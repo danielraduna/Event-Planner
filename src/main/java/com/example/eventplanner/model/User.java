@@ -1,10 +1,14 @@
 package com.example.eventplanner.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -15,6 +19,8 @@ public class User {
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
 
+    private String username;
+
     private String firstName;
 
     private String lastName;
@@ -23,7 +29,17 @@ public class User {
 
     private String phone;
 
+    private LocalDate birthday;
+
     @OneToMany(mappedBy = "admin") // -> unidirectional relantionship -> creates a join table
-    private List<Event> events;
+    private Set<Event> eventsAdmin;
+
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id"))
+    private Set<Event> events;
+
+
 
 }

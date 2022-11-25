@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -26,5 +27,8 @@ public class Event {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User admin;
+
+    @ManyToMany(mappedBy = "events", cascade = CascadeType.PERSIST)
+    private List<User> users;
 
 }
