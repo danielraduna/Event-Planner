@@ -2,18 +2,18 @@ package com.example.eventplanner.service;
 
 import com.example.eventplanner.model.User;
 
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 public interface UserService {
 
     void createUser(User user);
 
-    Set<User> getAllUsers();
+    List<User> getAllUsers();
 
     Optional<User>  getUserById(Long id);
 
     Optional<User>  getUserByEmail(String email);
 
-    Optional<User>  getuserByUsername(String username);
+    Optional<User>  getUserByUsername(String username);
 }

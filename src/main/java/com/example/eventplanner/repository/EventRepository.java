@@ -5,14 +5,12 @@ import com.example.eventplanner.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Set;
+import java.util.List;
 
 @Repository
 public interface EventRepository extends JpaRepository<Event, Long> {
 
-    Set<Event> findAllByNameEqualsIgnoreCase(String name);
+    List<Event> findAllByNameEqualsIgnoreCase(String name);
 
-    Set<Event> findAllByAdmin(User user);
-
-
+    List<Event> findAllByAdmin(User user);
 }

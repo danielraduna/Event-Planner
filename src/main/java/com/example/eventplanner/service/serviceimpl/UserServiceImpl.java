@@ -5,6 +5,7 @@ import com.example.eventplanner.repository.UserRepository;
 import com.example.eventplanner.service.UserService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -19,26 +20,26 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void createUser(User user) {
-        return;
+        userRepository.save(user);
     }
 
     @Override
-    public Set<User> getAllUsers() {
-        return null;
+    public List<User> getAllUsers() {
+        return userRepository.findAll();
     }
 
     @Override
     public Optional<User> getUserById(Long id) {
-        return null;
+        return userRepository.findById(id);
     }
 
     @Override
     public Optional<User>  getUserByEmail(String email) {
-        return null;
+        return userRepository.findByEmail(email);
     }
 
     @Override
-    public Optional<User>  getuserByUsername(String username) {
-        return null;
+    public Optional<User>  getUserByUsername(String username) {
+        return userRepository.findByUsernameEqualsIgnoreCase(username);
     }
 }

@@ -39,7 +39,4 @@ public class User {
     @JoinTable(joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "event_id"))
     private Set<Event> events;
-
-
-
 }

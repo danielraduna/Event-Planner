@@ -6,6 +6,7 @@ import com.example.eventplanner.repository.EventRepository;
 import com.example.eventplanner.service.EventService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -18,27 +19,27 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void createEvent(Event Event) {
-
+    public void createEvent(Event event) {
+        eventRepository.save(event);
     }
 
     @Override
-    public Set<Event> getAllEvents() {
-        return null;
+    public List<Event> getAllEvents() {
+        return eventRepository.findAll();
     }
 
     @Override
     public Optional<Event> getEventById(Long id) {
-        return Optional.empty();
+        return eventRepository.findById(id);
     }
 
     @Override
-    public Set<Event> getEventsByName(String name) {
-        return null;
+    public List<Event> getEventsByName(String name) {
+        return eventRepository.findAllByNameEqualsIgnoreCase(name);
     }
 
     @Override
-    public Set<Event> getAllByAdmin(User user) {
-        return null;
+    public List<Event> getAllByAdmin(User user) {
+        return eventRepository.findAllByAdmin(user);
     }
 }
