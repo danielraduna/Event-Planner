@@ -9,7 +9,7 @@ import java.util.Set;
 
 public interface EventService {
 
-    void createEvent(Event Event);
+    void createEvent(Event event);
 
     List<Event> getAllEvents();
 
@@ -19,4 +19,5 @@ public interface EventService {
 
     List<Event> getAllByAdmin(User user);
 
+    void deleteEvent(Event event);
 }

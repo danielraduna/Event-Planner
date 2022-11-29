@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -42,4 +41,11 @@ public class EventServiceImpl implements EventService {
     public List<Event> getAllByAdmin(User user) {
         return eventRepository.findAllByAdmin(user);
     }
+
+    @Override
+    public void deleteEvent(Event event) {
+        eventRepository.delete(event);
+    }
+
+
 }
