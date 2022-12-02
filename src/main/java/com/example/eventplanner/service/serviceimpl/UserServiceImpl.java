@@ -1,6 +1,7 @@
 package com.example.eventplanner.service.serviceimpl;
 
 import com.example.eventplanner.exception.EventNotFoundException;
+import com.example.eventplanner.exception.UserAlreadyExistsException;
 import com.example.eventplanner.exception.UserNotFoundException;
 import com.example.eventplanner.model.User;
 import com.example.eventplanner.repository.EventRepository;
@@ -24,6 +25,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void createUser(User user) {
+        var u1 = userRepository.findByUsernameEquals(user.getUsername());
+        if(u1.isPresent()) {
+            throw new UserAlreadyExistsException("This username is already used!");
+        }
+
+        u1 = userRepository.findByEmail(user.getEmail());
+        if(u1.isPresent()) {
+            throw new UserAlreadyExistsException("This email is already used!");
+        }
         userRepository.save(user);
     }
 
