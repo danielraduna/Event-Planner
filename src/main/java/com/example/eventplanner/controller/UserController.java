@@ -46,6 +46,18 @@ public class UserController {
                 body(userService.getUserByEmail(email).get());
     }
 
+    @PutMapping("/assignToEvent")
+    public ResponseEntity<User> assignUserToEvent(@RequestParam Long idUser, @RequestParam Long idEvent) {
+        userService.assignUserToEvent(idUser, idEvent);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<User> updadteUser(@RequestBody User user) {
+        userService.updateUser(user);
+        return ResponseEntity.ok().build();
+    }
+
     @DeleteMapping("/delete")
     public ResponseEntity<User> deleteUser(@RequestBody User user) {
         userService.deleteUser(user);

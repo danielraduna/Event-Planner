@@ -1,7 +1,9 @@
 package com.example.eventplanner.service.serviceimpl;
 
+import com.example.eventplanner.exception.EventNotFoundException;
 import com.example.eventplanner.exception.UserNotFoundException;
 import com.example.eventplanner.model.User;
+import com.example.eventplanner.repository.EventRepository;
 import com.example.eventplanner.repository.UserRepository;
 import com.example.eventplanner.service.UserService;
 import org.springframework.stereotype.Service;
@@ -13,9 +15,11 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final EventRepository eventRepository;
 
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, EventRepository eventRepository) {
         this.userRepository = userRepository;
+        this.eventRepository = eventRepository;
     }
 
     @Override
@@ -35,7 +39,7 @@ public class UserServiceImpl implements UserService {
             return user;
         }
         else {
-            throw new UserNotFoundException("User not found");
+            throw new UserNotFoundException("User with this id was not found");
         }
     }
 
@@ -46,7 +50,7 @@ public class UserServiceImpl implements UserService {
             return user;
         }
         else {
-            throw new UserNotFoundException("User not found");
+            throw new UserNotFoundException("User with this email was not found");
         }
     }
 
@@ -57,8 +61,31 @@ public class UserServiceImpl implements UserService {
             return user;
         }
         else {
-            throw new UserNotFoundException("User not found");
+            throw new UserNotFoundException("User with this username was not found");
         }
+    }
+
+    @Override
+    public void assignUserToEvent(Long idUser, Long idEvent) {
+        var user = userRepository.findById(idUser);
+        if(user.isEmpty()) {
+            throw new UserNotFoundException("User with this id was not found");
+        }
+
+        var event = eventRepository.findById(idEvent);
+        if(event.isEmpty()) {
+            throw new EventNotFoundException("Event with this id was not found");
+
+        }
+
+        event.get().getUsers().add(user.get());
+        user.get().getEvents().add(event.get());
+        eventRepository.save(event.get());
+    }
+
+    @Override
+    public void updateUser(User user) {
+        userRepository.save(user);
     }
 
     @Override
@@ -68,7 +95,7 @@ public class UserServiceImpl implements UserService {
             userRepository.delete(user);
         }
         else {
-            throw new UserNotFoundException("User not found");
+            throw new UserNotFoundException("User with this id was not found");
         }
     }
 }

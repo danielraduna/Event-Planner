@@ -17,7 +17,12 @@ public class ExceptionHandler {
                 .badRequest()
                 .body(userNotFoundException.getMessage());
     }
-
+    @org.springframework.web.bind.annotation.ExceptionHandler(value = {EventNotFoundException.class})
+    public ResponseEntity<String> eventNotFound(EventNotFoundException eventNotFoundException){
+        return ResponseEntity
+                .badRequest()
+                .body(eventNotFoundException.getMessage());
+    }
     @org.springframework.web.bind.annotation.ExceptionHandler(value = {MethodArgumentNotValidException.class})
     public ResponseEntity<String> userParametersValidation(MethodArgumentNotValidException badRequestException){
 

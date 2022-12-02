@@ -39,6 +39,12 @@ public class EventController {
         return eventService.getEventsByName(name);
     }
 
+    @PutMapping("/update")
+    public ResponseEntity<Event> updadteEvent(@RequestBody Event event) {
+        eventService.updateEvent(event);
+        return ResponseEntity.ok().build();
+    }
+
     @DeleteMapping("/delete")
     public ResponseEntity<User> deleteUser(@RequestBody Event event) {
         eventService.deleteEvent(event);

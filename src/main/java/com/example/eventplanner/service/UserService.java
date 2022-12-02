@@ -17,5 +17,9 @@ public interface UserService {
 
     Optional<User>  getUserByUsername(String username);
 
+    void assignUserToEvent(Long idUser, Long idEvent);
+
+    void updateUser(User user);
+
     void deleteUser(User user);
 }

@@ -5,7 +5,6 @@ import com.example.eventplanner.model.User;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 public interface EventService {
 
@@ -18,6 +17,8 @@ public interface EventService {
     List<Event> getEventsByName(String name);
 
     List<Event> getAllByAdmin(User user);
+
+    void updateEvent(Event event);
 
     void deleteEvent(Event event);
 }
