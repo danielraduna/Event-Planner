@@ -1,5 +1,6 @@
 package com.example.eventplanner.service.serviceimpl;
 
+import com.example.eventplanner.exception.EventNotFoundException;
 import com.example.eventplanner.model.Event;
 import com.example.eventplanner.model.User;
 import com.example.eventplanner.repository.EventRepository;
@@ -8,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -30,7 +30,13 @@ public class EventServiceImpl implements EventService {
 
     @Override
     public Optional<Event> getEventById(Long id) {
-        return eventRepository.findById(id);
+        var event = eventRepository.findById(id);
+        if(event.isPresent()) {
+            return event;
+        }
+        else {
+            throw new EventNotFoundException("Event with this id was not found!");
+        }
     }
 
     @Override
@@ -41,5 +47,21 @@ public class EventServiceImpl implements EventService {
     @Override
     public List<Event> getAllByAdmin(User user) {
         return eventRepository.findAllByAdmin(user);
+    }
+
+    @Override
+    public void updateEvent(Event event) {
+        eventRepository.save(event);
+    }
+
+    @Override
+    public void deleteEvent(Event event) {
+        var e = eventRepository.findById(event.getId());
+        if(e.isPresent()) {
+            eventRepository.delete(event);
+        }
+        else {
+            throw new EventNotFoundException("Event with this id was not found!");
+        }
     }
 }
