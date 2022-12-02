@@ -6,6 +6,7 @@ import com.example.eventplanner.service.EventService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -19,6 +20,7 @@ public class EventController {
     }
     @PostMapping("/new")
     public ResponseEntity<Event> createEvent(@RequestBody Event event) {
+        event.setCreateDate(LocalDateTime.now());
         eventService.createEvent(event);
         return ResponseEntity.ok().build();
     }

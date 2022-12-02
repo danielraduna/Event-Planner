@@ -21,5 +21,6 @@ public interface UserService {
 
     void updateUser(User user);
 
+    void makeUserAdminOfEvent(Long idUser, Long idEvent);
     void deleteUser(User user);
 }

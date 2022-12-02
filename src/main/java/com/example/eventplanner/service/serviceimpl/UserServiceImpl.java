@@ -89,6 +89,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void makeUserAdminOfEvent(Long idUser, Long idEvent) {
+        var user = userRepository.findById(idUser);
+        if(user.isEmpty()) {
+            throw new UserNotFoundException("User with this id was not found");
+        }
+
+        var event = eventRepository.findById(idEvent);
+        if(event.isEmpty()) {
+            throw new EventNotFoundException("Event with this id was not found");
+        }
+
+        event.get().setAdmin(user.get());
+        eventRepository.save(event.get());
+
+        user.get().getEventsAdmin().add(event.get());
+        user.get().getEvents().add(event.get());
+        userRepository.save(user.get());
+
+    }
+
+    @Override
     public void deleteUser(User user) {
         var u = userRepository.findById(user.getId());
         if(u.isPresent()) {

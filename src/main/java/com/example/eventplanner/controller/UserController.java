@@ -52,6 +52,11 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
+    @PutMapping("/makeAdminOfEvent")
+    public ResponseEntity<User> makeUserOfEvent(@RequestParam Long idUser, @RequestParam Long idEvent) {
+        userService.makeUserAdminOfEvent(idUser, idEvent);
+        return ResponseEntity.ok().build();
+    }
     @PutMapping("/update")
     public ResponseEntity<User> updadteUser(@RequestBody User user) {
         userService.updateUser(user);

@@ -29,6 +29,7 @@ public class User {
 
     private LocalDate birthday;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "admin") // -> unidirectional relantionship -> creates a join table
     private Set<Event> eventsAdmin;
 
