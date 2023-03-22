@@ -94,6 +94,24 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void assignUserToUser(Long idUser1, Long idUser2) {
+        var user = userRepository.findById(idUser1);
+        if(user.isEmpty()) {
+            throw new UserNotFoundException("User with this id was not found");
+        }
+
+        var friend = userRepository.findById(idUser2);
+        if(friend.isEmpty()) {
+            throw new UserNotFoundException("User with this id was not found");
+        }
+
+        user.get().getFriends().add(friend.get());
+        friend.get().getFriends().add(user.get());
+        userRepository.save(user.get());
+        userRepository.save(friend.get());
+    }
+
+    @Override
     public void updateUser(User user) {
         userRepository.save(user);
     }
