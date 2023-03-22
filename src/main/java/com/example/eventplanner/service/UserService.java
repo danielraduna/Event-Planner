@@ -21,6 +21,9 @@ public interface UserService {
 
     void assignUserToUser(Long idUser1, Long idUser2);
 
+    void assignUserToGroup(Long idUser, Long idGroup);
+
+    void deleteUserFromGroup(Long idUser, Long idGroup);
     void updateUser(User user);
 
     void makeUserAdminOfEvent(Long idUser, Long idEvent);

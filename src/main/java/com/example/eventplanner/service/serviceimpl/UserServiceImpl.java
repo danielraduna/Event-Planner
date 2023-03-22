@@ -1,27 +1,27 @@
 package com.example.eventplanner.service.serviceimpl;
 
 import com.example.eventplanner.exception.EventNotFoundException;
+import com.example.eventplanner.exception.GroupNotFoundException;
 import com.example.eventplanner.exception.UserAlreadyExistsException;
 import com.example.eventplanner.exception.UserNotFoundException;
 import com.example.eventplanner.model.User;
 import com.example.eventplanner.repository.EventRepository;
+import com.example.eventplanner.repository.FriendsGroupRepository;
 import com.example.eventplanner.repository.UserRepository;
 import com.example.eventplanner.service.UserService;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final EventRepository eventRepository;
-
-    public UserServiceImpl(UserRepository userRepository, EventRepository eventRepository) {
-        this.userRepository = userRepository;
-        this.eventRepository = eventRepository;
-    }
+    private final FriendsGroupRepository friendsGroupRepository;
 
     @Override
     public void createUser(User user) {
@@ -109,6 +109,42 @@ public class UserServiceImpl implements UserService {
         friend.get().getFriends().add(user.get());
         userRepository.save(user.get());
         userRepository.save(friend.get());
+    }
+
+    @Override
+    public void assignUserToGroup(Long idUser, Long idGroup) {
+        var user = userRepository.findById(idUser);
+        if(user.isEmpty()) {
+            throw new UserNotFoundException("User with this id was not found");
+        }
+
+        var group = friendsGroupRepository.findById(idGroup);
+        if(group.isEmpty()) {
+            throw new UserNotFoundException("User with this id was not found");
+        }
+
+        user.get().getFriendsGroups().add(group.get());
+        group.get().getUsers().add(user.get());
+        userRepository.save(user.get());
+        friendsGroupRepository.save(group.get());
+    }
+
+    @Override
+    public void deleteUserFromGroup(Long idUser, Long idGroup) {
+        var user = userRepository.findById(idUser);
+        if(user.isEmpty()) {
+            throw new UserNotFoundException("User with this id was not found");
+        }
+
+        var group = friendsGroupRepository.findById(idGroup);
+        if(group.isEmpty()) {
+            throw new GroupNotFoundException("Group with this id was not found");
+        }
+
+        user.get().getFriendsGroups().remove(group.get());
+        group.get().getUsers().remove(user.get());
+        userRepository.save(user.get());
+        friendsGroupRepository.save(group.get());
     }
 
     @Override

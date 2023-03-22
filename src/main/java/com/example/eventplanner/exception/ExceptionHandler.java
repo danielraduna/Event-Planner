@@ -32,6 +32,13 @@ public class ExceptionHandler {
                 .body(eventNotFoundException.getMessage());
     }
 
+    @org.springframework.web.bind.annotation.ExceptionHandler(value = {GroupNotFoundException.class})
+    public ResponseEntity<String> groupNotFound(GroupNotFoundException groupNotFoundException){
+        return ResponseEntity
+                .badRequest()
+                .body(groupNotFoundException.getMessage());
+    }
+
     @org.springframework.web.bind.annotation.ExceptionHandler(value = {MethodArgumentNotValidException.class})
     public ResponseEntity<String> userParametersValidation(MethodArgumentNotValidException badRequestException){
 

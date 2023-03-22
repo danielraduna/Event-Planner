@@ -45,4 +45,9 @@ public class User {
     @ManyToMany
     @JoinTable(joinColumns = @JoinColumn(name = "user_id"))
     private Set<User> friends;
+
+    @JsonIgnore
+    @ManyToMany(mappedBy = "users")
+    private Set<FriendsGroup> friendsGroups;
+
 }

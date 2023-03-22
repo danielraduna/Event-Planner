@@ -57,6 +57,19 @@ public class UserController {
         userService.assignUserToUser(idUser1, idUser2);
         return ResponseEntity.ok().build();
     }
+
+    @PutMapping("/assignToGroup")
+    public ResponseEntity<User> assignUserToGroup(@RequestParam Long idUser, @RequestParam Long idGroup) {
+        userService.assignUserToGroup(idUser, idGroup);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/deleteFromGroup")
+    public ResponseEntity<User> deleteUserFromGroup(@RequestParam Long idUser, @RequestParam Long idGroup) {
+        userService.deleteUserFromGroup(idUser, idGroup);
+        return ResponseEntity.ok().build();
+    }
+
     @PutMapping("/makeAdminOfEvent")
     public ResponseEntity<User> makeUserOfEvent(@RequestParam Long idUser, @RequestParam Long idEvent) {
         userService.makeUserAdminOfEvent(idUser, idEvent);
