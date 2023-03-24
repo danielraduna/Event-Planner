@@ -7,6 +7,8 @@ import { UserComponent } from './components/user/user.component';
 import { GroupComponent } from './components/group/group.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ButtonModule } from 'primeng/button';
+import {AppRoutingModule} from "./app-routing.module";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -16,9 +18,11 @@ import { ButtonModule } from 'primeng/button';
     GroupComponent
   ],
   imports: [
+    HttpClientModule,
     BrowserModule,
     BrowserAnimationsModule,
-    ButtonModule
+    ButtonModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
