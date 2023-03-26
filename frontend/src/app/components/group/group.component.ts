@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {GroupService} from "../../services/group.service";
+import {FriendsGroup} from "../../entities/friends-group";
 
 @Component({
   selector: 'app-group',
@@ -7,9 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GroupComponent implements OnInit {
 
-  constructor() { }
+  group?: FriendsGroup;
+  constructor(private groupService: GroupService) { }
 
   ngOnInit(): void {
+    this.groupService.getGroupById(1).subscribe(data => {
+      if(data.body) {
+        this.group = data.body;
+        console.log(this.group);
+      }
+    });
   }
 
 }

@@ -91,6 +91,7 @@ public class UserServiceImpl implements UserService {
         event.get().getUsers().add(user.get());
         user.get().getEvents().add(event.get());
         eventRepository.save(event.get());
+        userRepository.save(user.get());
     }
 
     @Override

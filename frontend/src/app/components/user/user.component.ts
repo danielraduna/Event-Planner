@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {UserService} from "../../services/user.service";
 import {User} from "../../entities/user";
+import {EventService} from "../../services/event.service";
+import {Event} from "../../entities/event";
 
 @Component({
   selector: 'app-user',
@@ -9,16 +11,25 @@ import {User} from "../../entities/user";
 })
 export class UserComponent implements OnInit {
 
-  users?: User[];
-  constructor(private userService: UserService) { }
+  user?: User;
+  event?: Event;
+  constructor(private userService: UserService,
+              private eventService: EventService) { }
 
   ngOnInit(): void {
-    this.userService.getAllUsers().subscribe(data => {
+    this.userService.getUserById(2).subscribe(data => {
       if(data.body) {
-        this.users = data.body;
-        console.log(this.users)
+        this.user = data.body;
+
+        this.eventService.getAllEvents().subscribe(res => {
+          this.event = res.body![0];
+        })
       }
     });
   }
 
+  assignUserToEvent(): void {
+    this.userService.assignUserToUser(1, 2).subscribe();
+    console.log(this.event);
+  }
 }

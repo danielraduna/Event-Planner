@@ -48,6 +48,7 @@ public class UserController {
     }
 
     @PutMapping("/assignToEvent")
+    @CrossOrigin(origins = "http://localhost:4200/")
     public ResponseEntity<User> assignUserToEvent(@RequestParam Long idUser, @RequestParam Long idEvent) {
         userService.assignUserToEvent(idUser, idEvent);
         return ResponseEntity.ok().build();
@@ -72,10 +73,11 @@ public class UserController {
     }
 
     @PutMapping("/makeAdminOfEvent")
-    public ResponseEntity<User> makeUserOfEvent(@RequestParam Long idUser, @RequestParam Long idEvent) {
+    public ResponseEntity<User> makeAdminOfEvent(@RequestParam Long idUser, @RequestParam Long idEvent) {
         userService.makeUserAdminOfEvent(idUser, idEvent);
         return ResponseEntity.ok().build();
     }
+
     @PutMapping("/update")
     public ResponseEntity<User> updadteUser(@RequestBody User user) {
         userService.updateUser(user);
