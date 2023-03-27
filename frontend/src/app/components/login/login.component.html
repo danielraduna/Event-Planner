@@ -1,1 +1,38 @@
-<p>login works!</p>
+<div class="login-register">
+
+  <h1>WELCOME BACK!</h1>
+  <ul class="tabs nav nav-pills">
+    <li class="nav-item active log-tab" (click)="switchLoginRegister($event)">
+      <a class="nav-link" id="log-in-link" aria-current="page" href="#">Log in</a>
+    </li>
+    <li class="nav-item reg-tab" (click)="switchLoginRegister($event)">
+      <a class="nav-link" id="sign-in-link" href="#">Sign in</a>
+    </li>
+  </ul>
+
+  <div class="login visible">
+    <div class="login-infos">
+      <div class="p-inputgroup">
+    <span class="p-inputgroup-addon">
+        <i class="pi pi-user"></i>
+    </span>
+        <input pInputText placeholder="Username" />
+      </div>
+      <div class="p-inputgroup">
+    <span class="p-inputgroup-addon">
+        <i class="pi pi-lock"></i>
+    </span>
+        <input pInputText  placeholder="Password" />
+      </div>
+    </div>
+
+    <button class="login-button">Log in</button>
+  </div>
+
+  <div class="register invisible">
+
+  </div>
+
+</div>
+
+

@@ -48,7 +48,6 @@ public class UserController {
     }
 
     @PutMapping("/assignToEvent")
-    @CrossOrigin(origins = "http://localhost:4200/")
     public ResponseEntity<User> assignUserToEvent(@RequestParam Long idUser, @RequestParam Long idEvent) {
         userService.assignUserToEvent(idUser, idEvent);
         return ResponseEntity.ok().build();

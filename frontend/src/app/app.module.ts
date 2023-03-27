@@ -11,7 +11,7 @@ import {AppRoutingModule} from "./app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-
+import { PasswordModule } from 'primeng/password';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,6 +26,7 @@ import { RegisterComponent } from './components/register/register.component';
     BrowserModule,
     BrowserAnimationsModule,
     ButtonModule,
+    PasswordModule,
     AppRoutingModule
   ],
   providers: [],
