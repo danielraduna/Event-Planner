@@ -52,4 +52,8 @@ export class UserService {
     return this.http.put(this.usersUrl + `makeAdminOfEvent?idUser=${idUser}&idEvent=${idEvent}`, {observe:'response'});
   }
 
+  public createUser(user: User) :Observable<HttpResponse<User>> {
+    return this.http.post(this.usersUrl + "new", user, {observe: 'response'})
+      .pipe(map((res:HttpResponse<User>) => res));
+  }
 }

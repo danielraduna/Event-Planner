@@ -11,26 +11,43 @@
   </ul>
 
   <div class="login visible">
-    <div class="login-infos">
-      <div class="p-inputgroup">
+    <form [formGroup]="loginForm">
+      <div class="login-infos">
+        <div class="p-inputgroup">
     <span class="p-inputgroup-addon">
         <i class="pi pi-user"></i>
     </span>
-        <input pInputText placeholder="Username" />
-      </div>
-      <div class="p-inputgroup">
-    <span class="p-inputgroup-addon">
-        <i class="pi pi-lock"></i>
-    </span>
-        <input pInputText  placeholder="Password" />
-      </div>
-    </div>
+          <input formControlName="username" pInputText placeholder="Username" />
+        </div>
 
-    <button class="login-button">Log in</button>
+        <div class="p-inputgroup">
+        <span class="p-inputgroup-addon">
+          <i class="pi pi-lock"></i>
+        </span>
+          <input formControlName="password" type="password" pInputText  placeholder="Password"  />
+        </div>
+      </div>
+    </form>
+
+    <button class="login-button" (click)="login()">Log in</button>
   </div>
 
   <div class="register invisible">
+    <form [formGroup]="registerForm">
+      <input id="firstName" pInputText formControlName="firstName" placeholder="First Name*" />
+      <input id="lastName" pInputText formControlName="lastName" placeholder="Last Name*" />
+      <input id="username" pInputText formControlName="username" placeholder="Username*" />
+      <input id="email" pInputText formControlName="email" placeholder="Email*" />
+      <input id="phone" pInputText formControlName="phone" placeholder="Phone*" />
 
+      <p-calendar id="birthday" formControlName="birthday" placeholder="Birthday*" [showIcon]="true"></p-calendar>
+
+      <p-password id="password" formControlName="password" placeholder="Password*" [feedback]="false" [toggleMask]="true"></p-password>
+      <p-password id="confirmPassword" formControlName="confirmPassword" placeholder="Repeat the password" [feedback]="false" [toggleMask]="true"></p-password>
+    </form>
+
+
+    <button (click)="register()" class="login-button">Sign in</button>
   </div>
 
 </div>

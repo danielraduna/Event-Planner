@@ -12,6 +12,10 @@ import {HttpClientModule} from "@angular/common/http";
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { PasswordModule } from 'primeng/password';
+import { InputTextModule } from 'primeng/inputtext';
+import { CalendarModule } from 'primeng/calendar';
+import {ReactiveFormsModule} from "@angular/forms";
+import {ToastrModule} from "ngx-toastr";
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,14 +25,22 @@ import { PasswordModule } from 'primeng/password';
     LoginComponent,
     RegisterComponent
   ],
-  imports: [
-    HttpClientModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    ButtonModule,
-    PasswordModule,
-    AppRoutingModule
-  ],
+    imports: [
+        HttpClientModule,
+        BrowserModule,
+        BrowserAnimationsModule,
+        ButtonModule,
+        PasswordModule,
+        InputTextModule,
+        CalendarModule,
+        AppRoutingModule,
+        ReactiveFormsModule,
+      ToastrModule.forRoot({
+        positionClass: 'toast-top-right',
+        preventDuplicates: true,
+      }),
+
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

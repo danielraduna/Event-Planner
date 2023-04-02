@@ -1,11 +1,40 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {Router} from "@angular/router";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {ToastrService} from "ngx-toastr";
+import {User} from "../../entities/user";
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent  implements OnInit {
+
+  registerForm = new FormGroup({
+    firstName: new FormControl(''),
+    lastName: new FormControl(''),
+    username: new FormControl(''),
+    email: new FormControl(''),
+    phone: new FormControl(''),
+    birthday: new FormControl(''),
+    password: new FormControl(''),
+    confirmPassword: new FormControl(''),
+  });
+
+  loginForm = new FormGroup({
+    username: new FormControl(''),
+    password: new FormControl('')
+  });
+
+  constructor(private router: Router,
+              private toastr: ToastrService,
+              private userService: UserService) {
+  }
+  ngOnInit(): void {
+  }
+
 
   switchLoginRegister($event: any): void {
     let registerTab = document.querySelector(".reg-tab");
@@ -13,6 +42,7 @@ export class LoginComponent {
     let login = document.querySelector(".login") as HTMLDivElement;
     let register = document.querySelector(".register") as HTMLDivElement;
     let title = document.querySelector("h1");
+
     if($event.target.attributes.id.value === "sign-in-link") {
       loginTab!.classList.remove("active");
       registerTab!.classList.add("active");
@@ -21,6 +51,11 @@ export class LoginComponent {
       login.classList.remove("visible");
       login.classList.add("invisible");
       title!.textContent = "CREATE ACCOUNT";
+
+      this.loginForm = new FormGroup({
+        username: new FormControl(''),
+        password: new FormControl('')
+      });
     }
     else {
       registerTab!.classList.remove("active");
@@ -30,6 +65,131 @@ export class LoginComponent {
       register.classList.remove("visible");
       register.classList.add("invisible");
       title!.textContent = "WELCOME BACK!";
+      this.registerForm = new FormGroup({
+        firstName: new FormControl(''),
+        lastName: new FormControl(''),
+        username: new FormControl(''),
+        email: new FormControl(''),
+        phone: new FormControl(''),
+        birthday: new FormControl(''),
+        password: new FormControl(''),
+        confirmPassword: new FormControl(''),
+      });
+    }
+  }
+
+  login(): void {
+    this.router.navigate(['/users']);
+  }
+
+  register(): void {
+    let toastrMessage: string = "";
+    let firstName = document.querySelector("#firstName");
+    let lastName = document.querySelector("#lastName");
+    let username = document.querySelector("#username");
+    let email = document.querySelector("#email");
+    let phone = document.querySelector("#phone");
+    let birthday = document.querySelector("#birthday");
+    let password = document.querySelector("#password");
+    let confirmPassword = document.querySelector("#confirmPassword");
+
+    if (this.registerForm.value.password !== this.registerForm.value.confirmPassword) {
+      toastrMessage = "Parolele nu corespund!";
+    }
+    if (this.registerForm.value.firstName === "") {
+      toastrMessage = "Completati campurile obligatorii";
+      firstName!.classList.add("dirty");
+    }
+    else {
+      if(firstName!.classList.contains("dirty")) {
+        firstName!.classList.remove("dirty");
+      }
+    }
+
+    if (this.registerForm.value.lastName === "") {
+      toastrMessage = "Completati campurile obligatorii";
+      lastName!.classList.add("dirty");
+    }
+    else {
+      if(lastName!.classList.contains("dirty")) {
+        lastName!.classList.remove("dirty");
+      }
+    }
+
+    if (this.registerForm.value.username === "") {
+      toastrMessage = "Completati campurile obligatorii";
+      username!.classList.add("dirty");
+    }
+    else {
+      if(username!.classList.contains("dirty")) {
+        username!.classList.remove("dirty");
+      }
+    }
+
+    if (this.registerForm.value.email === "") {
+      toastrMessage = "Completati campurile obligatorii";
+      email!.classList.add("dirty");
+    }
+    else {
+      if(email!.classList.contains("dirty")) {
+        email!.classList.remove("dirty");
+      }
+    }
+
+    if (this.registerForm.value.phone === "") {
+      toastrMessage = "Completati campurile obligatorii";
+      phone!.classList.add("dirty");
+    }
+    else {
+      if(phone!.classList.contains("dirty")) {
+        phone!.classList.remove("dirty");
+      }
+    }
+
+    if (this.registerForm.value.birthday === "") {
+      toastrMessage = "Completati campurile obligatorii";
+      birthday!.classList.add("dirty");
+    }
+    else {
+      if(birthday!.classList.contains("dirty")) {
+        birthday!.classList.remove("dirty");
+      }
+    }
+
+    if (this.registerForm.value.password === "") {
+      toastrMessage = "Completati campurile obligatorii";
+      password!.classList.add("dirty");
+    }
+    else {
+      if(password!.classList.contains("dirty")) {
+        password!.classList.remove("dirty");
+      }
+    }
+
+    if (this.registerForm.value.confirmPassword === "") {
+      toastrMessage = "Completati campurile obligatorii";
+      confirmPassword!.classList.add("dirty");
+    }
+    else {
+      if(confirmPassword!.classList.contains("dirty")) {
+        confirmPassword!.classList.remove("dirty");
+      }
+    }
+
+
+    if (toastrMessage !== "") {
+      this.toastr.error(toastrMessage);
+    }
+    else {
+      let user: User = {
+        firstName: this.registerForm.value.firstName!,
+        lastName: this.registerForm.value.lastName!,
+        username: this.registerForm.value.username!,
+        email: this.registerForm.value.email!,
+        phone: this.registerForm.value.phone!,
+        birthday: new Date(this.registerForm.value.birthday!)
+      }
+      this.userService.createUser(user).subscribe();
     }
   }
 }
