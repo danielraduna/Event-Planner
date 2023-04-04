@@ -69,3 +69,10 @@ li {
     border: #1ab188;
   }
 }
+
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}

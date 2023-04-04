@@ -1,0 +1,12 @@
+<div class="navbar">
+  <div>
+    <img src="assets/logo.png" class="logo">
+  </div>
+
+  <h1>EventPlanner</h1>
+
+  <div class="buttons">
+    <p-menu #menu [model]="items" [popup]="true"></p-menu>
+    <p-avatar label="D" size="xlarge" shape="circle" [style]="{ 'background-color': '#1ab188', color: '#ffffff' }" (click)="menu.toggle($event)"></p-avatar>
+  </div>
+</div>

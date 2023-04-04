@@ -10,12 +10,16 @@ import { ButtonModule } from 'primeng/button';
 import {AppRoutingModule} from "./app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
 import { PasswordModule } from 'primeng/password';
 import { InputTextModule } from 'primeng/inputtext';
 import { CalendarModule } from 'primeng/calendar';
 import {ReactiveFormsModule} from "@angular/forms";
 import {ToastrModule} from "ngx-toastr";
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { AvatarModule } from 'primeng/avatar';
+import { MenuModule } from 'primeng/menu';
+import { UserProfileComponent } from './user-profile/user-profile.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +27,9 @@ import {ToastrModule} from "ngx-toastr";
     UserComponent,
     GroupComponent,
     LoginComponent,
-    RegisterComponent
+    DashboardComponent,
+    NavbarComponent,
+    UserProfileComponent
   ],
     imports: [
         HttpClientModule,
@@ -35,11 +41,12 @@ import {ToastrModule} from "ngx-toastr";
         CalendarModule,
         AppRoutingModule,
         ReactiveFormsModule,
-      ToastrModule.forRoot({
-        positionClass: 'toast-top-right',
-        preventDuplicates: true,
-      }),
-
+        ToastrModule.forRoot({
+          positionClass: 'toast-top-right',
+          preventDuplicates: true,
+        }),
+        AvatarModule,
+      MenuModule
     ],
   providers: [],
   bootstrap: [AppComponent]

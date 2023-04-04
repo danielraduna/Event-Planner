@@ -79,7 +79,7 @@ export class LoginComponent  implements OnInit {
   }
 
   login(): void {
-    this.router.navigate(['/users']);
+    this.router.navigate(['/dashboard']);
   }
 
   register(): void {
