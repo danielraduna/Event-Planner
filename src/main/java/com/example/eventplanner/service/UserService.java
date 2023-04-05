@@ -1,5 +1,6 @@
 package com.example.eventplanner.service;
 
+import com.example.eventplanner.dto.LoginDto;
 import com.example.eventplanner.model.User;
 
 import java.util.List;
@@ -16,6 +17,7 @@ public interface UserService {
     Optional<User>  getUserByEmail(String email);
 
     Optional<User>  getUserByUsername(String username);
+    User  login(LoginDto loginDto);
 
     void assignUserToEvent(Long idUser, Long idEvent);
 

@@ -20,6 +20,9 @@ public class User {
     @Column(unique=true)
     private String username;
 
+    @Column(name = "pass")
+    private String password;
+
     private String firstName;
 
     private String lastName;

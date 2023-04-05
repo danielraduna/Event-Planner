@@ -1,5 +1,6 @@
 package com.example.eventplanner.service.serviceimpl;
 
+import com.example.eventplanner.dto.LoginDto;
 import com.example.eventplanner.exception.EventNotFoundException;
 import com.example.eventplanner.exception.GroupNotFoundException;
 import com.example.eventplanner.exception.UserAlreadyExistsException;
@@ -10,6 +11,8 @@ import com.example.eventplanner.repository.FriendsGroupRepository;
 import com.example.eventplanner.repository.UserRepository;
 import com.example.eventplanner.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +25,19 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final EventRepository eventRepository;
     private final FriendsGroupRepository friendsGroupRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    private final JpaUserDetailsService userDetailsService;
+    @Override
+    public User login(LoginDto loginDto) {
+
+        UserDetails userDetails = userDetailsService.loadUserByUsername(loginDto.getUsername());
+        if(passwordEncoder.matches(loginDto.getPassword(), userDetails.getPassword())) {
+            return userRepository.findByUsernameEquals(loginDto.getUsername()).get();
+        }
+        return new User();
+
+    }
 
     @Override
     public void createUser(User user) {
@@ -34,6 +50,7 @@ public class UserServiceImpl implements UserService {
         if(u1.isPresent()) {
             throw new UserAlreadyExistsException("This email is already used!");
         }
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
