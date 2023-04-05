@@ -2,6 +2,13 @@
   box-sizing: border-box;
 }
 
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
 .login-register {
   display: flex;
   flex-direction: column;
@@ -70,9 +77,3 @@ li {
   }
 }
 
-:host {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-}

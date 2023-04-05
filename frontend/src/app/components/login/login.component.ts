@@ -33,6 +33,8 @@ export class LoginComponent  implements OnInit {
               private userService: UserService) {
   }
   ngOnInit(): void {
+    let navbar = document.querySelector('app-navbar') as HTMLElement;
+    navbar.style.display = "none";
   }
 
 
