@@ -4,6 +4,7 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
 import {User} from "../../entities/user";
 import {UserService} from "../../services/user.service";
+import {LoginDTO} from "../../entities/loginDTO";
 
 @Component({
   selector: 'app-login',
@@ -81,7 +82,21 @@ export class LoginComponent  implements OnInit {
   }
 
   login(): void {
-    this.router.navigate(['/dashboard']);
+    if(this.loginForm.value.username && this.loginForm.value.password) {
+      this.userService.login({username: this.loginForm.value.username, password: this.loginForm.value.password}).subscribe(data => {
+        if(data.body!.id) {
+          localStorage.setItem('user', JSON.stringify(data.body))
+          console.log(localStorage.getItem('user'))
+          this.router.navigate(['/dashboard']);
+        }
+        else {
+          this.toastr.error("Username or password are incorrect!");
+        }
+      })
+    }
+    else {
+      this.toastr.error("Completati fiecare camp!");
+    }
   }
 
   register(): void {

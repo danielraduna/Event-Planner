@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MenuItem} from "primeng/api";
+import {User} from "../entities/user";
 
 @Component({
   selector: 'app-navbar',
@@ -8,6 +9,7 @@ import {MenuItem} from "primeng/api";
 })
 export class NavbarComponent implements OnInit{
 
+  user?: User;
   items: MenuItem[] = [];
   ngOnInit(): void {
     this.items = [
@@ -29,6 +31,8 @@ export class NavbarComponent implements OnInit{
         icon: 'pi pi-sign-out',
         routerLink: '/login'
       }];
+    this.user = JSON.parse(localStorage.getItem("user")!);
+    console.log(this.user);
   }
 }
 

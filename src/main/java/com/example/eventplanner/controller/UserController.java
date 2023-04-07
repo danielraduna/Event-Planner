@@ -103,8 +103,8 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping(path = "/login")
-    public User login(@RequestBody LoginDto loginDto, HttpSession session) {
+    @PostMapping(path = "/login")
+    public User login(@RequestBody LoginDto loginDto) {
         return userService.login(loginDto);
     }
 }

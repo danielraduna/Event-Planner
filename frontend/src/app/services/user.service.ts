@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpParams, HttpResponse} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams, HttpResponse} from "@angular/common/http";
 import {User} from "../entities/user";
 import {environment} from "../../environments/environment";
 import {map, Observable} from "rxjs";
+import {LoginDTO} from "../entities/loginDTO";
 
 @Injectable({
   providedIn: 'root'
@@ -55,5 +56,12 @@ export class UserService {
   public createUser(user: User) :Observable<HttpResponse<User>> {
     return this.http.post(this.usersUrl + "new", user, {observe: 'response'})
       .pipe(map((res:HttpResponse<User>) => res));
+  }
+
+  public login(loginDTO: LoginDTO) :Observable<HttpResponse<User>> {
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(loginDTO.username + ':' + loginDTO.password) });
+    headers.set('Content-Type', 'application/json');
+    return this.http.post<User>(this.usersUrl + 'login', loginDTO,  {headers: headers, observe: 'response'})
+      .pipe(map((res: HttpResponse<User>) => res));
   }
 }

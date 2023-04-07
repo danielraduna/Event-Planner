@@ -9,6 +9,10 @@
   height: 100vh;
 }
 
+.log-tab, .reg-tab {
+  cursor: pointer;
+}
+
 .login-register {
   display: flex;
   flex-direction: column;
