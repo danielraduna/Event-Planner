@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'EventPlanner';
+
+  isLoggedIn() {
+    return localStorage.getItem('user');
+  }
+
 }

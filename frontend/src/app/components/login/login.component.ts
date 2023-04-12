@@ -204,7 +204,8 @@ export class LoginComponent  implements OnInit {
         username: this.registerForm.value.username!,
         email: this.registerForm.value.email!,
         phone: this.registerForm.value.phone!,
-        birthday: new Date(this.registerForm.value.birthday!)
+        birthday: new Date(this.registerForm.value.birthday!),
+        password: this.registerForm.value.password!
       }
       this.userService.createUser(user).subscribe();
     }

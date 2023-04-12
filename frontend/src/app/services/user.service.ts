@@ -54,6 +54,8 @@ export class UserService {
   }
 
   public createUser(user: User) :Observable<HttpResponse<User>> {
+    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(user.username + ':' + user.password) });
+    headers.set('Content-Type', 'application/json');
     return this.http.post(this.usersUrl + "new", user, {observe: 'response'})
       .pipe(map((res:HttpResponse<User>) => res));
   }

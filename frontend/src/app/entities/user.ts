@@ -8,6 +8,7 @@ export interface User {
   lastName?: string;
   email?: string;
   phone?: string;
+  password?: string;
   birthday?: Date;
   eventsAdmin?: Event[];
   events?: Event[];

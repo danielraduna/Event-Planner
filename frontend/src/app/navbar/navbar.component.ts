@@ -29,6 +29,10 @@ export class NavbarComponent implements OnInit{
       {
         label: 'Deconecteaza-ma',
         icon: 'pi pi-sign-out',
+        command: () => {
+          this.user = undefined;
+          localStorage.removeItem('user');
+        },
         routerLink: '/login'
       }];
     this.user = JSON.parse(localStorage.getItem("user")!);
