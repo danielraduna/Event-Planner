@@ -45,8 +45,8 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public List<Event> getAllByAdmin(User user) {
-        return eventRepository.findAllByAdmin(user);
+    public List<Event> getAllByUser(Long idUser) {
+        return eventRepository.findByUsersId(idUser);
     }
 
     @Override

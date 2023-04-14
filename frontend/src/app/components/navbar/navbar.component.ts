@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MenuItem} from "primeng/api";
-import {User} from "../entities/user";
+import {User} from "../../entities/user";
 
 @Component({
   selector: 'app-navbar',
@@ -20,7 +20,8 @@ export class NavbarComponent implements OnInit{
       },
       {
         label: 'Evenimentele mele',
-        icon: 'pi pi-book'
+        icon: 'pi pi-book',
+        routerLink: '/my-events'
       },
       {
         label: 'Grupurile mele',

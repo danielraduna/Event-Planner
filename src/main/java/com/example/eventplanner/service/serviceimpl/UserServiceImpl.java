@@ -1,10 +1,7 @@
 package com.example.eventplanner.service.serviceimpl;
 
 import com.example.eventplanner.dto.LoginDto;
-import com.example.eventplanner.exception.EventNotFoundException;
-import com.example.eventplanner.exception.GroupNotFoundException;
-import com.example.eventplanner.exception.UserAlreadyExistsException;
-import com.example.eventplanner.exception.UserNotFoundException;
+import com.example.eventplanner.exception.*;
 import com.example.eventplanner.model.User;
 import com.example.eventplanner.repository.EventRepository;
 import com.example.eventplanner.repository.FriendsGroupRepository;
@@ -30,13 +27,11 @@ public class UserServiceImpl implements UserService {
     private final JpaUserDetailsService userDetailsService;
     @Override
     public User login(LoginDto loginDto) {
-
         UserDetails userDetails = userDetailsService.loadUserByUsername(loginDto.getUsername());
-        if(passwordEncoder.matches(loginDto.getPassword(), userDetails.getPassword())) {
+        if (passwordEncoder.matches(loginDto.getPassword(), userDetails.getPassword())) {
             return userRepository.findByUsernameEquals(loginDto.getUsername()).get();
         }
-        return new User();
-
+        throw new InvalidCredentialsException("Invalid username or password.");
     }
 
     @Override

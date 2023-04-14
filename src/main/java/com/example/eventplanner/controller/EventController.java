@@ -3,6 +3,7 @@ package com.example.eventplanner.controller;
 import com.example.eventplanner.model.Event;
 import com.example.eventplanner.model.User;
 import com.example.eventplanner.service.EventService;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,14 +12,12 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/events")
-@CrossOrigin(origins = "http://localhost:4200/")
+@CrossOrigin(origins = "http://localhost:4200",  allowedHeaders = "*")
+@AllArgsConstructor
 public class EventController {
 
     private final EventService eventService;
 
-    public EventController(EventService eventService) {
-        this.eventService = eventService;
-    }
     @PostMapping("/new")
     public ResponseEntity<Event> createEvent(@RequestBody Event event) {
         event.setCreateDate(LocalDateTime.now());
@@ -40,6 +39,11 @@ public class EventController {
     @GetMapping("/byName/{name}")
     public List<Event> getEventsByName(@PathVariable String name) {
         return eventService.getEventsByName(name);
+    }
+
+    @GetMapping("/byUser/{idUser}")
+    public List<Event> getEventsByUser(@PathVariable Long idUser) {
+        return eventService.getAllByUser(idUser);
     }
 
     @PutMapping("/update")

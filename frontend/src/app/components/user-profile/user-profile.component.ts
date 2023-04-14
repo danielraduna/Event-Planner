@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from "../entities/user";
+import {User} from "../../entities/user";
 
 @Component({
   selector: 'app-user-profile',
@@ -7,7 +7,7 @@ import {User} from "../entities/user";
   styleUrls: ['./user-profile.component.scss']
 })
 export class UserProfileComponent implements OnInit{
-  value = 4.3;
+  value = 2;
   user?: User;
 
   ngOnInit(): void {

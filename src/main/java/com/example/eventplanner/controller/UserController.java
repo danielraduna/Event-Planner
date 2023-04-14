@@ -3,16 +3,8 @@ package com.example.eventplanner.controller;
 import com.example.eventplanner.dto.LoginDto;
 import com.example.eventplanner.model.User;
 import com.example.eventplanner.service.UserService;
-import com.example.eventplanner.service.serviceimpl.JpaUserDetailsService;
-import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -23,10 +15,6 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-
-    private AuthenticationManager authenticationManager;
-
-    private JpaUserDetailsService userDetailsService;
 
     public UserController(UserService userService) {
         this.userService = userService;

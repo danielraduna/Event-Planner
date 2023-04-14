@@ -34,8 +34,7 @@ export class LoginComponent  implements OnInit {
               private userService: UserService) {
   }
   ngOnInit(): void {
-    let navbar = document.querySelector('app-navbar') as HTMLElement;
-    navbar.style.display = "none";
+
   }
 
 
@@ -85,8 +84,12 @@ export class LoginComponent  implements OnInit {
     if(this.loginForm.value.username && this.loginForm.value.password) {
       this.userService.login({username: this.loginForm.value.username, password: this.loginForm.value.password}).subscribe(data => {
         if(data.body!.id) {
-          localStorage.setItem('user', JSON.stringify(data.body))
-          console.log(localStorage.getItem('user'))
+          const authenticatedUser = data.body!;
+
+          // Store the original, unencrypted password in the user object
+          authenticatedUser.password = this.loginForm.value.password!;
+          localStorage.setItem('user', JSON.stringify(authenticatedUser));
+          console.log(localStorage.getItem('user'));
           this.router.navigate(['/dashboard']);
         }
         else {

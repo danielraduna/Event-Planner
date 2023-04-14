@@ -16,7 +16,7 @@ public interface EventService {
 
     List<Event> getEventsByName(String name);
 
-    List<Event> getAllByAdmin(User user);
+    List<Event> getAllByUser(Long idUser);
 
     void updateEvent(Event event);
 
