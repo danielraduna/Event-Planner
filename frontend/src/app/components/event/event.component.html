@@ -1,1 +1,13 @@
-<p>event works!</p>
+<div class="event">
+  <h1>{{event?.name}}</h1>
+
+  <div class="users" >
+    <p-avatar *ngFor="let user of event.users" label="{{user?.username?.charAt(0)?.toUpperCase()}}" size="xlarge" shape="circle" [style]="{'background-color': '#1ab188', color: '#ffffff' }"></p-avatar>
+  </div>
+
+  <div class="buttons">
+    <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+    <p-button (click)="confirm1()" icon="pi pi-check" styleClass="p-button-success"></p-button>
+    <p-button (click)="confirm2()" icon="pi pi-times" styleClass="p-button-danger"></p-button>
+  </div>
+</div>

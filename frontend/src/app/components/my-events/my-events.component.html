@@ -1,1 +1,4 @@
-<p>my-events works!</p>
+<div class="events">
+  <h1>Your Events</h1>
+  <app-event *ngFor="let event of events" [event]="event"></app-event>
+</div>

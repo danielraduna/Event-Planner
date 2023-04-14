@@ -1,25 +1,55 @@
-import { Component, OnInit } from '@angular/core';
-import {EventService} from "../../services/event.service";
+import {Component, Input, OnInit} from '@angular/core';
 import {Event} from "../../entities/event";
+import {ConfirmationService, ConfirmEventType} from "primeng/api";
 
 @Component({
   selector: 'app-event',
   templateUrl: './event.component.html',
-  styleUrls: ['./event.component.scss']
+  styleUrls: ['./event.component.scss'],
+  providers: [ConfirmationService]
 })
 export class EventComponent implements OnInit {
-
-  events: Event[] = [];
-  constructor(private eventService: EventService) { }
+  @Input() event!: Event;
+  constructor(private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
-    this.eventService.getAllEvents().subscribe(data => {
-      if(data.body) {
-        this.events = data.body!;
-        console.log(this.events);
-      }
 
-    })
+
+  }
+  confirm1() {
+    this.confirmationService.confirm({
+      message: '\n' +
+        'Are you sure you want to participate in this event??',
+      header: 'Accept',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+      },
+      reject: (type: any) => {
+        switch (type) {
+          case ConfirmEventType.REJECT:
+            break;
+          case ConfirmEventType.CANCEL:
+            break;
+        }
+      }
+    });
   }
 
+  confirm2() {
+    this.confirmationService.confirm({
+      message: 'Are you sure you don\'t want to participate in this event?',
+      header: 'Decline',
+      icon: 'pi pi-info-circle',
+      accept: () => {
+      },
+      reject: (type: any) => {
+        switch (type) {
+          case ConfirmEventType.REJECT:
+            break;
+          case ConfirmEventType.CANCEL:
+            break;
+        }
+      }
+    });
+  }
 }

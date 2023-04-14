@@ -23,6 +23,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { RatingModule } from 'primeng/rating';
 import { MyEventsComponent } from './components/my-events/my-events.component';
 import {AuthInterceptor} from "./auth.interceptor";
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import {AuthInterceptor} from "./auth.interceptor";
     AvatarModule,
     MenuModule,
     RatingModule,
-    FormsModule
+    FormsModule,
+    ConfirmDialogModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
   bootstrap: [AppComponent]
