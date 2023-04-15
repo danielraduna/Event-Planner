@@ -210,7 +210,11 @@ export class LoginComponent  implements OnInit {
         birthday: new Date(this.registerForm.value.birthday!),
         password: this.registerForm.value.password!
       }
-      this.userService.createUser(user).subscribe();
+      this.userService.createUser(user).subscribe(data => {
+        localStorage.setItem("user", JSON.stringify(user));
+        this.router.navigate(['/dashboard']);
+      });
+
     }
   }
 }

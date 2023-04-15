@@ -14,9 +14,9 @@
     <form [formGroup]="loginForm">
       <div class="login-infos">
         <div class="p-inputgroup">
-    <span class="p-inputgroup-addon">
-        <i class="pi pi-user"></i>
-    </span>
+        <span class="p-inputgroup-addon">
+          <i class="pi pi-user"></i>
+        </span>
           <input formControlName="username" pInputText placeholder="Username" />
         </div>
 
@@ -24,7 +24,11 @@
         <span class="p-inputgroup-addon">
           <i class="pi pi-lock"></i>
         </span>
-          <input formControlName="password" type="password" pInputText  placeholder="Password"  />
+          <input formControlName="password" type="password" pInputText placeholder="Password" />
+        </div>
+
+        <div class="forgot-password">
+          <a routerLink="/dashboard">Forgot password?</a>
         </div>
       </div>
     </form>

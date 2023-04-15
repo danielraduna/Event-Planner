@@ -24,6 +24,7 @@ import { RatingModule } from 'primeng/rating';
 import { MyEventsComponent } from './components/my-events/my-events.component';
 import {AuthInterceptor} from "./auth.interceptor";
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     DashboardComponent,
     NavbarComponent,
     UserProfileComponent,
-    MyEventsComponent
+    MyEventsComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     HttpClientModule,

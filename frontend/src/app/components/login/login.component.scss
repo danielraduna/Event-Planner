@@ -81,3 +81,10 @@ li {
   }
 }
 
+.forgot-password {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Add this line */
+  margin-left: auto !important;
+}
+

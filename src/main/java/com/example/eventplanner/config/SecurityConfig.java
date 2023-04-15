@@ -52,8 +52,8 @@ public class SecurityConfig implements WebSecurityConfigurer{
                 .cors().configurationSource(corsConfigurationSource())
                 .and()
                 .authorizeHttpRequests()
-                .requestMatchers("/api/events/**").authenticated()
-                .requestMatchers("/api/users/**").authenticated()
+                .requestMatchers("/api/users/new").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .csrf().disable()
                 .build();

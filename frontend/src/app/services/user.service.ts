@@ -54,8 +54,8 @@ export class UserService {
   }
 
   public createUser(user: User) :Observable<HttpResponse<User>> {
-    const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(user.username + ':' + user.password) });
-    return this.http.post(this.usersUrl + "new", user, {headers: headers, observe: 'response'})
+    localStorage.setItem('pass', user.password!);
+    return this.http.post(this.usersUrl + "new", user, {observe: 'response'})
       .pipe(map((res:HttpResponse<User>) => res));
   }
 
