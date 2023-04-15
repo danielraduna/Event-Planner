@@ -30,6 +30,5 @@ export class UserComponent implements OnInit {
 
   assignUserToEvent(): void {
     this.userService.assignUserToUser(1, 2).subscribe();
-    console.log(this.event);
   }
 }

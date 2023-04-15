@@ -22,7 +22,6 @@ export class MyEventsComponent implements OnInit{
     this.eventService.getEventsByUser(this.user?.id!).subscribe(data => {
       if(data.body) {
         this.events = data.body;
-        console.log(this.events);
       }
     })
   }

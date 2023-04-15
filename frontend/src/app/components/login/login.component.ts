@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {FormControl, FormGroup} from "@angular/forms";
 import {ToastrService} from "ngx-toastr";
 import {User} from "../../entities/user";
 import {UserService} from "../../services/user.service";
-import {LoginDTO} from "../../entities/loginDTO";
 
 @Component({
   selector: 'app-login',
@@ -85,11 +84,8 @@ export class LoginComponent  implements OnInit {
       this.userService.login({username: this.loginForm.value.username, password: this.loginForm.value.password}).subscribe(data => {
         if(data.body!.id) {
           const authenticatedUser = data.body!;
-
-          // Store the original, unencrypted password in the user object
           authenticatedUser.password = this.loginForm.value.password!;
           localStorage.setItem('user', JSON.stringify(authenticatedUser));
-          console.log(localStorage.getItem('user'));
           this.router.navigate(['/dashboard']);
         }
         else {
