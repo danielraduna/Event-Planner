@@ -53,16 +53,16 @@ export class UserService {
     return this.http.put(this.usersUrl + `makeAdminOfEvent?idUser=${idUser}&idEvent=${idEvent}`, {observe:'response'});
   }
 
-  public createUser(user: User) :Observable<HttpResponse<User>> {
-    localStorage.setItem('pass', user.password!);
-    return this.http.post(this.usersUrl + "new", user, {observe: 'response'})
-      .pipe(map((res:HttpResponse<User>) => res));
+  public createUser(user: User): Observable<HttpResponse<User>> {
+    return this.http.post<User>(this.usersUrl + "new", user, { observe: 'response' })
+      .pipe(map((res: HttpResponse<User>) => res));
   }
+
+
 
   public login(loginDTO: LoginDTO, ) :Observable<HttpResponse<User>> {
     const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(loginDTO.username + ':' + loginDTO.password) });
     headers.set('Content-Type', 'application/json');
-    localStorage.setItem('pass', loginDTO.password!);
     return this.http.post<User>(this.usersUrl + 'login', loginDTO,  {headers: headers, observe: 'response'})
       .pipe(map((res: HttpResponse<User>) => res));
   }

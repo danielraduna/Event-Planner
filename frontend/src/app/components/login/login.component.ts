@@ -211,7 +211,9 @@ export class LoginComponent  implements OnInit {
         password: this.registerForm.value.password!
       }
       this.userService.createUser(user).subscribe(data => {
-        localStorage.setItem("user", JSON.stringify(user));
+        const authenticatedUser = data.body!;
+        authenticatedUser.password = user.password!;
+        localStorage.setItem('user', JSON.stringify(authenticatedUser));
         this.router.navigate(['/dashboard']);
       });
 

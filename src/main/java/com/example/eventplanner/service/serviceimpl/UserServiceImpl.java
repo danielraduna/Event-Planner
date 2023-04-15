@@ -35,7 +35,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void createUser(User user) {
+    public User createUser(User user) {
         var u1 = userRepository.findByUsernameEquals(user.getUsername());
         if(u1.isPresent()) {
             throw new UserAlreadyExistsException("This username is already used!");
@@ -47,6 +47,7 @@ public class UserServiceImpl implements UserService {
         }
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
+        return user;
     }
 
     @Override
