@@ -53,4 +53,8 @@ public class User {
     @ManyToMany(mappedBy = "users")
     private Set<FriendsGroup> friendsGroups;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "profile_picture_id", referencedColumnName = "id")
+    private ProfilePicture profilePicture;
+
 }
