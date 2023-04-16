@@ -1,13 +1,39 @@
 <div class="profile">
 
-  <p-avatar label="{{user?.username?.charAt(0)?.toUpperCase()}}" size="xlarge" shape="circle" [style]="{ 'background-color': '#1ab188', color: '#ffffff', 'width': '100px', 'height': '100px'}"></p-avatar>
+  <input
+    type="file"
+    #fileInput
+    style="display: none"
+    (change)="onFileSelected($event)"
+    accept="image/*"
+  />
+
+
+  <p-avatar
+    *ngIf="user?.profilePicture?.imageData; else defaultAvatar"
+    [image]="user?.profilePicture?.imageData!"
+    size="xlarge"
+    shape="circle"
+    [style]="{ 'width': '200px', 'height': '200px' }"
+    (click)="fileInput.click()"
+  ></p-avatar>
+
+  <ng-template #defaultAvatar>
+    <p-avatar
+      label="{{ user?.username?.charAt(0)?.toUpperCase() }}"
+      size="xlarge"
+      shape="circle"
+      [style]="{ 'background-color': '#1ab188', color: '#ffffff', 'width': '100px', 'height': '100px' }"
+      (click)="fileInput.click()"
+    ></p-avatar>
+  </ng-template>
   <div class="profile-info">
     <p>Username:   {{user?.username}}</p>
     <p>Email:    {{user?.email}}</p>
     <p>Phone:    {{user?.phone}}</p>
 
   </div>
-  <button class="login-button">Manage your profile</button>
+
 </div>
 
 <div class="profile">

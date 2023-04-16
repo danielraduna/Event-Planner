@@ -1,5 +1,6 @@
 package com.example.eventplanner.service.serviceimpl;
 
+import com.example.eventplanner.exception.UserNotFoundException;
 import com.example.eventplanner.model.ProfilePicture;
 import com.example.eventplanner.model.User;
 import com.example.eventplanner.repository.ProfilePictureRepository;
@@ -25,11 +26,20 @@ public class ProfilePictureServiceImpl implements ProfilePictureService {
             return profilePictureRepository.findById(id).orElse(null);
         }
 
-        public ProfilePicture createProfilePicture(ProfilePicture profilePicture) {
-            return profilePictureRepository.save(profilePicture);
+    public ProfilePicture createProfilePicture(ProfilePicture profilePicture, Long userId) {
+        User user = userRepository.findById(userId).orElse(null);
+        if (user == null) {
+            throw new UserNotFoundException("User not found with id: " + userId);
         }
+        profilePicture.setUser(user);
+        user.setProfilePicture(profilePicture);
+        profilePictureRepository.save(profilePicture);
+        userRepository.save(user);
+        return profilePicture;
+    }
 
-        public ProfilePicture updateProfilePicture(ProfilePicture profilePicture) {
+
+    public ProfilePicture updateProfilePicture(ProfilePicture profilePicture) {
             return profilePictureRepository.save(profilePicture);
         }
 

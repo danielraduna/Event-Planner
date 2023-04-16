@@ -30,10 +30,13 @@ public class ProfilePictureController {
     }
 
     @PostMapping("/new")
-    public ResponseEntity<ProfilePicture> createProfilePicture(@RequestBody ProfilePicture profilePicture) {
-        ProfilePicture newProfilePicture = profilePictureService.createProfilePicture(profilePicture);
+    public ResponseEntity<ProfilePicture> createProfilePicture(@RequestParam("userId") Long userId, @RequestParam("imageData") String imageData) {
+        ProfilePicture profilePicture = new ProfilePicture();
+        profilePicture.setImageData(imageData);
+        ProfilePicture newProfilePicture = profilePictureService.createProfilePicture(profilePicture, userId);
         return new ResponseEntity<>(newProfilePicture, HttpStatus.CREATED);
     }
+
 
     @PutMapping("/{id}")
     public ResponseEntity<ProfilePicture> updateProfilePicture(@PathVariable Long id, @RequestBody ProfilePicture profilePicture) {

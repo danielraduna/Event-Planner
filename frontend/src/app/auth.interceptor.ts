@@ -10,7 +10,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const currentUser: User = JSON.parse(localStorage.getItem('user')!);
-    if (currentUser  && !request.url.includes('/new')) {
+    if (currentUser  && !request.url.includes('users/new')) {
       request = request.clone({
         setHeaders: {
           Authorization: `Basic ${btoa(currentUser.username + ':' + currentUser.password)}`,

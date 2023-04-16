@@ -12,7 +12,7 @@ public interface ProfilePictureService {
 
     public ProfilePicture getProfilePictureById(Long id);
 
-    public ProfilePicture createProfilePicture(ProfilePicture profilePicture);
+    public ProfilePicture createProfilePicture(ProfilePicture profilePicture, Long userId);
 
     public ProfilePicture updateProfilePicture(ProfilePicture profilePicture);
 

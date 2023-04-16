@@ -8,6 +8,11 @@
   color: #1ab188;
 
 }
+.users {
+  display: flex;
+  gap: 0; /* Elimină spațiul dintre elementele .users */
+  align-items: center; /* Centrați elementele pe axa transversală */
+}
 
 p-button {
   margin-right: 15px;

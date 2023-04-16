@@ -7,6 +7,23 @@
 
   <div class="buttons">
     <p-menu #menu [model]="items" [popup]="true"></p-menu>
-    <p-avatar label="{{user?.username?.charAt(0)?.toUpperCase()}}" size="xlarge" shape="circle" [style]="{ 'background-color': '#1ab188', color: '#ffffff' }" (click)="menu.toggle($event)"></p-avatar>
+    <p-avatar
+      *ngIf="user?.profilePicture?.imageData; else defaultAvatar"
+      [image]="user?.profilePicture?.imageData!"
+      size="xlarge"
+      shape="circle"
+      [style]="{ 'width': '100px', 'height': '100px', 'border-radius': '50%;' }"
+      (click)="menu.toggle($event)"
+    ></p-avatar>
+
+    <ng-template #defaultAvatar>
+      <p-avatar
+        label="{{ user?.username?.charAt(0)?.toUpperCase() }}"
+        size="xlarge"
+        shape="circle"
+        [style]="{ 'background-color': '#1ab188', color: '#ffffff', 'width': '100px', 'height': '100px' }"
+        (click)="menu.toggle($event)"
+      ></p-avatar>
+    </ng-template>
   </div>
 </div>

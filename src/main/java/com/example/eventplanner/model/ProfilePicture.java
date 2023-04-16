@@ -1,5 +1,6 @@
 package com.example.eventplanner.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mysql.cj.jdbc.Clob;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -19,5 +20,6 @@ public class ProfilePicture {
     private String imageData;
 
     @OneToOne(mappedBy = "profilePicture")
+    @JsonIgnore
     private User user;
 }

@@ -25,7 +25,7 @@ import { MyEventsComponent } from './components/my-events/my-events.component';
 import {AuthInterceptor} from "./auth.interceptor";
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
-
+import { FileUploadModule } from 'primeng/fileupload';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +57,8 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
     MenuModule,
     RatingModule,
     FormsModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    FileUploadModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
   bootstrap: [AppComponent]
