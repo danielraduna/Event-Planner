@@ -1,6 +1,8 @@
 package com.example.eventplanner.service;
 
 import com.example.eventplanner.dto.LoginDto;
+import com.example.eventplanner.exception.EventRequestAlreadyExistsException;
+import com.example.eventplanner.model.EventRequest;
 import com.example.eventplanner.model.User;
 
 import java.util.List;
@@ -29,5 +31,9 @@ public interface UserService {
     void updateUser(User user);
 
     void makeUserAdminOfEvent(Long idUser, Long idEvent);
-    void deleteUser(User user);
+    public void deleteUserById(Long id);
+
+    void sendEventRequest(Long senderId, Long receiverId, Long eventId) throws EventRequestAlreadyExistsException;
+
+    List<EventRequest> getReceivedEventRequests(Long userId);
 }

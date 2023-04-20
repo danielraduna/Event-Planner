@@ -2,8 +2,10 @@ package com.example.eventplanner.service.serviceimpl;
 
 import com.example.eventplanner.dto.LoginDto;
 import com.example.eventplanner.exception.*;
+import com.example.eventplanner.model.EventRequest;
 import com.example.eventplanner.model.User;
 import com.example.eventplanner.repository.EventRepository;
+import com.example.eventplanner.repository.EventRequestRepository;
 import com.example.eventplanner.repository.FriendsGroupRepository;
 import com.example.eventplanner.repository.UserRepository;
 import com.example.eventplanner.service.UserService;
@@ -23,8 +25,8 @@ public class UserServiceImpl implements UserService {
     private final EventRepository eventRepository;
     private final FriendsGroupRepository friendsGroupRepository;
     private final PasswordEncoder passwordEncoder;
-
     private final JpaUserDetailsService userDetailsService;
+    private final EventRequestRepository eventRequestRepository;
     @Override
     public User login(LoginDto loginDto) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(loginDto.getUsername());
@@ -188,13 +190,58 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(User user) {
-        var u = userRepository.findById(user.getId());
-        if(u.isPresent()) {
-            userRepository.delete(user);
-        }
-        else {
+    public void deleteUserById(Long id) {
+        var user = userRepository.findById(id);
+        if (user.isPresent()) {
+            userRepository.delete(user.get());
+        } else {
             throw new UserNotFoundException("User with this id was not found");
         }
+    }
+
+
+    @Override
+    public void sendEventRequest(Long senderId, Long receiverId, Long eventId){
+        // Check if sender exists
+        var sender = userRepository.findById(senderId);
+        if (sender.isEmpty()) {
+            throw new UserNotFoundException("Sender with this id was not found");
+        }
+
+        // Check if receiver exists
+        var receiver = userRepository.findById(receiverId);
+        if (receiver.isEmpty()) {
+            throw new UserNotFoundException("Receiver with this id was not found");
+        }
+
+        // Check if event exists
+        var event = eventRepository.findById(eventId);
+        if (event.isEmpty()) {
+            throw new EventNotFoundException("Event with this id was not found");
+        }
+
+        // Check if the event request already exists
+        var existingRequest = eventRequestRepository.findByUserAndEvent(receiver.get(), event.get());
+        if (existingRequest.isPresent()) {
+            throw new EventRequestAlreadyExistsException("Event request already exists");
+        }
+
+        // Create a new event request
+        EventRequest eventRequest = new EventRequest();
+        eventRequest.setUser(receiver.get());
+        eventRequest.setEvent(event.get());
+        eventRequest.setAccepted(false);
+
+        // Save the event request
+        eventRequestRepository.save(eventRequest);
+    }
+
+    @Override
+    public List<EventRequest> getReceivedEventRequests(Long userId) {
+        var user = userRepository.findById(userId);
+        if (user.isEmpty()) {
+            throw new UserNotFoundException("User with this id was not found");
+        }
+        return eventRequestRepository.findByUser(user.get());
     }
 }

@@ -1,6 +1,7 @@
 package com.example.eventplanner.controller;
 
 import com.example.eventplanner.dto.LoginDto;
+import com.example.eventplanner.model.EventRequest;
 import com.example.eventplanner.model.User;
 import com.example.eventplanner.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -85,14 +86,26 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<User> deleteUser(@RequestBody User user) {
-        userService.deleteUser(user);
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<User> deleteUser(@PathVariable Long id) {
+        userService.deleteUserById(id);
         return ResponseEntity.ok().build();
     }
 
     @PostMapping(path = "/login")
     public User login(@RequestBody LoginDto loginDto) {
         return userService.login(loginDto);
+    }
+
+    @PostMapping("/sendEventRequest")
+    public ResponseEntity<User> sendEventRequest(@RequestParam Long senderId, @RequestParam Long receiverId, @RequestParam Long eventId) {
+        userService.sendEventRequest(senderId, receiverId, eventId);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/received-invitations/{idUser}")
+    public ResponseEntity<List<EventRequest>> getReceivedEventRequests(@PathVariable Long idUser) {
+        List<EventRequest> eventRequests = userService.getReceivedEventRequests(idUser);
+        return new ResponseEntity<>(eventRequests, HttpStatus.OK);
     }
 }

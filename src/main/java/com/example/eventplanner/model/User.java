@@ -57,4 +57,7 @@ public class User {
     @JoinColumn(name = "profile_picture_id", referencedColumnName = "id")
     private ProfilePicture profilePicture;
 
+    @OneToMany(mappedBy = "user")
+    private Set<EventRequest> eventRequests;
+
 }

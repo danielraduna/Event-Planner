@@ -31,4 +31,6 @@ public class Event {
     @ManyToMany(mappedBy = "events", cascade = CascadeType.PERSIST)
     private List<User> users;
 
+    @OneToMany(mappedBy = "event")
+    private List<EventRequest> eventRequests;
 }
