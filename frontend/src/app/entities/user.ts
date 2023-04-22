@@ -1,6 +1,7 @@
 import {Event} from "./event";
 import {FriendsGroup} from "./friends-group";
 import {ProfilePicture} from "./profile-picture";
+import {EventRequest} from "./EventRequest";
 
 export interface User {
   id?: number;
@@ -16,4 +17,5 @@ export interface User {
   friends?: User[];
   friendsGroups?: FriendsGroup[];
   profilePicture?: ProfilePicture;
+  eventRequests?: EventRequest[];
 }

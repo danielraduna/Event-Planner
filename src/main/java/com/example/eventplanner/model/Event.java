@@ -1,5 +1,8 @@
 package com.example.eventplanner.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,5 +35,6 @@ public class Event {
     private List<User> users;
 
     @OneToMany(mappedBy = "event")
+    @JsonIgnore
     private List<EventRequest> eventRequests;
 }

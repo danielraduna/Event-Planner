@@ -4,6 +4,7 @@ import {User} from "../entities/user";
 import {environment} from "../../environments/environment";
 import {map, Observable} from "rxjs";
 import {LoginDTO} from "../entities/loginDTO";
+import {EventRequest} from "../entities/EventRequest";
 
 @Injectable({
   providedIn: 'root'
@@ -58,12 +59,28 @@ export class UserService {
       .pipe(map((res: HttpResponse<User>) => res));
   }
 
-
-
   public login(loginDTO: LoginDTO, ) :Observable<HttpResponse<User>> {
     const headers = new HttpHeaders({ Authorization: 'Basic ' + btoa(loginDTO.username + ':' + loginDTO.password) });
     headers.set('Content-Type', 'application/json');
     return this.http.post<User>(this.usersUrl + 'login', loginDTO,  {headers: headers, observe: 'response'})
       .pipe(map((res: HttpResponse<User>) => res));
   }
+
+  public getReceivedEventRequests(idUser: number): Observable<HttpResponse<EventRequest[]>> {
+    return this.http.get<EventRequest[]>(this.usersUrl + `received-invitations/${idUser}`, { observe: 'response' })
+      .pipe(map((res: HttpResponse<EventRequest[]>) => res));
+  }
+
+  public sendEventRequest(senderId: number, receiverId: number, eventId: number): any {
+    return this.http.post<void>(this.usersUrl + `sendEventRequest?senderId=${senderId}&receiverId=${receiverId}&eventId=${eventId}`, null, { observe: 'response' });
+  }
+
+  public acceptEventRequest(requestId: number): any {
+    return this.http.put<void>(this.usersUrl + `acceptEventRequest/${requestId}`, { observe: 'response' });
+  }
+
+  public rejectEventRequest(requestId: number): any {
+    return this.http.put<void>(this.usersUrl + `rejectEventRequest/${requestId}`, { observe: 'response' });
+  }
+
 }

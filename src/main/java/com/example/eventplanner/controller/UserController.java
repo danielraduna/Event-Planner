@@ -108,4 +108,17 @@ public class UserController {
         List<EventRequest> eventRequests = userService.getReceivedEventRequests(idUser);
         return new ResponseEntity<>(eventRequests, HttpStatus.OK);
     }
+
+    @PutMapping("/acceptEventRequest/{requestId}")
+    public ResponseEntity<Void> acceptEventRequest(@PathVariable Long requestId) {
+        userService.acceptEventRequest(requestId);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/rejectEventRequest/{requestId}")
+    public ResponseEntity<Void> rejectEventRequest(@PathVariable Long requestId) {
+        userService.rejectEventRequest(requestId);
+        return ResponseEntity.ok().build();
+    }
+
 }

@@ -2,6 +2,7 @@ package com.example.eventplanner.service.serviceimpl;
 
 import com.example.eventplanner.dto.LoginDto;
 import com.example.eventplanner.exception.*;
+import com.example.eventplanner.model.Event;
 import com.example.eventplanner.model.EventRequest;
 import com.example.eventplanner.model.User;
 import com.example.eventplanner.repository.EventRepository;
@@ -244,4 +245,42 @@ public class UserServiceImpl implements UserService {
         }
         return eventRequestRepository.findByUser(user.get());
     }
+
+    @Override
+    public void acceptEventRequest(Long requestId) {
+        var eventRequest = eventRequestRepository.findById(requestId);
+        if (eventRequest.isEmpty()) {
+            throw new EventRequestNotFoundException("Event request with this id was not found");
+        }
+
+        EventRequest request = eventRequest.get();
+        if (request.isAccepted()) {
+            throw new EventRequestAlreadyAcceptedException("Event request has already been accepted");
+        }
+
+        // Add user to the event
+        User user = request.getUser();
+        Event event = request.getEvent();
+        user.getEvents().add(event);
+        userRepository.save(user);
+
+        // Delete the event request
+        eventRequestRepository.delete(request);
+    }
+
+    @Override
+    public void rejectEventRequest(Long requestId) {
+        var eventRequest = eventRequestRepository.findById(requestId);
+        if (eventRequest.isEmpty()) {
+            throw new EventRequestNotFoundException("Event request with this id was not found");
+        }
+
+        EventRequest request = eventRequest.get();
+        if (!request.isAccepted()) {
+            eventRequestRepository.delete(request);
+        } else {
+            throw new EventRequestAlreadyAcceptedException("Event request has already been accepted and cannot be rejected");
+        }
+    }
+
 }
