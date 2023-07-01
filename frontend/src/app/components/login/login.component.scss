@@ -35,6 +35,7 @@ a, a:hover {
   background: #1ab188;
   color: white;
 }
+
 li {
   list-style: none;
   margin-bottom: 20px;
@@ -87,4 +88,11 @@ li {
   justify-content: flex-end; /* Add this line */
   margin-left: auto !important;
 }
+
+.register form, .visible {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
 

@@ -6,13 +6,12 @@ import com.example.eventplanner.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Repository
 public interface EventRequestRepository extends JpaRepository<EventRequest, Long> {
 
-    Optional<EventRequest> findByUserAndEvent(User user, Event event);
-    List<EventRequest> findByUser(User user);
+    Optional<EventRequest> findByReceiverAndEvent(User receiver, Event event);
 
+    Optional<EventRequest> findBySenderAndReceiverAndEvent(User sender, User receiver, Event event);
 }

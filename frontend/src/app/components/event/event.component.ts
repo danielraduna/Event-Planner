@@ -35,7 +35,7 @@ export class EventComponent implements OnInit {
     });
   }
 
-  confirm2() {
+  decline() {
     this.confirmationService.confirm({
       message: 'Are you sure you don\'t want to participate in this event?',
       header: 'Decline',

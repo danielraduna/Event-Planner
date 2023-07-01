@@ -35,9 +35,4 @@ public interface UserService {
 
     void sendEventRequest(Long senderId, Long receiverId, Long eventId) throws EventRequestAlreadyExistsException;
 
-    List<EventRequest> getReceivedEventRequests(Long userId);
-
-    public void acceptEventRequest(Long requestId);
-
-    public void rejectEventRequest(Long requestId);
 }

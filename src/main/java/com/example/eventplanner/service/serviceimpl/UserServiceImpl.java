@@ -200,7 +200,6 @@ public class UserServiceImpl implements UserService {
         }
     }
 
-
     @Override
     public void sendEventRequest(Long senderId, Long receiverId, Long eventId){
         // Check if sender exists
@@ -222,65 +221,31 @@ public class UserServiceImpl implements UserService {
         }
 
         // Check if the event request already exists
-        var existingRequest = eventRequestRepository.findByUserAndEvent(receiver.get(), event.get());
+        var existingRequest = eventRequestRepository.findBySenderAndReceiverAndEvent(sender.get(), receiver.get(), event.get());
         if (existingRequest.isPresent()) {
             throw new EventRequestAlreadyExistsException("Event request already exists");
         }
 
+        if(!event.get().getUsers().contains(sender.get())) {
+            throw new SenderNotFoundInEventException("Sender is not in this event");
+        }
+
         // Create a new event request
         EventRequest eventRequest = new EventRequest();
-        eventRequest.setUser(receiver.get());
+        eventRequest.setSender(sender.get());
+        eventRequest.setReceiver(receiver.get());
         eventRequest.setEvent(event.get());
         eventRequest.setAccepted(false);
 
+        // Add event request to receiver's list of event requests
+        receiver.get().getEventRequests().add(eventRequest);
+
         // Save the event request
         eventRequestRepository.save(eventRequest);
+
+        // Save the receiver to update its list of event requests
+        userRepository.save(receiver.get());
     }
 
-    @Override
-    public List<EventRequest> getReceivedEventRequests(Long userId) {
-        var user = userRepository.findById(userId);
-        if (user.isEmpty()) {
-            throw new UserNotFoundException("User with this id was not found");
-        }
-        return eventRequestRepository.findByUser(user.get());
-    }
-
-    @Override
-    public void acceptEventRequest(Long requestId) {
-        var eventRequest = eventRequestRepository.findById(requestId);
-        if (eventRequest.isEmpty()) {
-            throw new EventRequestNotFoundException("Event request with this id was not found");
-        }
-
-        EventRequest request = eventRequest.get();
-        if (request.isAccepted()) {
-            throw new EventRequestAlreadyAcceptedException("Event request has already been accepted");
-        }
-
-        // Add user to the event
-        User user = request.getUser();
-        Event event = request.getEvent();
-        user.getEvents().add(event);
-        userRepository.save(user);
-
-        // Delete the event request
-        eventRequestRepository.delete(request);
-    }
-
-    @Override
-    public void rejectEventRequest(Long requestId) {
-        var eventRequest = eventRequestRepository.findById(requestId);
-        if (eventRequest.isEmpty()) {
-            throw new EventRequestNotFoundException("Event request with this id was not found");
-        }
-
-        EventRequest request = eventRequest.get();
-        if (!request.isAccepted()) {
-            eventRequestRepository.delete(request);
-        } else {
-            throw new EventRequestAlreadyAcceptedException("Event request has already been accepted and cannot be rejected");
-        }
-    }
 
 }

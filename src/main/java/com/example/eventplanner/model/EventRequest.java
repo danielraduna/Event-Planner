@@ -15,9 +15,13 @@ public class EventRequest {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "sender_id")
+    private User sender;
+
+    @ManyToOne
+    @JoinColumn(name = "receiver_id")
     @JsonIgnore
-    private User user;
+    private User receiver;
 
     @ManyToOne
     @JoinColumn(name = "event_id")

@@ -39,6 +39,20 @@ public class ExceptionHandler {
                 .body(groupNotFoundException.getMessage());
     }
 
+    @org.springframework.web.bind.annotation.ExceptionHandler(value = {SenderNotFoundInEventException.class})
+    public ResponseEntity<String> senderNotFoundInEvent(SenderNotFoundInEventException senderNotFoundInEventException){
+        return ResponseEntity
+                .badRequest()
+                .body(senderNotFoundInEventException.getMessage());
+    }
+
+    @org.springframework.web.bind.annotation.ExceptionHandler(value = {EventRequestAlreadyExistsException.class})
+    public ResponseEntity<String> eventRequestAlreadyExists(EventRequestAlreadyExistsException eventRequestAlreadyExistsException){
+        return ResponseEntity
+                .badRequest()
+                .body(eventRequestAlreadyExistsException.getMessage());
+    }
+
     @org.springframework.web.bind.annotation.ExceptionHandler(value = {MethodArgumentNotValidException.class})
     public ResponseEntity<String> userParametersValidation(MethodArgumentNotValidException badRequestException){
 

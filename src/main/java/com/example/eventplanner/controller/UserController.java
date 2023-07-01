@@ -1,7 +1,6 @@
 package com.example.eventplanner.controller;
 
 import com.example.eventplanner.dto.LoginDto;
-import com.example.eventplanner.model.EventRequest;
 import com.example.eventplanner.model.User;
 import com.example.eventplanner.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -100,24 +99,6 @@ public class UserController {
     @PostMapping("/sendEventRequest")
     public ResponseEntity<User> sendEventRequest(@RequestParam Long senderId, @RequestParam Long receiverId, @RequestParam Long eventId) {
         userService.sendEventRequest(senderId, receiverId, eventId);
-        return ResponseEntity.ok().build();
-    }
-
-    @GetMapping("/received-invitations/{idUser}")
-    public ResponseEntity<List<EventRequest>> getReceivedEventRequests(@PathVariable Long idUser) {
-        List<EventRequest> eventRequests = userService.getReceivedEventRequests(idUser);
-        return new ResponseEntity<>(eventRequests, HttpStatus.OK);
-    }
-
-    @PutMapping("/acceptEventRequest/{requestId}")
-    public ResponseEntity<Void> acceptEventRequest(@PathVariable Long requestId) {
-        userService.acceptEventRequest(requestId);
-        return ResponseEntity.ok().build();
-    }
-
-    @PutMapping("/rejectEventRequest/{requestId}")
-    public ResponseEntity<Void> rejectEventRequest(@PathVariable Long requestId) {
-        userService.rejectEventRequest(requestId);
         return ResponseEntity.ok().build();
     }
 
