@@ -20,12 +20,10 @@
         ></p-avatar>
       </ng-template>
     </div>
-
   </div>
 
-  <div class="buttons">
-    <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
-    <p-button (click)="confirm1()" icon="pi pi-check" styleClass="p-button-success"></p-button>
-    <p-button (click)="confirm2()" icon="pi pi-times" styleClass="p-button-danger"></p-button>
+  <div *ngIf="request">
+    <button (click)="confirm()">Accept</button>
+    <button (click)="reject()">Reject</button>
   </div>
 </div>

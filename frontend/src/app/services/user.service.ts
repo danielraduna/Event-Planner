@@ -71,16 +71,9 @@ export class UserService {
       .pipe(map((res: HttpResponse<EventRequest[]>) => res));
   }
 
-  public sendEventRequest(senderId: number, receiverId: number, eventId: number): any {
-    return this.http.post<void>(this.usersUrl + `sendEventRequest?senderId=${senderId}&receiverId=${receiverId}&eventId=${eventId}`, null, { observe: 'response' });
-  }
-
-  public acceptEventRequest(requestId: number): any {
-    return this.http.put<void>(this.usersUrl + `acceptEventRequest/${requestId}`, { observe: 'response' });
-  }
-
-  public rejectEventRequest(requestId: number): any {
-    return this.http.put<void>(this.usersUrl + `rejectEventRequest/${requestId}`, { observe: 'response' });
+  public sendEventRequest(senderId: number, receiverId: number, eventId: number): Observable<HttpResponse<User>> {
+    return this.http.post<User>(this.usersUrl + `sendEventRequest?senderId=${senderId}&receiverId=${receiverId}&eventId=${eventId}`, null, { observe: 'response' })
+      .pipe(map((res: HttpResponse<User>) => res));
   }
 
 }

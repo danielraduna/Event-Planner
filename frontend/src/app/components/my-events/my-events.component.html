@@ -1,4 +1,5 @@
 <div class="events">
   <h1>Your Events</h1>
   <app-event *ngFor="let event of events" [event]="event"></app-event>
+  <app-event *ngFor="let request of eventsRequests" [event]="request.event" [request]="request" ></app-event>
 </div>
