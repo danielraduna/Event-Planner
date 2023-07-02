@@ -77,7 +77,7 @@ li {
 
 :host {
   ::ng-deep .p-calendar-w-btn .p-datepicker-trigger{
-    background: #1ab188 ;
+    background: #1ab188;
     border: #1ab188;
   }
 }
@@ -85,7 +85,7 @@ li {
 .forgot-password {
   display: flex;
   align-items: center;
-  justify-content: flex-end; /* Add this line */
+  justify-content: flex-end;
   margin-left: auto !important;
 }
 

@@ -22,11 +22,15 @@
     </div>
   </div>
 
-  <div *ngIf="request">
-    <div class="buttons">
+
+  <div class="buttons">
+    <div *ngIf="request">
       <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
       <p-button (click)="confirm()" icon="pi pi-check" styleClass="p-button-success"></p-button>
       <p-button (click)="reject()" icon="pi pi-times" styleClass="p-button-danger"></p-button>
+    </div>
+    <div *ngIf="!request">
+      <p-button [routerLink]="['/event', event?.id]" icon="pi pi-eye"  styleClass="p-button-rounded red-button"></p-button>
     </div>
   </div>
 </div>

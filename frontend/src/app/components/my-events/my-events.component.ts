@@ -51,6 +51,4 @@ export class MyEventsComponent implements OnInit{
       }
     });
   }
-
-
 }

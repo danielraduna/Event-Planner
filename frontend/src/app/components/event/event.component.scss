@@ -17,3 +17,11 @@
 p-button {
   margin-right: 15px;
 }
+:host{
+  ::ng-deep .p-button.p-button-icon-only.p-button-rounded {
+    background: #1ab188;
+    border: #1ab188;
+  }
+
+}
+
