@@ -66,10 +66,7 @@ export class UserService {
       .pipe(map((res: HttpResponse<User>) => res));
   }
 
-  public getReceivedEventRequests(idUser: number): Observable<HttpResponse<EventRequest[]>> {
-    return this.http.get<EventRequest[]>(this.usersUrl + `received-invitations/${idUser}`, { observe: 'response' })
-      .pipe(map((res: HttpResponse<EventRequest[]>) => res));
-  }
+
 
   public sendEventRequest(senderId: number, receiverId: number, eventId: number): Observable<HttpResponse<User>> {
     return this.http.post<User>(this.usersUrl + `sendEventRequest?senderId=${senderId}&receiverId=${receiverId}&eventId=${eventId}`, null, { observe: 'response' })

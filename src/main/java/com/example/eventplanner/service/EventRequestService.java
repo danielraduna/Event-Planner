@@ -11,4 +11,6 @@ public interface EventRequestService {
 
     public void acceptRequest(Long requestId);
     public void rejectRequest(Long requestId);
+
+    public List<EventRequest> getEventRequestsByUserId(Long userId);
 }

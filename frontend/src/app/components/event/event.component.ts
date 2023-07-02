@@ -1,9 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Event} from "../../entities/event";
 import {ConfirmationService, ConfirmEventType} from "primeng/api";
 import {EventRequest} from "../../entities/EventRequest";
 import {UserService} from "../../services/user.service";
 import {EventRequestService} from "../../services/event-request.service";
+import {User} from "../../entities/user";
 
 @Component({
   selector: 'app-event',
@@ -14,13 +15,14 @@ import {EventRequestService} from "../../services/event-request.service";
 export class EventComponent implements OnInit {
   @Input() event!: Event;
   @Input() request?: EventRequest;
+  @Output() requestUpdated = new EventEmitter();
+  user!: User;
   constructor(private confirmationService: ConfirmationService,
               private userService: UserService,
-              private eventrequestService: EventRequestService) { }
+              private eventRequestService: EventRequestService) { }
 
   ngOnInit(): void {
-
-
+    this.user = JSON.parse(localStorage.getItem('user')!);
   }
   confirm(): void {
     this.confirmationService.confirm({
@@ -30,7 +32,11 @@ export class EventComponent implements OnInit {
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
         if (this.request) {
-          this.eventrequestService.acceptEventRequest(this.request.id).subscribe();
+          this.eventRequestService.acceptEventRequest(this.request.id).subscribe(
+            () => {
+              this.requestUpdated.emit();
+            }
+          );
         }
       },
       reject: (type: any) => {
@@ -51,7 +57,11 @@ export class EventComponent implements OnInit {
       icon: 'pi pi-info-circle',
       accept: () => {
         if (this.request) {
-          this.eventrequestService.rejectEventRequest(this.request.id).subscribe();
+          this.eventRequestService.rejectEventRequest(this.request.id).subscribe(
+            () => {
+              this.requestUpdated.emit();
+            }
+        );
         }
       },
       reject: (type: any) => {

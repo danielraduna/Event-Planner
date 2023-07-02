@@ -25,7 +25,6 @@ public class EventRequest {
 
     @ManyToOne
     @JoinColumn(name = "event_id")
-    @JsonIgnore
     private Event event;
 
     private boolean accepted;

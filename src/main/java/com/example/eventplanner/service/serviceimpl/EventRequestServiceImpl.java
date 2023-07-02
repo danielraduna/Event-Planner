@@ -1,6 +1,8 @@
 package com.example.eventplanner.service.serviceimpl;
 
+import com.example.eventplanner.exception.UserNotFoundException;
 import com.example.eventplanner.model.EventRequest;
+import com.example.eventplanner.model.User;
 import com.example.eventplanner.repository.EventRequestRepository;
 import com.example.eventplanner.repository.UserRepository;
 import com.example.eventplanner.service.EventRequestService;
@@ -30,6 +32,12 @@ public class EventRequestServiceImpl implements EventRequestService {
     @Override
     public void rejectRequest(Long requestId) {
         eventRequestRepository.deleteById(requestId);
+    }
+
+    @Override
+    public List<EventRequest> getEventRequestsByUserId(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new UserNotFoundException("User not found"));
+        return eventRequestRepository.findByReceiver(user);
     }
 
     @Override

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {HttpClient, HttpResponse} from "@angular/common/http";
+import {map, Observable} from "rxjs";
 import {EventRequest} from "../entities/EventRequest";
 import {environment} from "../../environments/environment";
 
@@ -17,10 +17,18 @@ export class EventRequestService {
     return this.http.get<EventRequest[]>(`${this.requestsUrl}/list`);
   }
 
-  acceptEventRequest(id: number): Observable<EventRequest> {
-    return this.http.put<EventRequest>(`${this.requestsUrl}/accept/${id}`, {});
+  acceptEventRequest(idRequest: number): Observable<HttpResponse<any>> {
+    return this.http.post<any>(this.requestsUrl + `accept/${idRequest}`, {}, { observe: 'response' });
   }
 
-  rejectEventRequest(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.requestsUrl}/reject/${id}`);
-  }}
+  rejectEventRequest(idRequest: number): Observable<HttpResponse<any>> {
+    return this.http.post<any>(this.requestsUrl + `reject/${idRequest}`, {}, { observe: 'response' });
+  }
+
+
+
+  getReceivedEventRequests(idUser: number): Observable<HttpResponse<EventRequest[]>> {
+    return this.http.get<EventRequest[]>(this.requestsUrl + `received-invitations/${idUser}`, { observe: 'response' })
+      .pipe(map((res: HttpResponse<EventRequest[]>) => res));
+  }
+}

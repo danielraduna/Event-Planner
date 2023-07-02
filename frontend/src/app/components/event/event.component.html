@@ -23,7 +23,10 @@
   </div>
 
   <div *ngIf="request">
-    <button (click)="confirm()">Accept</button>
-    <button (click)="reject()">Reject</button>
+    <div class="buttons">
+      <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+      <p-button (click)="confirm()" icon="pi pi-check" styleClass="p-button-success"></p-button>
+      <p-button (click)="reject()" icon="pi pi-times" styleClass="p-button-danger"></p-button>
+    </div>
   </div>
 </div>
