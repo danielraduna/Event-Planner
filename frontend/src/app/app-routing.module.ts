@@ -6,6 +6,7 @@ import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {UserProfileComponent} from "./components/user-profile/user-profile.component";
 import {MyEventsComponent} from "./components/my-events/my-events.component";
 import {EventDetailComponent} from "./components/event-detail/event-detail.component";
+import {ParticipantsListComponent} from "./components/participants-list/participants-list.component";
 
 const routes: Routes = [
   {
@@ -34,7 +35,11 @@ const routes: Routes = [
   },
   { path: 'event/:id',
     component: EventDetailComponent
-  }
+  },
+  {
+    path: 'event/:id/participants',
+    component: ParticipantsListComponent,
+  },
 
 
 ]

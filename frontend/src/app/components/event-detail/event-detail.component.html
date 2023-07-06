@@ -1,7 +1,88 @@
-<div class="events">
-  <div *ngIf="event">
-    <h1>{{event.name}}</h1>
-    <p>{{event.location}}</p>
-    <!-- Add more fields as needed -->
+<div *ngIf="event" class="event-details-container">
+  <div class="event-header">
+    <h1 class="event-title">{{event.name}}</h1>
+  </div>
+
+  <div class="event-content">
+    <p class="event-description">Description here (add it to your event model)</p>
+
+    <div class="event-info">
+        <div class="info-row">
+          <p><strong>Date:</strong></p>
+          <p>{{event.eventDate | date:'short'}}</p>
+        </div>
+        <div class="info-row">
+          <p><strong>Created at:</strong></p>
+          <p>{{event.createDate | date:'short'}}</p>
+        </div>
+        <div class="info-row">
+          <p><strong>Location:</strong></p>
+          <p>{{event.location}}</p>
+        </div>
+        <div class="info-row">
+          <p><strong>Admin:</strong></p>
+          <p-avatar
+            *ngIf="event.admin && event.admin?.profilePicture?.imageData; else defaultAvatar"
+            [image]="event.admin?.profilePicture?.imageData!"
+            shape="circle"
+            [style]="{ 'width': '100px', 'height': '100px', 'border-radius': '50%;' }"
+          ></p-avatar>
+        </div>
+      <div class="info-row">
+        <p class="info-label"><strong>Participants:</strong></p>
+        <div class="info-value">
+          <div *ngFor="let user of event.users | slice:0:5"> <!-- limit to first 5 users -->
+            <p-avatar
+              *ngIf="user?.profilePicture?.imageData; else defaultAvatar"
+              [image]="user?.profilePicture?.imageData!"
+              size="xlarge"
+              shape="circle"
+              [style]="{ 'width': '100px', 'height': '100px', 'border-radius': '50%;' }"
+            ></p-avatar>
+
+            <ng-template #defaultAvatar>
+              <p-avatar
+                label="{{ user?.username?.charAt(0)?.toUpperCase() }}"
+                size="xlarge"
+                shape="circle"
+                [style]="{ 'background-color': '#1ab188', color: '#ffffff', 'width': '100px', 'height': '100px' }"
+              ></p-avatar>
+            </ng-template>
+          </div>
+          <!-- Show "..." button if there are more than 5 users -->
+          <button class="more-button" *ngIf="event.users.length > 5" [routerLink]="['/event', event?.id, 'participants']">
+            ...
+          </button>
+        </div>
+      </div>
+
+
+
+      <ng-template #defaultAvatar>
+        <p-avatar
+          *ngIf="event.admin"
+          label="{{ event.admin?.username?.charAt(0)?.toUpperCase() }}"
+          size="xlarge"
+          shape="circle"
+          [style]="{ 'background-color': '#1ab188', color: '#ffffff', 'width': '100px', 'height': '100px' }"
+        ></p-avatar>
+      </ng-template>
+    </div>
+
+      <div class="info-value action-buttons">
+        <div class="action-button-wrapper">
+          <button class="action-button">Button 1</button>
+        </div>
+        <div class="action-button-wrapper">
+          <button class="action-button">Button 1</button>
+        </div>
+        <div class="action-button-wrapper">
+          <button class="action-button">Button 1</button>
+        </div>
+        <div class="action-button-wrapper">
+          <button class="action-button">Button 1</button>
+        </div>
+      </div>
+
   </div>
 </div>

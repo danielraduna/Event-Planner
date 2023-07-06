@@ -27,6 +27,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
 import { FileUploadModule } from 'primeng/fileupload';
 import { EventDetailComponent } from './components/event-detail/event-detail.component';
+import { ParticipantsListComponent } from './components/participants-list/participants-list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,7 +40,8 @@ import { EventDetailComponent } from './components/event-detail/event-detail.com
     UserProfileComponent,
     MyEventsComponent,
     ForgotPasswordComponent,
-    EventDetailComponent
+    EventDetailComponent,
+    ParticipantsListComponent
   ],
   imports: [
     HttpClientModule,
