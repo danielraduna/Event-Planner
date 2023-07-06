@@ -2,24 +2,27 @@
   <h1>{{event?.name}}</h1>
 
   <div class="users">
-    <div  *ngFor="let user of event.users">
-      <p-avatar
-        *ngIf="user?.profilePicture?.imageData; else defaultAvatar"
-        [image]="user?.profilePicture?.imageData!"
-        size="xlarge"
-        shape="circle"
-        [style]="{ 'width': '100px', 'height': '100px', 'border-radius': '50%;' }"
-      ></p-avatar>
-
-      <ng-template #defaultAvatar>
+    <div *ngFor="let user of event.users | slice:0:5"> <!-- limit to first 5 users -->
         <p-avatar
-          label="{{ user?.username?.charAt(0)?.toUpperCase() }}"
+          *ngIf="user?.profilePicture?.imageData; else defaultAvatar"
+          [image]="user?.profilePicture?.imageData!"
           size="xlarge"
           shape="circle"
-          [style]="{ 'background-color': '#1ab188', color: '#ffffff', 'width': '100px', 'height': '100px' }"
+          [style]="{ 'width': '100px', 'height': '100px', 'border-radius': '50%;' }"
         ></p-avatar>
-      </ng-template>
+
+        <ng-template #defaultAvatar>
+          <p-avatar
+            label="{{ user?.username?.charAt(0)?.toUpperCase() }}"
+            size="xlarge"
+            shape="circle"
+            [style]="{ 'background-color': '#1ab188', color: '#ffffff', 'width': '100px', 'height': '100px' }"
+          ></p-avatar>
+        </ng-template>
     </div>
+      <button class="more-button" *ngIf="event.users.length > 2" [routerLink]="['/event', event?.id, 'participants']">
+        ...
+      </button>
   </div>
 
 

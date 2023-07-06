@@ -17,11 +17,22 @@
 p-button {
   margin-right: 15px;
 }
+
 :host{
   ::ng-deep .p-button.p-button-icon-only.p-button-rounded {
     background: #1ab188;
     border: #1ab188;
   }
+}
 
+.more-button {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border-color: black;
+  font-size: 20px;
+  color: #000;
+  background-color: #fff;
+  cursor: pointer;
 }
 
