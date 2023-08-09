@@ -59,7 +59,6 @@ public class User {
     private ProfilePicture profilePicture;
 
     @OneToMany(mappedBy = "receiver")
+    @JsonIgnore
     private Set<EventRequest> eventRequests;
-
-
 }

@@ -3,11 +3,13 @@
     <h1 class="event-title">{{event.name}} Participants</h1>
   </div>
 
-  <div *ngIf="users && users.length" class="participants-list">
+  <div *ngIf="(users && users.length) || (rejectedUsers && rejectedUsers.length)" class="participants-list">
+    <!-- Accepted users -->
     <div *ngFor="let user of users" class="participant-row">
       <p-avatar
         *ngIf="user?.profilePicture?.imageData; else defaultAvatar"
         [image]="user?.profilePicture?.imageData!"
+        size="large"
         shape="circle"
         [style]="{ 'width': '50px', 'height': '50px', 'border-radius': '50%;' }"
       ></p-avatar>
@@ -15,7 +17,7 @@
       <ng-template #defaultAvatar>
         <p-avatar
           label="{{ user?.username?.charAt(0)?.toUpperCase() }}"
-          size="medium"
+          size="large"
           shape="circle"
           [style]="{ 'background-color': '#1ab188', color: '#ffffff', 'width': '50px', 'height': '50px' }"
         ></p-avatar>
@@ -25,9 +27,34 @@
         <p class="participant-name">{{ user.username }}</p>
       </div>
       <div class="like-icon">
-        <i class="pi pi-thumbs-up"></i>
+        <i class="pi pi-thumbs-up pi-3x"></i>
+      </div>
+    </div>
+
+    <!-- Rejected users -->
+    <div *ngFor="let user of rejectedUsers" class="participant-row rejected">
+      <p-avatar
+        *ngIf="user?.profilePicture?.imageData; else defaultAvatarRejected"
+        [image]="user?.profilePicture?.imageData!"
+        shape="circle"
+        [style]="{ 'width': '50px', 'height': '50px', 'border-radius': '50%;' }"
+      ></p-avatar>
+
+      <ng-template #defaultAvatarRejected>
+        <p-avatar
+          label="{{ user?.username?.charAt(0)?.toUpperCase() }}"
+          size="medium"
+          shape="circle"
+          [style]="{ 'background-color': '#ff4d4d', color: '#ffffff', 'width': '50px', 'height': '50px' }"
+        ></p-avatar>
+      </ng-template>
+
+      <div class="participant-info">
+        <p class="participant-name">{{ user.username }}</p>
+      </div>
+      <div class="dislike-icon">
+        <i class="pi pi-thumbs-down"></i>
       </div>
     </div>
   </div>
 </div>
-

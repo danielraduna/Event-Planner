@@ -27,6 +27,13 @@ public class EventRequest {
     @JoinColumn(name = "event_id")
     private Event event;
 
-    private boolean accepted;
+    @Enumerated(EnumType.STRING)
+    private RequestStatus status;
+
+    public enum RequestStatus {
+        PENDING,
+        ACCEPTED,
+        REJECTED
+    }
 
 }

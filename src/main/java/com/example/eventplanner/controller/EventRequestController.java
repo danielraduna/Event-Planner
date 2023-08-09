@@ -1,8 +1,10 @@
 package com.example.eventplanner.controller;
 
 import com.example.eventplanner.model.EventRequest;
+import com.example.eventplanner.model.User;
 import com.example.eventplanner.service.EventRequestService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -56,4 +58,18 @@ public class EventRequestController {
         List<EventRequest> eventRequests = eventRequestService.getEventRequestsByUserId(userId);
         return ResponseEntity.ok(eventRequests);
     }
+
+    @GetMapping("/user/{userId}/pending")
+    public ResponseEntity<List<EventRequest>> getPendingEventRequestsByUserId(@PathVariable Long userId) {
+        List<EventRequest> eventRequests = eventRequestService.getPendingEventRequestsByUserId(userId);
+        return new ResponseEntity<>(eventRequests, HttpStatus.OK);
+    }
+
+    @GetMapping("/event/{eventId}/rejected-users")
+    public ResponseEntity<List<User>> getRejectedUsersForEvent(@PathVariable Long eventId) {
+        List<User> users = eventRequestService.getUsersThatRejectedEvent(eventId);
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
+
 }

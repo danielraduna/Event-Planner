@@ -29,7 +29,7 @@ export class MyEventsComponent implements OnInit{
       }
     });
 
-    this.eventRequestService.getReceivedEventRequests(this.user?.id!).subscribe(data => {
+    this.eventRequestService.getPendingEventRequestsByUserId(this.user?.id!).subscribe(data => {
       if(data.body) {
         this.eventsRequests = data.body;
       }
@@ -37,7 +37,7 @@ export class MyEventsComponent implements OnInit{
   }
 
   updateEventRequests(): void {
-    this.eventRequestService.getReceivedEventRequests(this.user.id!)
+    this.eventRequestService.getPendingEventRequestsByUserId(this.user.id!)
       .subscribe(data => {
         this.eventsRequests = data.body!;
         this.updateEvents();

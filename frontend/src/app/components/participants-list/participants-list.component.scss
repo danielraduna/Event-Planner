@@ -21,23 +21,15 @@ h1 {
   border-radius: 20px;
 }
 
-//.participants-list {
-//  display: flex;
-//  justify-content: space-around;
-//}
-
-.participant-name {
-  font-size: 18px;
-}
-
 .participants-list {
   width: 50%;
-  margin: 0 auto;
+  margin: 50px auto 0; // Ajustează valoarea primei cifre pentru a modifica spațiul de la partea de sus
 }
+
 
 .participant-row {
   display: flex;
-  align-items: center;
+  align-items: baseline;
   margin-bottom: 15px;
 }
 
@@ -46,13 +38,22 @@ h1 {
 }
 
 .participant-name {
-  font-size: 18px;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: bold;
 }
 
-.like-icon {
+.like-icon,
+.dislike-icon {
   color: green;
   margin-left: auto;
-  font-size: 24px;
 }
+
+.dislike-icon {
+  color: red;
+}
+
+.like-icon i, .dislike-icon i {
+  font-size: 35px; // you can change this value to adjust the size
+}
+
 

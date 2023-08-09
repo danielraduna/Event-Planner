@@ -235,7 +235,7 @@ public class UserServiceImpl implements UserService {
         eventRequest.setSender(sender.get());
         eventRequest.setReceiver(receiver.get());
         eventRequest.setEvent(event.get());
-        eventRequest.setAccepted(false);
+        eventRequest.setStatus(EventRequest.RequestStatus.PENDING);
 
         // Add event request to receiver's list of event requests
         receiver.get().getEventRequests().add(eventRequest);
