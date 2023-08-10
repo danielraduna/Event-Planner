@@ -62,7 +62,8 @@ import { ParticipantsListComponent } from './components/participants-list/partic
     RatingModule,
     FormsModule,
     ConfirmDialogModule,
-    FileUploadModule
+    FileUploadModule,
+
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
   bootstrap: [AppComponent]

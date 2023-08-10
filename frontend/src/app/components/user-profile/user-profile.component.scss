@@ -1,44 +1,90 @@
 :host {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
-
   height: 100vh;
 }
 
-.profile {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border: black 1px solid;
-  padding: 100px;
+.profile-container {
+  width: 80%;
+  max-width: 800px;
   background: rgba(19, 35, 47, 1);
+  border-radius: 10px;
+  padding: 50px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.avatar-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  margin-bottom: 40px;
+
+  &:hover .edit-icon {
+    display: block;
+  }
+
+  .edit-icon {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    font-size: 1.5rem;
+    color: #fff;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 50%;
+    padding: 5px;
+    display: none;
+    cursor: pointer;
+  }
 }
 
 .profile-info {
   color: white;
-  font-size: larger;
-  font-weight: bold;
+  font-size: 1.2rem;
   text-align: center;
-  display: flex;
-  align-items: flex-start;
-  flex-direction: column;
   margin-top: 40px;
+  padding: 20px 0;
+  border-top: 1px solid #444;
+  border-bottom: 1px solid #444;
+
+  h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+
+  p {
+    margin-bottom: 15px;
+  }
 }
 
-.login-button {
+.edit-button {
   color: white;
-  background: #1ab188;
-  font-size: 1.25rem;
+  background-color: #1ab188;
+  padding: 10px 20px;
   font-weight: bold;
-  padding: 0.9375rem 1.5625rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #12856d;
+  }
+}
+
+.rating-section {
+  margin-top: 40px;
+  color: white;
   text-align: center;
-  border-radius: 6px;
-  border: #1ab188;
-  margin-top: 25px;
+
+  h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
 }
 
-h1 {
-  color: white;
-  font-weight: bold;
+p-avatar[label] {
+  font-size: 3rem;  /* Adjustează dimensiunea conform nevoilor tale */
 }

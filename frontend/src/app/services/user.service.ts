@@ -66,7 +66,9 @@ export class UserService {
       .pipe(map((res: HttpResponse<User>) => res));
   }
 
-
+  updateUser(userId: number, updatedUser: User): Observable<User> {
+    return this.http.put<User>(`/api/users/update/${userId}`, updatedUser);
+  }
 
   public sendEventRequest(senderId: number, receiverId: number, eventId: number): Observable<HttpResponse<User>> {
     return this.http.post<User>(this.usersUrl + `sendEventRequest?senderId=${senderId}&receiverId=${receiverId}&eventId=${eventId}`, null, { observe: 'response' })

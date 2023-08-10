@@ -1,43 +1,43 @@
-<div class="profile">
+<div class="profile-container">
+  <div class="avatar-section">
+    <input
+      type="file"
+      #fileInput
+      style="display: none"
+      (change)="onFileSelected($event)"
+      accept="image/*"
+    />
 
-  <input
-    type="file"
-    #fileInput
-    style="display: none"
-    (change)="onFileSelected($event)"
-    accept="image/*"
-  />
-
-
-  <p-avatar
-    *ngIf="user?.profilePicture?.imageData; else defaultAvatar"
-    [image]="user?.profilePicture?.imageData!"
-    size="xlarge"
-    shape="circle"
-    [style]="{ 'width': '200px', 'height': '200px' }"
-    (click)="fileInput.click()"
-  ></p-avatar>
-
-  <ng-template #defaultAvatar>
     <p-avatar
-      label="{{ user?.username?.charAt(0)?.toUpperCase() }}"
+      *ngIf="user?.profilePicture?.imageData; else defaultAvatar"
+      [image]="user?.profilePicture?.imageData!"
       size="xlarge"
       shape="circle"
-      [style]="{ 'background-color': '#1ab188', color: '#ffffff', 'width': '100px', 'height': '100px' }"
+      [style]="{ 'width': '200px', 'height': '200px', 'cursor': 'pointer' }"
       (click)="fileInput.click()"
     ></p-avatar>
-  </ng-template>
-  <div class="profile-info">
-    <p>Username:   {{user?.username}}</p>
-    <p>Email:    {{user?.email}}</p>
-    <p>Phone:    {{user?.phone}}</p>
 
+    <ng-template #defaultAvatar>
+      <p-avatar
+        label="{{ user?.username?.charAt(0)?.toUpperCase() }}"
+        size="xlarge"
+        shape="circle"
+        [style]="{ 'background-color': '#1ab188', color: '#ffffff', 'width': '200px', 'height': '200px', 'cursor': 'pointer' }"
+        (click)="fileInput.click()"
+      ></p-avatar>
+    </ng-template>
   </div>
 
-</div>
+  <div class="profile-info">
+    <h2>Personal Info</h2>
+    <p><strong>Username:</strong> {{user?.username}}</p>
+    <p><strong>Email:</strong> {{user?.email}}</p>
+    <p><strong>Phone:</strong> {{user?.phone}}</p>
+    <button class="edit-button">Edit Info</button>
+  </div>
 
-<div class="profile">
-  <h1>Ratingul tau</h1>
-
-  <p-rating [(ngModel)]="value" [cancel]="false"></p-rating>
+  <div class="rating-section">
+    <h2>Your Rating</h2>
+    <p-rating [(ngModel)]="value" [cancel]="false"></p-rating>
+  </div>
 </div>
