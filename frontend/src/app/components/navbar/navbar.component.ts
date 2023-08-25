@@ -19,6 +19,11 @@ export class NavbarComponent implements OnInit{
         routerLink: '/user-profile'
       },
       {
+        label: 'Cereri de prietenie',
+        icon: 'pi pi-plus',
+        routerLink: '/friend-requests'
+      },
+      {
         label: 'Evenimentele mele',
         icon: 'pi pi-book',
         routerLink: '/my-events'

@@ -47,8 +47,22 @@ public class User {
 
     @JsonIgnore
     @ManyToMany
-    @JoinTable(joinColumns = @JoinColumn(name = "user_id"))
+    @JoinTable(
+            name = "user_friends",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "friend_id")
+    )
     private Set<User> friends;
+
+    // Cererile de prietenie trimise
+    @JsonIgnore
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<FriendRequest> sentRequests;
+
+    // Cererile de prietenie primite
+    @JsonIgnore
+    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<FriendRequest> receivedRequests;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "users")

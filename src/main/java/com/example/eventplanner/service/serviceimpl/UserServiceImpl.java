@@ -4,11 +4,9 @@ import com.example.eventplanner.dto.LoginDto;
 import com.example.eventplanner.exception.*;
 import com.example.eventplanner.model.Event;
 import com.example.eventplanner.model.EventRequest;
+import com.example.eventplanner.model.FriendRequest;
 import com.example.eventplanner.model.User;
-import com.example.eventplanner.repository.EventRepository;
-import com.example.eventplanner.repository.EventRequestRepository;
-import com.example.eventplanner.repository.FriendsGroupRepository;
-import com.example.eventplanner.repository.UserRepository;
+import com.example.eventplanner.repository.*;
 import com.example.eventplanner.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,6 +27,8 @@ public class UserServiceImpl implements UserService {
     private final PasswordEncoder passwordEncoder;
     private final JpaUserDetailsService userDetailsService;
     private final EventRequestRepository eventRequestRepository;
+
+    private final FriendRequestRepository friendRequestRepository;
     @Override
     public User login(LoginDto loginDto) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(loginDto.getUsername());
@@ -261,6 +261,24 @@ public class UserServiceImpl implements UserService {
 
         // Save the receiver to update its list of event requests
         userRepository.save(receiver.get());
+    }
+
+    public void sendFriendRequest(Long senderId, Long receiverId) {
+        User sender = userRepository.findById(senderId)
+                .orElseThrow(() -> new UserNotFoundException("Sender not found"));
+
+        User receiver = userRepository.findById(receiverId)
+                .orElseThrow(() -> new UserNotFoundException("Receiver not found"));
+
+        if(friendRequestRepository.existsBySenderIdAndReceiverId(senderId, receiverId)) {
+            throw new IllegalArgumentException("Friend request already exists and is pending.");
+        }
+
+        FriendRequest friendRequest = new FriendRequest();
+        friendRequest.setSender(sender);
+        friendRequest.setReceiver(receiver);
+
+        friendRequestRepository.save(friendRequest);
     }
 
 

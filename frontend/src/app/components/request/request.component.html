@@ -1,0 +1,29 @@
+<div class="requests">
+
+  <div class="request">
+    <p-avatar
+      *ngIf="request!.sender?.profilePicture?.imageData; else defaultAvatar"
+      [image]="request!.sender?.profilePicture?.imageData!"
+      size="xlarge"
+      shape="circle"
+      [style]="{ 'width': '100px', 'height': '100px', 'border-radius': '50%;' }"
+    ></p-avatar>
+
+    <ng-template #defaultAvatar>
+      <p-avatar
+        label="{{ request!.sender?.username?.charAt(0)?.toUpperCase() }}"
+        size="xlarge"
+        shape="circle"
+        [style]="{ 'background-color': '#1ab188', color: '#ffffff', 'width': '100px', 'height': '100px' }"
+      ></p-avatar>
+    </ng-template>
+
+    <h1>{{request!.sender.username}} send you a friend request!</h1>
+
+    <div class="buttons">
+      <p-confirmDialog [style]="{width: '50vw'}"></p-confirmDialog>
+      <p-button (click)="confirm()" icon="pi pi-check" styleClass="p-button-success"></p-button>
+      <p-button (click)="reject()" icon="pi pi-times" styleClass="p-button-danger"></p-button>
+    </div>
+  </div>
+</div>

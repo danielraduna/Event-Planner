@@ -1,0 +1,8 @@
+<div class="requests">
+  <h1>Your friend requests</h1>
+
+  <div *ngFor="let request of friendRequests; let i = index">
+    <app-request [request]="request"  (requestUpdated)="updateRequests(i)"></app-request>
+  </div>
+
+</div>

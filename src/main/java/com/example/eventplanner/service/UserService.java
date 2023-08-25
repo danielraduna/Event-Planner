@@ -38,4 +38,6 @@ public interface UserService {
 
     void sendEventRequest(Long senderId, Long receiverId, Long eventId) throws EventRequestAlreadyExistsException;
 
+    public void sendFriendRequest(Long senderId, Long receiverId);
+
 }

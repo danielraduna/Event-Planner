@@ -34,6 +34,8 @@ import { CreateEventComponent } from './components/create-event/create-event.com
 import { ToastModule } from "primeng/toast";
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { TooltipModule } from 'primeng/tooltip';
+import { FriendRequestsComponent } from './components/friend-requests/friend-requests.component';
+import { RequestComponent } from './components/request/request.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +51,9 @@ import { TooltipModule } from 'primeng/tooltip';
     EventDetailComponent,
     ParticipantsListComponent,
     MyModalComponent,
-    CreateEventComponent
+    CreateEventComponent,
+    FriendRequestsComponent,
+    RequestComponent
   ],
   imports: [
     HttpClientModule,

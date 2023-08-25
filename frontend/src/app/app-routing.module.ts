@@ -8,6 +8,7 @@ import {MyEventsComponent} from "./components/my-events/my-events.component";
 import {EventDetailComponent} from "./components/event-detail/event-detail.component";
 import {ParticipantsListComponent} from "./components/participants-list/participants-list.component";
 import {CreateEventComponent} from "./components/create-event/create-event.component";
+import {FriendRequestsComponent} from "./components/friend-requests/friend-requests.component";
 
 const routes: Routes = [
   {
@@ -44,6 +45,9 @@ const routes: Routes = [
   {
     path: 'create-event',
     component: CreateEventComponent
+  },
+  { path: 'friend-requests',
+    component: FriendRequestsComponent
   }
 
 

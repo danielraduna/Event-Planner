@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/users")
@@ -106,6 +107,18 @@ public class UserController {
     public ResponseEntity<User> sendEventRequest(@RequestParam Long senderId, @RequestParam Long receiverId, @RequestParam Long eventId) {
         userService.sendEventRequest(senderId, receiverId, eventId);
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/sendFriendRequest")
+    public ResponseEntity<Void> sendFriendRequest(@RequestParam Long senderId, @RequestParam Long receiverId) {
+        userService.sendFriendRequest(senderId, receiverId);
+        return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/{userId}/friends")
+    public ResponseEntity<Set<User>> getUserFriends(@PathVariable Long userId) {
+        Set<User> friends = userService.getUserById(userId).get().getFriends();
+        return ResponseEntity.ok(friends);
     }
 
 }
