@@ -4,13 +4,13 @@
   </div>
 
   <div class="event-content">
-    <p class="event-description">Description here (add it to your event model)</p>
+    <p class="event-description">{{event.description}}</p>
 
     <div class="event-info">
-        <div class="info-row">
-          <p><strong>Date:</strong></p>
-          <p>{{event.eventDate | date:'short'}}</p>
-        </div>
+<!--        <div class="info-row">-->
+<!--          <p><strong>Date:</strong></p>-->
+<!--          <p>{{event.eventDate | date:'short'}}</p>-->
+<!--        </div>-->
         <div class="info-row">
           <p><strong>Created at:</strong></p>
           <p>{{event.createDate | date:'short'}}</p>

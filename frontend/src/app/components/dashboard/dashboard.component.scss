@@ -1,0 +1,86 @@
+:host {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 100vh;
+}
+.dashboard {
+  flex-grow: 1;
+  margin-top: 20px;
+  text-align: center;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+
+.create-event-button {
+  background-color: #13232f;
+  color: #1ab188;
+  border: none;
+  padding: 30px;
+  border-radius: 8px;
+  font-size: 1.2em;
+  cursor: pointer;
+  margin-bottom: 50px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  &:hover {
+    background-color: #148a70;
+    color: white;
+  }
+}
+
+.center-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.events-container {
+  width: 80%;               /* Acesta este update-ul pentru lățime */
+  margin: 0 auto;           /* Acest lucru va centra div-ul pe orizontală */
+  background-color: #13232f;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+
+.my-events {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: space-around;
+}
+
+.event-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 150px; /* poți ajusta dimensiunea în funcție de nevoie */
+  height: 150px;
+  background-color: #1ab188; /* culoare de bază; poți alege orice culoare dorești */
+  border-radius: 8px; /* margini rotunjite */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* umbra pentru efect 3D */
+  transition: 0.3s; /* tranziție pentru hover */
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.3);
+  }
+}
+
+.event-button a {
+  text-decoration: none; /* elimină sublinierea linkului */
+  color: black;
+  font-weight: bold; /* face textul mai gros */
+}
+
+h1 {
+  text-align: center;
+  color: #1ab188;
+  font-family: 'Alkatra', cursive;
+  margin-bottom: 10px;
+}
+
+
+

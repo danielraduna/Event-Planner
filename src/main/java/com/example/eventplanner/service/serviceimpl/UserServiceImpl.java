@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -188,6 +189,21 @@ public class UserServiceImpl implements UserService {
         user.get().getEvents().add(event.get());
         userRepository.save(user.get());
 
+    }
+    @Transactional
+    @Override
+    public void withdrawUserFromEvent(Long eventId, Long userId) {
+        Event event = eventRepository.findById(eventId)
+                .orElseThrow(() -> new EventNotFoundException("Event not found"));
+
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new UserNotFoundException("User not found"));
+
+        event.getUsers().remove(user);
+        user.getEvents().remove(event);
+
+        eventRepository.save(event);
+        userRepository.save(user);
     }
 
     @Override

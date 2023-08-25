@@ -34,6 +34,7 @@
     </div>
     <div *ngIf="!request">
       <p-button [routerLink]="['/event', event?.id]" icon="pi pi-eye"  styleClass="p-button-rounded red-button"></p-button>
+      <p-button icon="pi pi-times" styleClass="p-button-danger"  pTooltip="Leave this event" [autoHide]="false" tooltipPosition="top" (click)="withdrawFromEvent()"></p-button>
     </div>
   </div>
 </div>

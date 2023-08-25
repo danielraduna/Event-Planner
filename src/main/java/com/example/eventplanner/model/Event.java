@@ -23,9 +23,21 @@ public class Event {
 
     private String location;
 
-    private LocalDateTime eventDate;
+    @Column(length = 1000)
+    private String description;
+
+    private LocalDateTime startDate;
+
+    private LocalDateTime stopDate;
 
     private LocalDateTime createDate;
+
+    private String startTime;
+
+    private String endTime;
+
+    @ElementCollection
+    private List<String> extraDetails;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

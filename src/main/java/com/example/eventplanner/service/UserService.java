@@ -31,6 +31,9 @@ public interface UserService {
     void updateUser(User user);
 
     void makeUserAdminOfEvent(Long idUser, Long idEvent);
+
+    public void withdrawUserFromEvent(Long eventId, Long userId);
+
     public void deleteUserById(Long id);
 
     void sendEventRequest(Long senderId, Long receiverId, Long eventId) throws EventRequestAlreadyExistsException;

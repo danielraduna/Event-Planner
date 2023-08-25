@@ -33,7 +33,7 @@ export class MyEventsComponent implements OnInit{
       if(data.body) {
         this.eventsRequests = data.body;
       }
-    })
+    });
   }
 
   updateEventRequests(): void {

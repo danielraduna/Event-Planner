@@ -33,7 +33,7 @@
     <p><strong>Username:</strong> {{user?.username}}</p>
     <p><strong>Email:</strong> {{user?.email}}</p>
     <p><strong>Phone:</strong> {{user?.phone}}</p>
-    <button class="edit-button">Edit Info</button>
+    <button class="edit-button" (click)="openModal()">Edit Info</button>
   </div>
 
   <div class="rating-section">
@@ -41,3 +41,26 @@
     <p-rating [(ngModel)]="value" [cancel]="false"></p-rating>
   </div>
 </div>
+
+<div *ngIf="isModalOpen" class="modal">
+  <div class="modal-content">
+    <span (click)="isModalOpen = false" class="close">&times;</span>
+    <form #userForm="ngForm">
+      <div>
+        <label>Username:</label>
+        <input [(ngModel)]="user!.username" name="username" required>
+      </div>
+      <div>
+        <label>Email:</label>
+        <input [(ngModel)]="user!.email" name="email" required>
+      </div>
+      <div>
+        <label>Phone:</label>
+        <input [(ngModel)]="user!.phone" name="phone" required>
+      </div>
+      <button type="button" (click)="onUpdate()">Save</button>
+    </form>
+  </div>
+</div>
+
+

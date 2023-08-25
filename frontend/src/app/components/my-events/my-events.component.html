@@ -1,9 +1,9 @@
 <div class="events">
   <h1>Your Events</h1>
   <div *ngIf="eventsRequests">
-    <app-event (requestUpdated)="updateEventRequests()" *ngFor="let request of eventsRequests" [event]="request.event" [request]="request" ></app-event>
+    <app-event (requestUpdated)="updateEventRequests()" *ngFor="let request of eventsRequests" [event]="request.event" [request]="request" (withdraw)="updateEvents()"></app-event>
   </div>
   <div *ngIf="events">
-    <app-event *ngFor="let event of events" [event]="event"></app-event>
+    <app-event *ngFor="let event of events" [event]="event" (withdraw)="updateEvents()"></app-event>
   </div>
 </div>

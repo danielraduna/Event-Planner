@@ -1,11 +1,16 @@
-import {User} from "./user";
+import { User } from "./user";
 
 export interface Event {
-  id: number;
+  id?: number;
   name: string;
   location: string;
-  eventDate: Date;
+  description: string;
+  startDate: Date;
+  stopDate: Date;
   createDate: Date;
+  startTime: string;
+  endTime: string;
   admin: User;
   users: User[];
+  extraDetails?: string[];
 }

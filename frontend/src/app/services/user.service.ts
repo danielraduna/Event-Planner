@@ -67,7 +67,12 @@ export class UserService {
   }
 
   updateUser(userId: number, updatedUser: User): Observable<User> {
-    return this.http.put<User>(`/api/users/update/${userId}`, updatedUser);
+    return this.http.put<User>(this.usersUrl + `update/${userId}`, updatedUser);
+  }
+
+  withdrawFromEvent(eventId: number, userId: number): Observable<HttpResponse<User>> {
+    return this.http.post(this.usersUrl + `${eventId}/${userId}/withdraw`, null, { observe: 'response' })
+      .pipe(map((res: HttpResponse<User>) => res));
   }
 
   public sendEventRequest(senderId: number, receiverId: number, eventId: number): Observable<HttpResponse<User>> {

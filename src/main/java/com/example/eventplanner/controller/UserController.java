@@ -79,7 +79,13 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping("/users/update/{userId}")
+    @PostMapping("/{eventId}/{userId}/withdraw")
+    public ResponseEntity<Void> withdrawFromEvent(@PathVariable Long eventId, @PathVariable Long userId) {
+        userService.withdrawUserFromEvent(eventId, userId);
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping("/update/{userId}")
     public ResponseEntity<User> updateUser(@PathVariable Long userId, @RequestBody User updatedUser) {
         userService.updateUser(updatedUser);
         return ResponseEntity.ok().build();

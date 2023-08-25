@@ -16,6 +16,9 @@ export class EventComponent implements OnInit {
   @Input() event!: Event;
   @Input() request?: EventRequest;
   @Output() requestUpdated = new EventEmitter();
+  @Output() withdraw = new EventEmitter<number>();
+
+
   user!: User;
   constructor(private confirmationService: ConfirmationService,
               private userService: UserService,
@@ -24,6 +27,7 @@ export class EventComponent implements OnInit {
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('user')!);
   }
+
   confirm(): void {
     this.confirmationService.confirm({
       message: '\n' +
@@ -72,6 +76,12 @@ export class EventComponent implements OnInit {
             break;
         }
       }
+    });
+  }
+
+  withdrawFromEvent() {
+    this.userService.withdrawFromEvent(this.event.id!, this.user.id!).subscribe(() => {
+      this.withdraw.emit();
     });
   }
 

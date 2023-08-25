@@ -28,6 +28,12 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { FileUploadModule } from 'primeng/fileupload';
 import { EventDetailComponent } from './components/event-detail/event-detail.component';
 import { ParticipantsListComponent } from './components/participants-list/participants-list.component';
+import { MyModalComponent } from './components/my-modal/my-modal.component';
+import { StepsModule } from 'primeng/steps';
+import { CreateEventComponent } from './components/create-event/create-event.component';
+import { ToastModule } from "primeng/toast";
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { TooltipModule } from 'primeng/tooltip';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +47,9 @@ import { ParticipantsListComponent } from './components/participants-list/partic
     MyEventsComponent,
     ForgotPasswordComponent,
     EventDetailComponent,
-    ParticipantsListComponent
+    ParticipantsListComponent,
+    MyModalComponent,
+    CreateEventComponent
   ],
   imports: [
     HttpClientModule,
@@ -63,7 +71,10 @@ import { ParticipantsListComponent } from './components/participants-list/partic
     FormsModule,
     ConfirmDialogModule,
     FileUploadModule,
-
+    StepsModule,
+    ToastModule,
+    RadioButtonModule,
+    TooltipModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
   bootstrap: [AppComponent]
