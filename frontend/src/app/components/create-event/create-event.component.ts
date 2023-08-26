@@ -36,7 +36,8 @@ export class CreateEventComponent implements OnInit{
   currentUser!: User;
 
   constructor(private eventService: EventService,
-              private router: Router) {
+              private router: Router,
+              private userService: UserService) {
   }
   ngOnInit(): void {
 
@@ -46,6 +47,11 @@ export class CreateEventComponent implements OnInit{
       { label: 'Data' },
       { label: 'Ultimele detalii' },
     ];
+    this.currentUser = JSON.parse(localStorage.getItem("user")!);
+    this.userService.getUserById(this.currentUser.id!).subscribe(data => {
+      this.currentUser = data.body!;
+    });
+
   }
 
   next() {
@@ -76,28 +82,31 @@ export class CreateEventComponent implements OnInit{
   }
 
   createEvent(): void {
-    this.currentUser = JSON.parse(localStorage.getItem("user")!);
-    const eventToSend: Event = {
-      name: this.eventDetails.name!,
-      description: this.eventDetails.description!, // adăugăm descrierea
-      location: this.eventDetails.location!,
-      startDate: (this.eventDetails.type === 'singleDay') ? this.eventDetails.date! : this.eventDetails.dateRange![0],
-      stopDate: (this.eventDetails.type === 'singleDay') ? this.eventDetails.date! : this.eventDetails.dateRange![1],
-      startTime: this.eventDetails.startTime!, // adăugăm ora de începere
-      endTime: this.eventDetails.endTime!, // adăugăm ora de terminare
-      createDate: new Date(),
-      admin: this.currentUser,
-      users: [this.currentUser],
-      extraDetails: this.extraDetails
-    };
+    this.userService.getUserById(this.currentUser.id!).subscribe(data => {
+      const attachedUser: User = data.body!;
 
+      const eventToSend: Event = {
+        name: this.eventDetails.name!,
+        description: this.eventDetails.description!,
+        location: this.eventDetails.location!,
+        startDate: (this.eventDetails.type === 'singleDay') ? this.eventDetails.date! : this.eventDetails.dateRange![0],
+        stopDate: (this.eventDetails.type === 'singleDay') ? this.eventDetails.date! : this.eventDetails.dateRange![1],
+        startTime: this.eventDetails.startTime!,
+        endTime: this.eventDetails.endTime!,
+        createDate: new Date(),
+        admin: attachedUser,
+        users: [attachedUser],
+        extraDetails: this.extraDetails
+      };
 
-    this.eventService.createEvent(eventToSend).subscribe(
-      (response) => {
-        console.log("Eveniment creat cu succes!", response);
-        this.router.navigate(['/dashboard']);
-      }
-    );
-    console.log(eventToSend);
+      console.log(eventToSend);
+      this.eventService.createEvent(eventToSend).subscribe(
+        (response) => {
+          console.log("Eveniment creat cu succes!", response);
+          this.router.navigate(['/dashboard']);
+        }
+      );
+    });
   }
+
 }

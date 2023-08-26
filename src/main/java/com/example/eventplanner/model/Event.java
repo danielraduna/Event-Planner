@@ -43,8 +43,9 @@ public class Event {
     @JoinColumn(name = "user_id")
     private User admin;
 
-    @ManyToMany(mappedBy = "events", cascade = CascadeType.PERSIST)
+    @ManyToMany(mappedBy = "events")
     private List<User> users;
+
 
     @OneToMany(mappedBy = "event")
     @JsonIgnore

@@ -4,24 +4,39 @@ import com.example.eventplanner.exception.EventNotFoundException;
 import com.example.eventplanner.model.Event;
 import com.example.eventplanner.model.User;
 import com.example.eventplanner.repository.EventRepository;
+import com.example.eventplanner.repository.UserRepository;
 import com.example.eventplanner.service.EventService;
+import jakarta.transaction.Transactional;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class EventServiceImpl implements EventService {
     private final EventRepository eventRepository;
+    private final UserRepository userRepository;
 
-    public EventServiceImpl(EventRepository eventRepository) {
-        this.eventRepository = eventRepository;
-    }
 
     @Override
+    @Transactional
     public void createEvent(Event event) {
+        User user = event.getUsers().get(0);
+        if(user.getId() != null) {
+            user = userRepository.findById(user.getId()).orElseThrow(() -> new RuntimeException("User not found!"));
+            event.setUsers(List.of(user)); // re-atașează utilizatorul "attached" la eveniment
+        }
+        if(user.getEvents() == null) {
+            user.setEvents(new HashSet<>());
+        }
+        user.getEvents().add(event);
+        userRepository.save(user);
         eventRepository.save(event);
     }
+
 
     @Override
     public List<Event> getAllEvents() {
