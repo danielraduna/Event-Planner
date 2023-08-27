@@ -26,7 +26,7 @@ interface EventDetails {
 })
 export class CreateEventComponent implements OnInit{
   items!: MenuItem[];
-  activeIndex: number = 1;
+  activeIndex: number = 0;
 
   showExtraDetailsInput: boolean = false;
   extraDetails: string[] = [];
@@ -106,9 +106,7 @@ export class CreateEventComponent implements OnInit{
         extraDetails: this.extraDetails
       };
 
-      console.log(eventToSend);
       this.eventService.createEvent(eventToSend).subscribe((response) => {
-        console.log("Eveniment creat cu succes!", response);
 
         this.userService.assignUserToEvent(this.currentUser.id!, response.body.id).subscribe(() => {
           for(const friend of this.selectedFriends) {

@@ -6,7 +6,7 @@
   <div *ngIf="events" class="events-container">
     <h1>Your Events</h1>
     <div class="my-events">
-      <div *ngFor="let event of events" class="event-button" [routerLink]="['/event', event?.id]">
+      <div *ngFor="let event of events | slice:0:4" class="event-button" [routerLink]="['/event', event?.id]">
         <a>{{event.name}}</a>
       </div>
       <div *ngIf="events.length > 3" class="event-button more-events-btn" [routerLink]="['/my-events']">
