@@ -23,19 +23,18 @@ public class EventServiceImpl implements EventService {
 
     @Override
     @Transactional
-    public void createEvent(Event event) {
+    public Event createEvent(Event event) {
         User user = event.getUsers().get(0);
-        if(user.getId() != null) {
-            user = userRepository.findById(user.getId()).orElseThrow(() -> new RuntimeException("User not found!"));
-            event.setUsers(List.of(user)); // re-atașează utilizatorul "attached" la eveniment
+        if(user.getId() == null) {
+            throw new RuntimeException("User not found!");
         }
         if(user.getEvents() == null) {
             user.setEvents(new HashSet<>());
         }
         user.getEvents().add(event);
-        userRepository.save(user);
-        eventRepository.save(event);
+        return eventRepository.save(event); // Salvează doar evenimentul
     }
+
 
 
     @Override
@@ -70,10 +69,10 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public void deleteEvent(Event event) {
-        var e = eventRepository.findById(event.getId());
-        if(e.isPresent()) {
-            eventRepository.delete(event);
+    public void deleteEvent(Long idEvent) {
+        var event = eventRepository.findById(idEvent);
+        if(event.isPresent()) {
+            eventRepository.delete(event.get());
         }
         else {
             throw new EventNotFoundException("Event with this id was not found!");

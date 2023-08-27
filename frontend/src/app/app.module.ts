@@ -36,6 +36,8 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { TooltipModule } from 'primeng/tooltip';
 import { FriendRequestsComponent } from './components/friend-requests/friend-requests.component';
 import { RequestComponent } from './components/request/request.component';
+import { CheckboxModule } from 'primeng/checkbox';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -78,7 +80,8 @@ import { RequestComponent } from './components/request/request.component';
     StepsModule,
     ToastModule,
     RadioButtonModule,
-    TooltipModule
+    TooltipModule,
+    CheckboxModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
   bootstrap: [AppComponent]

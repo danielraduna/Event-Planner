@@ -21,8 +21,8 @@ public class EventController {
     @PostMapping("/new")
     public ResponseEntity<Event> createEvent(@RequestBody Event event) {
         event.setCreateDate(LocalDateTime.now());
-        eventService.createEvent(event);
-        return ResponseEntity.ok().build();
+
+        return ResponseEntity.ok(eventService.createEvent(event));
     }
 
     @GetMapping("/list")
@@ -52,9 +52,9 @@ public class EventController {
         return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/delete")
-    public ResponseEntity<User> deleteUser(@RequestBody Event event) {
-        eventService.deleteEvent(event);
+    @DeleteMapping("/delete/{idEvent}")
+    public ResponseEntity<User> deleteUser(@PathVariable Long idEvent) {
+        eventService.deleteEvent(idEvent);
         return ResponseEntity.ok().build();
     }
 }

@@ -23,6 +23,12 @@
 
     <div *ngIf="activeIndex === 1">
       <h3>Pasul 2</h3>
+      <div class="friend">
+        <div *ngFor="let friend of friends" class="field-checkbox">
+          <label>{{ friend.username }}</label>
+          <p-checkbox name="group" [value]="friend" [(ngModel)]="selectedFriends"></p-checkbox>
+        </div>
+      </div>
     </div>
 
     <!-- Pasul 3 - Selecția tipului de eveniment și datei/orei -->

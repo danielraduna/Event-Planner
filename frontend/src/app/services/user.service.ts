@@ -80,4 +80,9 @@ export class UserService {
       .pipe(map((res: HttpResponse<User>) => res));
   }
 
+  getUserFriends(userId: number): Observable<HttpResponse<User[]>> {
+    return this.http.get<User[]>(`${this.usersUrl}${userId}/friends`, {observe:'response'})
+      .pipe(map((res: HttpResponse<User[]>) => res));
+  }
+
 }

@@ -99,3 +99,13 @@ p {
   margin-top: 25px;
   margin-left: 20px;
 }
+
+.field-checkbox {
+  display: flex;
+  justify-content: space-around;
+}
+
+.field-checkbox label {
+  font-weight: bold;
+  font-size: 18px;
+}

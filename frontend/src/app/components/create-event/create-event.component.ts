@@ -6,6 +6,7 @@ import {EventService} from "../../services/event.service";
 import {EventRequestService} from "../../services/event-request.service";
 import {User} from "../../entities/user";
 import {Router} from "@angular/router";
+import {forkJoin, switchMap} from "rxjs";
 
 interface EventDetails {
   name?: string;          // Numele evenimentului
@@ -25,7 +26,7 @@ interface EventDetails {
 })
 export class CreateEventComponent implements OnInit{
   items!: MenuItem[];
-  activeIndex: number = 0;
+  activeIndex: number = 1;
 
   showExtraDetailsInput: boolean = false;
   extraDetails: string[] = [];
@@ -35,9 +36,13 @@ export class CreateEventComponent implements OnInit{
   eventDetails: EventDetails = {};
   currentUser!: User;
 
+  friends: User[] = [];
+  selectedFriends: User[] = [];
+
   constructor(private eventService: EventService,
               private router: Router,
-              private userService: UserService) {
+              private userService: UserService,
+              private eventRequestService: EventRequestService) {
   }
   ngOnInit(): void {
 
@@ -50,8 +55,10 @@ export class CreateEventComponent implements OnInit{
     this.currentUser = JSON.parse(localStorage.getItem("user")!);
     this.userService.getUserById(this.currentUser.id!).subscribe(data => {
       this.currentUser = data.body!;
+      this.userService.getUserFriends(this.currentUser.id!).subscribe(data => {
+        this.friends = data.body!;
+      });
     });
-
   }
 
   next() {
@@ -100,12 +107,17 @@ export class CreateEventComponent implements OnInit{
       };
 
       console.log(eventToSend);
-      this.eventService.createEvent(eventToSend).subscribe(
-        (response) => {
-          console.log("Eveniment creat cu succes!", response);
+      this.eventService.createEvent(eventToSend).subscribe((response) => {
+        console.log("Eveniment creat cu succes!", response);
+
+        this.userService.assignUserToEvent(this.currentUser.id!, response.body.id).subscribe(() => {
+          for(const friend of this.selectedFriends) {
+            this.userService.sendEventRequest(this.currentUser.id!, friend.id!, response.body.id).subscribe();
+          }
           this.router.navigate(['/dashboard']);
-        }
-      );
+        });
+      });
+
     });
   }
 

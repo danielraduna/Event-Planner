@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface EventService {
 
-    void createEvent(Event event);
+    Event createEvent(Event event);
 
     List<Event> getAllEvents();
 
@@ -20,5 +20,5 @@ public interface EventService {
 
     void updateEvent(Event event);
 
-    void deleteEvent(Event event);
+    void deleteEvent(Long idEvent);
 }
