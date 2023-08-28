@@ -1,10 +1,12 @@
 package com.example.eventplanner.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -21,7 +23,6 @@ public class Poll {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "event_id", nullable = false)
     private Event event;
 
     @Column(nullable = false)
@@ -36,5 +37,12 @@ public class Poll {
 
     @ElementCollection
     private List<Integer> votes;
+
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },mappedBy = "votedPolls")
+    private Set<User> voters;
 
 }

@@ -61,12 +61,12 @@ public class User {
 
     // Cererile de prietenie trimise
     @JsonIgnore
-    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
     private Set<FriendRequest> sentRequests;
 
     // Cererile de prietenie primite
     @JsonIgnore
-    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
     private Set<FriendRequest> receivedRequests;
 
     @JsonIgnore
@@ -80,4 +80,13 @@ public class User {
     @OneToMany(mappedBy = "receiver")
     @JsonIgnore
     private Set<EventRequest> eventRequests;
+
+    @ManyToMany
+    @JsonIgnore
+    @JoinTable(
+            name = "user_poll",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "poll_id")
+    )
+    private Set<Poll> votedPolls;
 }

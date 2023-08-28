@@ -9,6 +9,7 @@ import {EventDetailComponent} from "./components/event-detail/event-detail.compo
 import {ParticipantsListComponent} from "./components/participants-list/participants-list.component";
 import {CreateEventComponent} from "./components/create-event/create-event.component";
 import {FriendRequestsComponent} from "./components/friend-requests/friend-requests.component";
+import {EventPollsComponent} from "./components/event-polls/event-polls.component";
 
 const routes: Routes = [
   {
@@ -48,6 +49,10 @@ const routes: Routes = [
   },
   { path: 'friend-requests',
     component: FriendRequestsComponent
+  },
+  {
+    path: 'event/:eventId/polls',
+    component: EventPollsComponent
   }
 
 

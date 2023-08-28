@@ -1,0 +1,30 @@
+<p-card header="{{ pollData.question }}">
+
+  <div class="polls-container" *ngIf="!hasVoted">
+    <div *ngIf="isMultipleChoice; else singleChoiceBlock">
+      <div class="option" *ngFor="let option of pollData.options">
+        <label>{{option}}</label>
+        <p-checkbox [value]="option" [(ngModel)]="selectedOption"></p-checkbox>
+      </div>
+    </div>
+
+    <ng-template #singleChoiceBlock>
+      <div class="option" *ngFor="let option of pollData.options">
+        <label>{{option}}</label>
+        <p-radioButton name="singleOption" [value]="option" [(ngModel)]="selectedOption"></p-radioButton>
+      </div>
+    </ng-template>
+
+    <button class="action-button" type="button" (click)="submitVote()">Vote</button>
+  </div>
+
+  <div *ngIf="hasVoted">
+    <!-- Afișează rezultatele votului aici -->
+    <div class="option" *ngFor="let option of pollData.options; let i = index">
+      <span>{{ option }}</span>
+      <span>{{ pollData.votes[i] }} votes</span>
+    </div>
+  </div>
+
+</p-card>
+

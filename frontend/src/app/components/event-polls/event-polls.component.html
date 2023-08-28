@@ -1,0 +1,28 @@
+<div class="polls">
+  <h1>Polls</h1>
+
+  <p-card  header="Create New Poll">
+    <form  [formGroup]="createPollForm!" (ngSubmit)="onCreatePoll()">
+      <div class="create-poll">
+        <p-dropdown [options]="pollTypes" formControlName="pollType" placeholder="Select a type"></p-dropdown>
+
+        <input pInputText placeholder="Question" formControlName="question">
+
+        <div formArrayName="options" *ngFor="let option of pollOptions.controls; let i = index">
+          <input pInputText formControlName="{{i}}" placeholder="Option">
+        </div>
+      </div>
+
+
+      <div class="buttons">
+        <button class="action-button" type="button"  (click)="addPollOption()">Add Option</button>
+        <button class="action-button" type="submit" >Create Poll</button>
+      </div>
+    </form>
+  </p-card>
+  <h1>Your polls</h1>
+  <div *ngFor="let poll of polls; let i = index">
+    <app-poll [pollData]="poll"></app-poll>
+  </div>
+
+</div>

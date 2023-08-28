@@ -121,4 +121,10 @@ public class UserController {
         return ResponseEntity.ok(friends);
     }
 
+    @PutMapping("/assignToPoll")
+    public ResponseEntity<User> assignUserToPoll(@RequestParam Long idUser, @RequestParam Long idPoll) {
+        userService.assignUserToPoll(idUser, idPoll);
+        return ResponseEntity.ok().build();
+    }
+
 }

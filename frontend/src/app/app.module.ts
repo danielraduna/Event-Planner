@@ -37,7 +37,11 @@ import { TooltipModule } from 'primeng/tooltip';
 import { FriendRequestsComponent } from './components/friend-requests/friend-requests.component';
 import { RequestComponent } from './components/request/request.component';
 import { CheckboxModule } from 'primeng/checkbox';
-
+import { PollComponent } from './components/poll/poll.component';
+import { EventPollsComponent } from './components/event-polls/event-polls.component';
+import { CardModule } from 'primeng/card';
+import { ListboxModule } from 'primeng/listbox';
+import {DropdownModule} from "primeng/dropdown";
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +59,9 @@ import { CheckboxModule } from 'primeng/checkbox';
     MyModalComponent,
     CreateEventComponent,
     FriendRequestsComponent,
-    RequestComponent
+    RequestComponent,
+    PollComponent,
+    EventPollsComponent
   ],
   imports: [
     HttpClientModule,
@@ -81,7 +87,10 @@ import { CheckboxModule } from 'primeng/checkbox';
     ToastModule,
     RadioButtonModule,
     TooltipModule,
-    CheckboxModule
+    CheckboxModule,
+    CardModule,
+    ListboxModule,
+    DropdownModule
   ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },],
   bootstrap: [AppComponent]

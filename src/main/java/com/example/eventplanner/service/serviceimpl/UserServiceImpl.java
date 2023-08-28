@@ -29,6 +29,9 @@ public class UserServiceImpl implements UserService {
     private final EventRequestRepository eventRequestRepository;
 
     private final FriendRequestRepository friendRequestRepository;
+
+    private final PollRepository pollRepository;
+
     @Override
     public User login(LoginDto loginDto) {
         UserDetails userDetails = userDetailsService.loadUserByUsername(loginDto.getUsername());
@@ -281,5 +284,22 @@ public class UserServiceImpl implements UserService {
         friendRequestRepository.save(friendRequest);
     }
 
+    public void assignUserToPoll(Long idUser, Long idPoll) {
+        var user = userRepository.findById(idUser);
+        if(user.isEmpty()) {
+            throw new UserNotFoundException("User with this id was not found");
+        }
+
+        var poll = pollRepository.findById(idPoll);
+        if(poll.isEmpty()) {
+            throw new EventNotFoundException("Event with this id was not found");
+
+        }
+
+        poll.get().getVoters().add(user.get());
+        user.get().getVotedPolls().add(poll.get());
+        pollRepository.save(poll.get());
+        userRepository.save(user.get());
+    }
 
 }

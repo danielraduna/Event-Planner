@@ -1,12 +1,16 @@
 package com.example.eventplanner.service.serviceimpl;
 
 import com.example.eventplanner.model.Poll;
+import com.example.eventplanner.model.User;
 import com.example.eventplanner.repository.PollRepository;
+import com.example.eventplanner.repository.UserRepository;
 import com.example.eventplanner.service.PollService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,9 +19,14 @@ import java.util.Optional;
 public class PollServiceImpl implements PollService {
 
     private final PollRepository pollRepository;
+    private final UserRepository userRepository;
 
     @Override
     public Poll createPoll(Poll poll) {
+        int numberOfOptions = poll.getOptions().size();
+        List<Integer> initializedVotes = new ArrayList<>(Collections.nCopies(numberOfOptions, 0));
+        poll.setVotes(initializedVotes);
+
         return pollRepository.save(poll);
     }
 
@@ -33,6 +42,7 @@ public class PollServiceImpl implements PollService {
 
     @Override
     public Poll updatePoll(Poll poll) {
+        userRepository.saveAll(poll.getVoters());
         return pollRepository.save(poll);
     }
 

@@ -40,4 +40,6 @@ public interface UserService {
 
     public void sendFriendRequest(Long senderId, Long receiverId);
 
+    public void assignUserToPoll(Long idUser, Long idPoll);
+
 }

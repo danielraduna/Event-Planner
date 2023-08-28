@@ -85,4 +85,8 @@ export class UserService {
       .pipe(map((res: HttpResponse<User[]>) => res));
   }
 
+  public assignUserToPoll(idUser: number, idPoll: number): any {
+    return this.http.put(this.usersUrl + `assignToPoll?idUser=${idUser}&idPoll=${idPoll}`, {observe:'response'});
+  }
+
 }
