@@ -1,0 +1,38 @@
+<div class="topic">
+  <h1>{{topic.title}}</h1>
+
+  <div class="add-argument">
+    <h3>Add Your Argument</h3>
+    <form (ngSubmit)="addArgument()">
+      <textarea [(ngModel)]="newArgumentContent" name="argumentContent" placeholder="Write your argument here!"></textarea>
+      <select [(ngModel)]="newArgumentType" name="argumentType">
+        <option value="PRO">Pro</option>
+        <option value="CONTRA">Contra</option>
+      </select>
+      <button class="action-button" type="submit">Add Argument</button>
+    </form>
+  </div>
+  <div class="arguments-section">
+    <div class="pro-arguments">
+      <h2>Pro</h2>
+      <!-- Iterează peste argumentele PRO și afișează-le aici folosind div-uri -->
+      <div class="argument" *ngFor="let argument of topic.arguments" >
+        <span *ngIf="argument.type === 'PRO'">
+          {{ argument.content }}
+        </span>
+      </div>
+    </div>
+
+    <div class="contra-arguments">
+      <h2>Contra</h2>
+      <!-- Iterează peste argumentele CONTRA și afișează-le aici folosind div-uri -->
+      <div class="argument" *ngFor="let argument of topic.arguments" >
+        <span *ngIf="argument.type === 'CONTRA'">
+          {{ argument.content }}
+        </span>
+      </div>
+    </div>
+
+
+  </div>
+</div>

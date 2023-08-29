@@ -89,4 +89,8 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "poll_id")
     )
     private Set<Poll> votedPolls;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    private Set<Argument> createdArguments;
 }

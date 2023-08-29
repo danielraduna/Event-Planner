@@ -1,0 +1,9 @@
+<div class="topic-card">
+  <h2>{{ topic.title }}</h2>
+  <div class="topic-stats">
+    <span class="pro">Pro: {{ countArguments('PRO') }}</span>
+    <span class="contra">Contra: {{ countArguments('CONTRA') }}</span>
+  </div>
+  <button class="action-button" [routerLink]="['/topic', topic.id, 'detailed']">Vezi argumentele</button>
+</div>
+

@@ -10,6 +10,10 @@ import {ParticipantsListComponent} from "./components/participants-list/particip
 import {CreateEventComponent} from "./components/create-event/create-event.component";
 import {FriendRequestsComponent} from "./components/friend-requests/friend-requests.component";
 import {EventPollsComponent} from "./components/event-polls/event-polls.component";
+import {EventTopicsComponent} from "./components/event-topics/event-topics.component";
+import {TopicComponent} from "./components/topic/topic.component";
+import {ArgumentComponent} from "./components/argument/argument.component";
+import {TopicDetailedComponent} from "./components/topic-detailed/topic-detailed.component";
 
 const routes: Routes = [
   {
@@ -53,8 +57,23 @@ const routes: Routes = [
   {
     path: 'event/:eventId/polls',
     component: EventPollsComponent
+  },
+  {
+    path: 'event/:eventId/topics',
+    component: EventTopicsComponent
+  },
+  {
+    path: 'topics/:topicId',
+    component: TopicComponent
+  },
+  {
+    path: 'topics/:topicId/arguments/:argumentId',
+    component: ArgumentComponent
+  },
+  {
+    path: 'topic/:topicId/detailed',
+    component: TopicDetailedComponent
   }
-
 
 ]
 @NgModule({

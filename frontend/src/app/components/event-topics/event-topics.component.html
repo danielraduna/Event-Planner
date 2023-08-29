@@ -1,0 +1,20 @@
+<div class="topics">
+  <h1>Topics</h1>
+  <p-card>
+    <form class="create-topic" [formGroup]="createTopicForm" (ngSubmit)="onSubmit()">
+      <div>
+        <label class="title" for="title">Titlu</label>
+        <input pInputText type="text" id="title" formControlName="title">
+      </div>
+
+      <button class="action-button" type="submit">Creează Topic</button>
+    </form>
+  </p-card>
+
+  <div class="topics-container">
+    <div *ngFor="let topic of topics">
+      <app-topic [topic]="topic"></app-topic>
+    </div>
+  </div>
+
+</div>

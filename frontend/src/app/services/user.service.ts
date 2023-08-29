@@ -4,7 +4,6 @@ import {User} from "../entities/user";
 import {environment} from "../../environments/environment";
 import {map, Observable} from "rxjs";
 import {LoginDTO} from "../entities/loginDTO";
-import {EventRequest} from "../entities/EventRequest";
 
 @Injectable({
   providedIn: 'root'

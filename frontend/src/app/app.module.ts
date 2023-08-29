@@ -42,6 +42,10 @@ import { EventPollsComponent } from './components/event-polls/event-polls.compon
 import { CardModule } from 'primeng/card';
 import { ListboxModule } from 'primeng/listbox';
 import {DropdownModule} from "primeng/dropdown";
+import { EventTopicsComponent } from './components/event-topics/event-topics.component';
+import { TopicComponent } from './components/topic/topic.component';
+import { ArgumentComponent } from './components/argument/argument.component';
+import { TopicDetailedComponent } from './components/topic-detailed/topic-detailed.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,7 +65,11 @@ import {DropdownModule} from "primeng/dropdown";
     FriendRequestsComponent,
     RequestComponent,
     PollComponent,
-    EventPollsComponent
+    EventPollsComponent,
+    EventTopicsComponent,
+    TopicComponent,
+    ArgumentComponent,
+    TopicDetailedComponent
   ],
   imports: [
     HttpClientModule,
