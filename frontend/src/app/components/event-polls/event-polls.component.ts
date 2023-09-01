@@ -70,9 +70,19 @@ export class EventPollsComponent implements OnInit {
       this.pollService.createPoll(newPoll).subscribe(response => {
         console.log(response);
         this.createPollForm!.reset();
+        const pollOptions = this.createPollForm!.get('options') as FormArray;
+
+        while (pollOptions.length) {
+          pollOptions.removeAt(0);
+        }
+        pollOptions.push(this.initPollOption());
         this.getPollsForEvent();
       });
     }
+  }
+
+  initPollOption(): FormControl {
+    return this.fb.control(null, Validators.required);
   }
 
 

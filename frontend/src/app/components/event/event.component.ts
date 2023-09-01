@@ -85,4 +85,11 @@ export class EventComponent implements OnInit {
     });
   }
 
+  getTruncatedTitle(title?: string, maxLength: number = 25): string {
+    if (!title) return '';
+    if (title.length <= maxLength) return title;
+    return title.substr(0, maxLength) + '...';
+  }
+
+
 }

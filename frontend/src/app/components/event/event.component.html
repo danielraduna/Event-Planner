@@ -1,8 +1,9 @@
 <div class="event">
-  <h1>{{event?.name}}</h1>
+  <h1>{{getTruncatedTitle(event?.name)}}</h1>
+
 
   <div class="users">
-    <div *ngFor="let user of event.users | slice:0:5"> <!-- limit to first 5 users -->
+    <div *ngFor="let user of event.users | slice:0:3"> <!-- limit to first 5 users -->
         <p-avatar
           *ngIf="user?.profilePicture?.imageData; else defaultAvatar"
           [image]="user?.profilePicture?.imageData!"
@@ -20,7 +21,7 @@
           ></p-avatar>
         </ng-template>
     </div>
-      <button class="more-button" *ngIf="event.users.length >= 1" [routerLink]="['/event', event?.id, 'participants']">
+      <button class="more-button" *ngIf="event.users.length >= 3" [routerLink]="['/event', event?.id, 'participants']">
         ...
       </button>
   </div>

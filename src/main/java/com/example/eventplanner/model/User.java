@@ -36,7 +36,7 @@ public class User {
     private LocalDate birthday;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "admin") // -> unidirectional relantionship -> creates a join table
+    @OneToMany(mappedBy = "admin")
     private Set<Event> eventsAdmin;
 
     @JsonIgnore
@@ -48,8 +48,6 @@ public class User {
     )
     private Set<Event> events;
 
-
-
     @JsonIgnore
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
@@ -59,12 +57,10 @@ public class User {
     )
     private Set<User> friends;
 
-    // Cererile de prietenie trimise
     @JsonIgnore
     @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
     private Set<FriendRequest> sentRequests;
 
-    // Cererile de prietenie primite
     @JsonIgnore
     @OneToMany(mappedBy = "receiver", cascade = CascadeType.ALL)
     private Set<FriendRequest> receivedRequests;

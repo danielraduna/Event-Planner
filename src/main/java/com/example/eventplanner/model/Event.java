@@ -48,10 +48,8 @@ public class Event {
 
 
     @OneToMany(mappedBy = "event")
-    @JsonIgnore
     private List<EventRequest> eventRequests;
 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
     private List<Poll> polls;
 }

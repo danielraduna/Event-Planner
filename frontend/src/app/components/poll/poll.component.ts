@@ -36,7 +36,6 @@ export class PollComponent implements OnInit{
 
   submitVote() {
     if(this.selectedOption) {
-      this.pollData.question += "1";
       if (this.isMultipleChoice) {
         const selectedOptions = this.selectedOption as string[];
 
