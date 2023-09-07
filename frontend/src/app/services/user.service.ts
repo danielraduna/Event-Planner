@@ -88,4 +88,12 @@ export class UserService {
     return this.http.put(this.usersUrl + `assignToPoll?idUser=${idUser}&idPoll=${idPoll}`, {observe:'response'});
   }
 
+  sendFriendRequest(senderId: number, receiverId: number): Observable<void> {
+    return this.http.post<void>(`${this.usersUrl}sendFriendRequest?senderId=${senderId}&receiverId=${receiverId}`, null);
+  }
+
+  unfriend(idSender: number, idReceiver: number): Observable<void> {
+    const url = `${this.usersUrl}unfriend?idSender=${idSender}&idReceiver=${idReceiver}`;
+    return this.http.post<void>(url, {});
+  }
 }

@@ -28,7 +28,7 @@ export class FriendRequestService {
     return this.http.delete<void>(`${this.requestsUrl}/${requestId}`);
   }
 
-  sendFriendRequest(senderId: number, receiverId: number): Observable<void> {
-    return this.http.post<void>(`${this.requestsUrl}/sendFriendRequest?senderId=${senderId}&receiverId=${receiverId}`, null);
+  checkFriendRequestExists(idSender: number, idReceiver: number): Observable<boolean> {
+    return this.http.get<boolean>(`${this.requestsUrl}existFriendRequest?idSender=${idSender}&idReceiver=${idReceiver}`);
   }
 }

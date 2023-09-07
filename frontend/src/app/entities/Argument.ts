@@ -13,5 +13,4 @@ export interface Argument {
   topic: Topic;  // ID-ul topicului asociat acestui argument
   content: string;
   type: ArgumentType;
-  user: User;
 }

@@ -86,7 +86,4 @@ public class User {
     )
     private Set<Poll> votedPolls;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    @JsonIgnore
-    private Set<Argument> createdArguments;
 }

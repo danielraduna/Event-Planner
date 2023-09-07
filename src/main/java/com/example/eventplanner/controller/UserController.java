@@ -127,4 +127,10 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
+    @PostMapping("/unfriend")
+    public ResponseEntity<Void> unfriend(@RequestParam Long idSender, @RequestParam Long idReceiver) {
+        userService.unfriend(idSender, idReceiver);
+        return ResponseEntity.ok().build();
+    }
+
 }

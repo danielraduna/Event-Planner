@@ -55,6 +55,7 @@ li {
   border-radius: 6px;
   border: #1ab188;
   margin-top: 25px;
+  align-self: center;
 }
 
 .invisible {
@@ -94,5 +95,9 @@ li {
   flex-direction: column;
   align-items: flex-start;
 }
-
-
+//
+//.login {
+//  display: flex;
+//  justify-content: center;
+//  align-content: center;
+//}

@@ -74,6 +74,17 @@
   }
 }
 
+.unfriend-button {
+  color: black;
+  background-color: red;
+  padding: 10px 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
 .rating-section {
   margin-top: 40px;
   color: white;

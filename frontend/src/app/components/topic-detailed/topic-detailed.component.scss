@@ -29,14 +29,14 @@ h1 {
 
 .pro-arguments {
   flex: 1; // Asta îi permite să ocupe jumătate din spațiu
-  background-color: green; // Verde pentru argumentele PRO
+  background-color: #3cb73c; // Verde pentru argumentele PRO
   padding: 10px; // Spacing în interiorul div-ului pentru conținut
   box-sizing: border-box; // Asta asigură că paddingul și borderul sunt incluse în dimensiunea totală a div-ului
 }
 
 .contra-arguments {
   flex: 1; // Similar cu .pro-arguments, ocupa jumătate din spațiu
-  background-color: red; // Roșu pentru argumentele CONTRA
+  background-color: #ff4646; // Roșu pentru argumentele CONTRA
   padding: 10px;
   box-sizing: border-box;
 }
@@ -84,6 +84,7 @@ h1 {
 
 .argument {
   margin: 0.5rem 0;
+  font-weight: bold;
 }
 
 .action-button {

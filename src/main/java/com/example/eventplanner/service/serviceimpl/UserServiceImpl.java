@@ -7,6 +7,7 @@ import com.example.eventplanner.model.EventRequest;
 import com.example.eventplanner.model.FriendRequest;
 import com.example.eventplanner.model.User;
 import com.example.eventplanner.repository.*;
+import com.example.eventplanner.service.EmailService;
 import com.example.eventplanner.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -31,6 +32,8 @@ public class UserServiceImpl implements UserService {
     private final FriendRequestRepository friendRequestRepository;
 
     private final PollRepository pollRepository;
+
+    private final EmailService emailService;
 
     @Override
     public User login(LoginDto loginDto) {
@@ -221,49 +224,38 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void sendEventRequest(Long senderId, Long receiverId, Long eventId){
-        // Check if sender exists
         var sender = userRepository.findById(senderId);
         if (sender.isEmpty()) {
             throw new UserNotFoundException("Sender with this id was not found");
         }
 
-        // Check if receiver exists
         var receiver = userRepository.findById(receiverId);
         if (receiver.isEmpty()) {
             throw new UserNotFoundException("Receiver with this id was not found");
         }
 
-        // Check if event exists
         var event = eventRepository.findById(eventId);
         if (event.isEmpty()) {
             throw new EventNotFoundException("Event with this id was not found");
-        }
-
-        // Check if the event request already exists
-        var existingRequest = eventRequestRepository.findBySenderAndReceiverAndEvent(sender.get(), receiver.get(), event.get());
-        if (existingRequest.isPresent()) {
-            throw new EventRequestAlreadyExistsException("Event request already exists");
         }
 
         if(!event.get().getUsers().contains(sender.get())) {
             throw new SenderNotFoundInEventException("Sender is not in this event");
         }
 
-        // Create a new event request
         EventRequest eventRequest = new EventRequest();
         eventRequest.setSender(sender.get());
         eventRequest.setReceiver(receiver.get());
         eventRequest.setEvent(event.get());
         eventRequest.setStatus(EventRequest.RequestStatus.PENDING);
 
-        // Add event request to receiver's list of event requests
         receiver.get().getEventRequests().add(eventRequest);
 
-        // Save the event request
         eventRequestRepository.save(eventRequest);
 
-        // Save the receiver to update its list of event requests
         userRepository.save(receiver.get());
+
+        emailService.sendEventInvitation(receiver.get(), sender.get(), event.get(), "eventplanner928@gmail.com");
     }
 
     public void sendFriendRequest(Long senderId, Long receiverId) {
@@ -302,4 +294,18 @@ public class UserServiceImpl implements UserService {
         userRepository.save(user.get());
     }
 
+    public void unfriend(Long senderId, Long receiverId) {
+        User sender = userRepository.findById(senderId)
+                .orElseThrow(() -> new UserNotFoundException("Sender not found"));
+
+        User receiver = userRepository.findById(receiverId)
+                .orElseThrow(() -> new UserNotFoundException("Receiver not found"));
+
+        if(sender.getFriends().contains(receiver)) {
+            sender.getFriends().remove(receiver);
+            receiver.getFriends().remove(sender);
+            userRepository.save(receiver);
+            userRepository.save(sender);
+        }
+    }
 }

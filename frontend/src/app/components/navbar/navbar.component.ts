@@ -12,11 +12,13 @@ export class NavbarComponent implements OnInit{
   user?: User;
   items: MenuItem[] = [];
   ngOnInit(): void {
+    this.user = JSON.parse(localStorage.getItem("user")!);
+
     this.items = [
       {
         label: 'Contul meu',
         icon: 'pi pi-user',
-        routerLink: '/user-profile'
+        routerLink: `/user-profile/${this.user?.id}`
       },
       {
         label: 'Cereri de prietenie',
@@ -41,7 +43,6 @@ export class NavbarComponent implements OnInit{
         },
         routerLink: '/login'
       }];
-    this.user = JSON.parse(localStorage.getItem("user")!);
   }
 }
 

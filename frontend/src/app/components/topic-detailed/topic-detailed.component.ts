@@ -44,14 +44,15 @@ export class TopicDetailedComponent implements OnInit{
     const newArgument: Argument = {
       topic: this.topic,
       content: this.newArgumentContent,
-      type: this.newArgumentType,
-      user: this.user
+      type: this.newArgumentType
     };
 
     this.argumentService.createArgument(newArgument).subscribe(data => {
-      this.argumentService.assignArgumentToTopic(data.id!, this.topic.id!).subscribe();
+      this.argumentService.assignArgumentToTopic(data.id!, this.topic.id!).subscribe(() => {
+        this.topic.arguments.push(newArgument);
+        this.newArgumentContent = ''; // Reset the textarea
+      });
     });
-    this.topic.arguments.push(newArgument);
-    this.newArgumentContent = ''; // Reset the textarea
+
   }
 }

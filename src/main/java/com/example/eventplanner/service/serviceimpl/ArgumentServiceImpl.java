@@ -27,6 +27,7 @@ public class ArgumentServiceImpl implements ArgumentService {
         return argumentRepository.findById(argumentId);
     }
 
+    @Override
     public void assignArgumenttoTopic(Long argumentId, Long topicId) {
         Argument argument = argumentRepository.findById(argumentId)
                 .orElseThrow(() -> new RuntimeException("Argument not found with id " + argumentId));

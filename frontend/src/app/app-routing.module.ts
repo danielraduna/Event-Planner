@@ -33,7 +33,7 @@ const routes: Routes = [
     component: DashboardComponent
   },
   {
-    path: 'user-profile',
+    path: 'user-profile/:userId',
     component: UserProfileComponent
   },
   {

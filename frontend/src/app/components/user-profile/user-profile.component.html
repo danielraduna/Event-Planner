@@ -34,12 +34,17 @@
     <p><strong>Email:</strong> {{user?.email}}</p>
     <p><strong>Phone:</strong> {{user?.phone}}</p>
     <button class="edit-button" (click)="openModal()">Edit Info</button>
+
   </div>
 
   <div class="rating-section">
-    <h2>Your Rating</h2>
-    <p-rating [(ngModel)]="value" [cancel]="false"></p-rating>
+    <button  *ngIf="addFriendButton" class="edit-button" (click)="sendFriendRequest()">Add Friend</button>
+    <p-button *ngIf="isAlreadyFriend" label="Unfriend" (click)="unfriend()" styleClass="p-button-danger"  icon="pi pi-times"></p-button>
+    <button *ngIf="isRequestSent" class="edit-button" disabled>Request already sent!</button>
   </div>
+
+
+
 </div>
 
 <div *ngIf="isModalOpen" class="modal">

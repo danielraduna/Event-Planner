@@ -36,10 +36,11 @@ public interface UserService {
 
     public void deleteUserById(Long id);
 
-    void sendEventRequest(Long senderId, Long receiverId, Long eventId) throws EventRequestAlreadyExistsException;
+    public void sendEventRequest(Long senderId, Long receiverId, Long eventId) throws EventRequestAlreadyExistsException;
 
     public void sendFriendRequest(Long senderId, Long receiverId);
 
     public void assignUserToPoll(Long idUser, Long idPoll);
 
+    public void unfriend(Long senderId, Long receiverId);
 }

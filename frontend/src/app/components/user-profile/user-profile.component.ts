@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {User} from "../../entities/user";
 import {UserService} from "../../services/user.service";
 import {ProfilePictureService} from "../../services/profile-picture.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {FriendRequestService} from "../../services/friend-request.service";
 
 @Component({
   selector: 'app-user-profile',
@@ -12,11 +14,48 @@ export class UserProfileComponent implements OnInit{
   value = 2;
   user?: User;
   isModalOpen = false;
+  currentUser!: User;
+  addFriendButton = true;
+  isRequestSent = false;
+  isAlreadyFriend = false;
   constructor(private userService: UserService,
-              private pictureService: ProfilePictureService) { }
+              private pictureService: ProfilePictureService,
+              private route: ActivatedRoute,
+              private router: Router,
+              private friendRequestService: FriendRequestService) { }
+
   ngOnInit(): void {
-    this.user = JSON.parse(localStorage.getItem("user")!);
+    this.route.params.subscribe(params => {
+      const userId = params['userId'];
+      if (userId) {
+        this.userService.getUserById(userId).subscribe(user => {
+          this.user = user.body!;
+          this.currentUser = JSON.parse(localStorage.getItem("user")!);
+          this.userService.getUserFriends(this.currentUser.id!).subscribe(data => {
+            let i;
+            for(i = 0; i <= data.body!.length; i++) {
+              if(data.body![i].id === this.user?.id) {
+                this.isAlreadyFriend = true;
+                break;
+              }
+            }
+            if(this.currentUser.id === this.user!.id || this.isAlreadyFriend)  {
+              this.addFriendButton = false;
+            }
+            if(this.addFriendButton) {
+              this.friendRequestService.checkFriendRequestExists(this.currentUser.id!, this.user!.id!).subscribe(resp => {
+                this.isRequestSent = resp;
+              });
+            }
+          })
+
+
+
+        });
+      }
+    });
   }
+
 
   openModal() {
     this.isModalOpen = true;
@@ -57,6 +96,14 @@ export class UserProfileComponent implements OnInit{
       };
       reader.readAsDataURL(file);
     }
+  }
+
+  sendFriendRequest(): void {
+    this.userService.sendFriendRequest(this.currentUser.id!, this.user?.id!).subscribe();
+  }
+
+  unfriend(): void {
+    this.userService.unfriend(this.currentUser.id!, this.user?.id!).subscribe();
   }
 
 }

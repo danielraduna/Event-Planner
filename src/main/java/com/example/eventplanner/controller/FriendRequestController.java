@@ -1,6 +1,7 @@
 package com.example.eventplanner.controller;
 
 import com.example.eventplanner.model.FriendRequest;
+import com.example.eventplanner.repository.FriendRequestRepository;
 import com.example.eventplanner.service.FriendRequestService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -15,12 +16,19 @@ import java.util.List;
 public class FriendRequestController {
 
     private final FriendRequestService friendRequestService;
+    private final FriendRequestRepository friendRequestRepository;
+
 
     // Preia cererile de prietenie primite de un utilizator
     @GetMapping("/received/{userId}")
     public ResponseEntity<List<FriendRequest>> getReceivedFriendRequests(@PathVariable Long userId) {
         List<FriendRequest> friendRequests = friendRequestService.getReceivedFriendRequests(userId);
         return new ResponseEntity<>(friendRequests, HttpStatus.OK);
+    }
+
+    @GetMapping("/existFriendRequest")
+    public boolean existFriendRequest(@RequestParam Long idSender, @RequestParam Long idReceiver) {
+        return friendRequestRepository.existsBySenderIdAndReceiverId(idSender, idReceiver);
     }
 
     // Acceptă o cerere de prietenie

@@ -65,7 +65,7 @@ export class LoginComponent  implements OnInit {
       login.classList.add("visible");
       register.classList.remove("visible");
       register.classList.add("invisible");
-      title!.textContent = "WELCOME BACK!";
+      title!.textContent = "WELCOME!";
       this.registerForm = new FormGroup({
         firstName: new FormControl(''),
         lastName: new FormControl(''),

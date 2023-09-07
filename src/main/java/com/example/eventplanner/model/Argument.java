@@ -27,7 +27,4 @@ public class Argument {
     @JsonIgnore
     private Topic topic;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
 }

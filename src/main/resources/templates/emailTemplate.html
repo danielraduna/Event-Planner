@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Detalii Eveniment</title>
+</head>
+
+<body>
+  <div style="border: solid 1px black; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+   max-width: 70%; border-radius: 10px" class="event-details-container">
+    <h1 style="text-align: center; color: #1ab188; font-family: 'Alkatra', cursive;">Ai fost invitat la un nou eveniment</h1>
+
+    <p style="color: black">Draga  <strong style="color: black" th:text="${receiver.username}"></strong>,</p><br>
+    <p style="color: black">  <strong style="color: black" th:text="${sender.username}"></strong> te-a invitat la un nou eveniment: <strong style="color: black" th:text="${event.name}"></strong>.</p><br>
+    <div th:if="${event.stopDate}">
+      <p style="color: black; margin-top: 20px;">
+        Perioada desfășurării: <strong th:text="${event.startDate}"></strong> - <strong th:text="${event.stopDate}"></strong>
+      </p>
+    </div>
+
+    <!-- Dacă nu există o dată de stop -->
+    <div th:if="${event.stopDate == null}">
+      <p style="color: black; margin-top: 20px;">
+        Data: <strong th:text="${event.startDate}"></strong> de la <strong th:text="${event.startTime}"></strong> până la <strong th:text="${event.endTime}"></strong>
+      </p>
+    </div>
+
+    <p style="text-align: center">Intra in aplicatia <strong style="color: #1ab188; font-family: 'Alkatra', cursive;">EventPlanner</strong> pentru a accepta sau a refuza aceasta invitatie.</p>
+
+  </div>
+
+</body>
+</html>

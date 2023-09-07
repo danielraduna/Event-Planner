@@ -107,7 +107,6 @@ export class CreateEventComponent implements OnInit{
       };
 
       this.eventService.createEvent(eventToSend).subscribe((response) => {
-
         this.userService.assignUserToEvent(this.currentUser.id!, response.body.id).subscribe(() => {
           for(const friend of this.selectedFriends) {
             this.userService.sendEventRequest(this.currentUser.id!, friend.id!, response.body.id).subscribe();
@@ -115,7 +114,6 @@ export class CreateEventComponent implements OnInit{
           this.router.navigate(['/dashboard']);
         });
       });
-
     });
   }
 
