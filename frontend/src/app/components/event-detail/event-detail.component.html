@@ -7,18 +7,30 @@
     <p class="event-description">{{event.description}}</p>
 
     <div class="event-info">
-<!--        <div class="info-row">-->
-<!--          <p><strong>Date:</strong></p>-->
-<!--          <p>{{event.eventDate | date:'short'}}</p>-->
-<!--        </div>-->
-        <div class="info-row">
-          <p><strong>Created at:</strong></p>
-          <p>{{event.createDate | date:'short'}}</p>
-        </div>
-        <div class="info-row">
-          <p><strong>Location:</strong></p>
-          <p>{{event.location}}</p>
-        </div>
+
+      <div class="info-row">
+        <p><strong>Location:</strong></p>
+        <p>{{event.location}}</p>
+      </div>
+
+      <div class="info-row" *ngIf="event.stopDate === null || event.stopDate === undefined">
+        <p>
+          <strong>Data de început:</strong> {{ event.startDate | date:'dd.MM.yyyy' }} la {{ event.startTime }}
+        </p>
+        <p>
+          <strong>Data de sfârșit:</strong> {{ event.startDate | date:'dd.MM.yyyy' }} la {{ event.endTime }}
+        </p>
+      </div>
+
+      <div class="info-row" *ngIf="event.stopDate !== null && event.stopDate !== undefined">
+        <p>
+          <strong>Data de început:</strong> {{ event.startDate | date:'dd.MM.yyyy' }} la {{ event.startTime }}
+        </p>
+        <p>
+          <strong>Data de final:</strong> {{ event.stopDate | date:'dd.MM.yyyy' }} la {{ event.endTime }}
+        </p>
+      </div>
+
         <div class="info-row">
           <p><strong>Admin:</strong></p>
           <p-avatar
@@ -29,10 +41,21 @@
             [style]="{ 'width': '100px', 'height': '100px', 'border-radius': '50%;' }"
           ></p-avatar>
         </div>
+
+      <div class="info-row" *ngIf="event.extraDetails">
+        <div>
+          <h4>Detalii adăugate:</h4>
+          <ul>
+            <li *ngFor="let detail of event.extraDetails">{{ detail }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="participants">
       <div class="info-row">
         <p class="info-label"><strong>Participants:</strong></p>
         <div class="info-value">
-          <div *ngFor="let user of event.users | slice:0:5"> <!-- limit to first 5 users -->
+          <div *ngFor="let user of event.users | slice:0:8"> <!-- limit to first 5 users -->
             <p-avatar
               *ngIf="user?.profilePicture?.imageData; else defaultAvatar"
               [image]="user?.profilePicture?.imageData!"
@@ -53,24 +76,23 @@
             </ng-template>
           </div>
           <!-- Show "..." button if there are more than 5 users -->
-          <button class="more-button" *ngIf="event.users.length > 5" [routerLink]="['/event', event?.id, 'participants']">
+          <button class="more-button" *ngIf="event.users.length >= 8" [routerLink]="['/event', event?.id, 'participants']">
             ...
           </button>
         </div>
       </div>
-
-
-
-      <ng-template #defaultAvatar>
-        <p-avatar
-          *ngIf="event.admin"
-          label="{{ event.admin?.username?.charAt(0)?.toUpperCase() }}"
-          size="xlarge"
-          shape="circle"
-          [style]="{ 'background-color': '#1ab188', color: '#ffffff', 'width': '100px', 'height': '100px' }"
-        ></p-avatar>
-      </ng-template>
     </div>
+
+
+    <ng-template #defaultAvatar>
+      <p-avatar
+        *ngIf="event.admin"
+        label="{{ event.admin?.username?.charAt(0)?.toUpperCase() }}"
+        size="xlarge"
+        shape="circle"
+        [style]="{ 'background-color': '#1ab188', color: '#ffffff', 'width': '100px', 'height': '100px' }"
+      ></p-avatar>
+    </ng-template>
 
       <div class="info-value action-buttons">
         <div class="action-button-wrapper">
@@ -80,12 +102,17 @@
           <button class="action-button" [routerLink]="['/event', eventId, 'topics']">Topics</button>
         </div>
         <div class="action-button-wrapper">
-          <button class="action-button">Button 1</button>
+          <button class="action-button">Media</button>
         </div>
         <div class="action-button-wrapper">
-          <button class="action-button">Button 1</button>
+          <button pButton class="action-button" [disabled]="buttonDisabled" (click)="showExtraDetailsInputFunction()">Details</button>
         </div>
       </div>
+    <div *ngIf="showExtraDetailsInput">
+      <label for="extraDetails">Detalii Suplimentare:</label>
+      <input type="text" id="extraDetails" [(ngModel)]="tempExtraDetails" class="form-control">
+      <button class="action-button mt-2" (click)="addExtraDetails()">Adaugă detaliu</button>
+    </div>
 
   </div>
 </div>
