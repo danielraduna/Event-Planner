@@ -31,6 +31,10 @@ export class UserProfileComponent implements OnInit{
         this.userService.getUserById(userId).subscribe(user => {
           this.user = user.body!;
           this.currentUser = JSON.parse(localStorage.getItem("user")!);
+
+          if(this.currentUser.id === this.user!.id)  {
+            this.addFriendButton = false;
+          }
           this.userService.getUserFriends(this.currentUser.id!).subscribe(data => {
             let i;
             for(i = 0; i <= data.body!.length; i++) {
@@ -99,11 +103,17 @@ export class UserProfileComponent implements OnInit{
   }
 
   sendFriendRequest(): void {
-    this.userService.sendFriendRequest(this.currentUser.id!, this.user?.id!).subscribe();
+    this.userService.sendFriendRequest(this.currentUser.id!, this.user?.id!).subscribe(data => {
+      this.isRequestSent = true;
+      this.addFriendButton = false;
+    });
   }
 
   unfriend(): void {
-    this.userService.unfriend(this.currentUser.id!, this.user?.id!).subscribe();
+    this.userService.unfriend(this.currentUser.id!, this.user?.id!).subscribe(data => {
+      this.addFriendButton = true;
+      this.isAlreadyFriend = false;
+    });
   }
 
 }
