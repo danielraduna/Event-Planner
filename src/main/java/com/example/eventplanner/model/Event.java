@@ -54,4 +54,8 @@ public class Event {
     @OneToMany(mappedBy = "event")
     @JsonIgnore
     private List<Poll> polls;
+
+    @OneToMany(mappedBy = "event")
+    @JsonIgnore
+    private List<EventImage> eventImages;
 }
