@@ -2,5 +2,18 @@
   <div class="event-header">
     <h1 class="event-title">Media</h1>
   </div>
+
+
+  <p-fileUpload mode="basic" chooseLabel="Choose" [multiple]="true" accept="image/*" (onSelect)="onFileSelected($event)"></p-fileUpload>
+  <p-galleria  [responsiveOptions]="responsiveOptions" [containerStyle]="{ 'max-width': '640px' }" [numVisible]="5" [value]="images">
+    <ng-template pTemplate="item" let-item>
+      <img [src]="item.imageData" style="width: 100%;" />
+    </ng-template>
+    <ng-template pTemplate="item" let-item>
+      <div class="grid grid-nogutter justify-content-center">
+        <img [src]="item.imageData" />
+      </div>
+    </ng-template>
+  </p-galleria>
 </div>
 

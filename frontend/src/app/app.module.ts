@@ -48,6 +48,7 @@ import { ArgumentComponent } from './components/argument/argument.component';
 import { TopicDetailedComponent } from './components/topic-detailed/topic-detailed.component';
 import { EventMediaComponent } from './components/event-media/event-media.component';
 import { EditEventComponent } from './components/edit-event/edit-event.component';
+import { GalleriaModule } from 'primeng/galleria';
 @NgModule({
   declarations: [
     AppComponent,
@@ -92,6 +93,7 @@ import { EditEventComponent } from './components/edit-event/edit-event.component
     AvatarModule,
     MenuModule,
     RatingModule,
+    GalleriaModule,
     FormsModule,
     ConfirmDialogModule,
     FileUploadModule,

@@ -9,9 +9,14 @@ import {HttpClient} from "@angular/common/http";
 })
 export class ImageEventService {
 
-  private imageUrl = environment.apiUrl + 'eventrequests/';
+  private imageUrl = environment.apiUrl + 'eventImages/';
 
   constructor(private http: HttpClient) { }
+
+  createEventImage(eventImage: ImageEvent): Observable<ImageEvent> {
+    const url = `${this.imageUrl}new`;
+    return this.http.post(url, eventImage);
+  }
 
   getEventImagesByEvent(eventId: number): Observable<ImageEvent[]> {
     const url = `${this.imageUrl}byEvent?idEvent=${eventId}`;
