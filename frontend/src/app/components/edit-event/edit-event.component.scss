@@ -1,0 +1,75 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+}
+
+.event-details-container, event-details {
+  flex-grow: 1;
+  max-width: 70%;
+  margin-top: 20px;
+  text-align: center;
+  background: white;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #1ab188;
+  font-family: 'Alkatra', cursive;
+}
+
+.action-button {
+  color: white;
+  background: #1ab188;
+  font-size: 1.25rem;
+  font-weight: bold;
+  padding: 0.9375rem 1.5625rem;
+  text-align: center;
+  border-radius: 6px;
+  border: #1ab188;
+  margin-top: 25px;
+  margin-left: 20px;
+}
+
+.single-day-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.calendar-wrapper {
+  margin-top: 20px;
+  margin-bottom: 20px; /* Spațiu între calendar și inputurile pentru ore */
+}
+
+.time-inputs {
+  display: flex;
+  justify-content: space-around; /* Distribuie inputurile pe orizontală */
+  width: 100%; /* Ocupă întreaga lățime disponibilă */
+}
+
+.info-row {
+  flex: 0 0 40%; /* Acest lucru va face ca fiecare rând de info să ia 40% din lățimea totală. Poți să reglezi procentajul în funcție de necesitățile tale. */
+  max-width: 40%; /* Acest lucru va limita lățimea maximă a rândului de info la 40% din lățimea totală. */
+  margin: 10px; /* Poți adăuga margine pentru a separa rândurile de info */
+}
+
+.info-row p {
+  font-size: 18px;  /* Ajustează această valoare în funcție de dimensiunea dorită */
+}
+
+.info-row strong {
+  font-size: 22px;
+}
+
+.event-info {
+  margin-top: 25px;
+  display: flex;
+  justify-content: space-around; /* Acest lucru va face ca elementele să fie distribuite uniform pe linie */
+  flex-wrap: wrap; /* Acest lucru va permite elementelor să se înfășoare în linii noi dacă nu mai există spațiu pe linia curentă */
+  border: solid 1px black;
+  border-radius: 20px;
+}

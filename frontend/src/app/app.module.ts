@@ -46,6 +46,8 @@ import { EventTopicsComponent } from './components/event-topics/event-topics.com
 import { TopicComponent } from './components/topic/topic.component';
 import { ArgumentComponent } from './components/argument/argument.component';
 import { TopicDetailedComponent } from './components/topic-detailed/topic-detailed.component';
+import { EventMediaComponent } from './components/event-media/event-media.component';
+import { EditEventComponent } from './components/edit-event/edit-event.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -69,7 +71,9 @@ import { TopicDetailedComponent } from './components/topic-detailed/topic-detail
     EventTopicsComponent,
     TopicComponent,
     ArgumentComponent,
-    TopicDetailedComponent
+    TopicDetailedComponent,
+    EventMediaComponent,
+    EditEventComponent
   ],
   imports: [
     HttpClientModule,

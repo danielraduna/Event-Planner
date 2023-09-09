@@ -1,0 +1,120 @@
+<div  class="event-details-container">
+  <div class="event-header">
+    <h1 class="event-title">Editare</h1>
+  </div>
+
+  <p-steps [model]="items" [readonly]="false" [activeIndex]="activeIndex" (activeIndexChange)="onActiveIndexChange($event)"></p-steps>
+
+  <div *ngIf="activeIndex === 0" class="step-content">
+    <form #eventForm="ngForm">
+      <div class="form-group">
+        <label for="eventName">Nume Eveniment</label>
+        <input type="text" id="eventName" name="name" [(ngModel)]="event.name" class="form-control" required>
+      </div>
+
+      <div class="form-group">
+        <label for="eventLocation">Locație</label>
+        <input type="text" id="eventLocation" name="location" [(ngModel)]="event.location" class="form-control" required>
+      </div>
+
+      <div class="form-group">
+        <label for="eventDescription">Descriere</label>
+        <textarea id="eventDescription" name="description" [(ngModel)]="event.description" class="form-control" rows="5" required></textarea>
+      </div>
+    </form>
+  </div>
+
+  <div *ngIf="activeIndex === 2">
+    <div class="flex flex-column gap-3">
+      <div class="flex align-items-center">
+        <p-radioButton name="eventType" value="singleDay" [(ngModel)]="type" (ngModelChange)="resetEventDetails()"></p-radioButton>
+        <label class="ml-2">Eveniment pe o singură zi</label>
+      </div>
+
+      <div class="flex align-items-center">
+        <p-radioButton name="eventType" value="multiDay" [(ngModel)]="type" (ngModelChange)="resetEventDetails()"></p-radioButton>
+        <label class="ml-2">Eveniment pe mai multe zile</label>
+      </div>
+    </div>
+
+    <!-- Pentru evenimentul pe o singură zi -->
+    <div *ngIf="type === 'singleDay'" class="single-day-container">
+      <div class="calendar-wrapper">
+        <p-calendar [(ngModel)]="event.startDate" dateFormat="dd.mm.yy" [inline]="true"></p-calendar>
+      </div>
+
+      <div class="time-inputs">
+        <label>
+          Ora de început:
+          <input type="time" [(ngModel)]="event.startTime">
+        </label>
+
+        <label>
+          Ora de sfârșit:
+          <input type="time" [(ngModel)]="event.endTime">
+        </label>
+      </div>
+    </div>
+
+    <!-- Pentru evenimentul pe mai multe zile -->
+    <div *ngIf="type === 'multiDay'">
+      <div class="calendar-wrapper">
+        <p-calendar class="max-w-full" [(ngModel)]="dateRange" selectionMode="range" dateFormat="dd.mm.yy" [inline]="true"></p-calendar>
+      </div>
+      <div class="time-inputs">
+        <label>
+          Ora de început:
+          <input type="time" [(ngModel)]="event.startTime">
+        </label>
+
+        <label>
+          Ora de sfârșit:
+          <input type="time" [(ngModel)]="event.endTime">
+        </label>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="activeIndex === 3" class="event-details"> <!-- presupunând că pasul 4 este indexat ca 3 -->
+    <h2>Detalii Eveniment:</h2>
+    <div class="event-info">
+      <div class="info-row">
+        <p>
+          <strong>Titlu:</strong> {{ event.name }}
+        </p>
+      </div>
+
+      <div class="info-row">
+        <p>
+          <strong>Descriere:</strong> {{ event.description }}
+        </p>
+      </div>
+
+      <div class="info-row">
+        <p>
+          <strong>Locație:</strong> {{ event.location }}
+        </p>
+      </div>
+
+      <div class="info-row" *ngIf="type === 'singleDay'">
+        <p>
+          <strong>Data de început:</strong> {{ event.startDate | date:'dd.MM.yyyy' }} la {{ event.startTime }}
+        </p>
+        <p>
+          <strong>Data de sfârșit:</strong> {{ event.startDate | date:'dd.MM.yyyy' }} la {{ event.endTime }}
+        </p>
+      </div>
+
+      <div class="info-row" *ngIf="type === 'multiDay'">
+        <p *ngIf="dateRange && dateRange.length">
+          <strong>Data de început:</strong> {{ dateRange[0] | date:'dd.MM.yyyy' }} la {{ event.startTime }}
+        </p>
+        <p *ngIf="dateRange && dateRange.length">
+          <strong>Data de final:</strong> {{ dateRange[1] | date:'dd.MM.yyyy' }} la {{ event.endTime }}
+        </p>
+      </div>
+    </div>
+  </div>
+  <button class="action-button" *ngIf="activeIndex > 0" (click)="prev()">Back</button>
+  <button class="action-button" *ngIf="activeIndex < 3" (click)="next()">Next</button>
+  <button class="action-button" *ngIf="activeIndex === 3" (click)="updateEvent()">Update Event!</button>
+</div>

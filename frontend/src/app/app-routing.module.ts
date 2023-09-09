@@ -14,6 +14,8 @@ import {EventTopicsComponent} from "./components/event-topics/event-topics.compo
 import {TopicComponent} from "./components/topic/topic.component";
 import {ArgumentComponent} from "./components/argument/argument.component";
 import {TopicDetailedComponent} from "./components/topic-detailed/topic-detailed.component";
+import {EventMediaComponent} from "./components/event-media/event-media.component";
+import {EditEventComponent} from "./components/edit-event/edit-event.component";
 
 const routes: Routes = [
   {
@@ -73,6 +75,15 @@ const routes: Routes = [
   {
     path: 'topic/:topicId/detailed',
     component: TopicDetailedComponent
+  },
+  {
+    path: 'event/:eventId/media',
+    component: EventMediaComponent
+  }
+  ,
+  {
+    path: 'event/:eventId/edit',
+    component: EditEventComponent
   }
 
 ]
