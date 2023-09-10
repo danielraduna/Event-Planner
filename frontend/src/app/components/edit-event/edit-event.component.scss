@@ -73,3 +73,17 @@ h1 {
   border: solid 1px black;
   border-radius: 20px;
 }
+
+.field-checkbox {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  margin: auto;
+
+  width: 600px;
+}
+
+.field-checkbox label {
+  font-weight: bold;
+  font-size: 18px;
+}

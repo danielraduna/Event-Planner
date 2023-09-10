@@ -39,6 +39,8 @@ export class CreateEventComponent implements OnInit{
   friends: User[] = [];
   selectedFriends: User[] = [];
 
+  filteredFriends: User[] = [];
+  searchText: string = '';
   constructor(private eventService: EventService,
               private router: Router,
               private userService: UserService,
@@ -57,6 +59,7 @@ export class CreateEventComponent implements OnInit{
       this.currentUser = data.body!;
       this.userService.getUserFriends(this.currentUser.id!).subscribe(data => {
         this.friends = data.body!;
+        this.filteredFriends = this.friends;
       });
     });
   }
@@ -117,4 +120,15 @@ export class CreateEventComponent implements OnInit{
     });
   }
 
+  filterFriends() {
+    if (this.searchText === '' || this.searchText === null) {
+      this.filteredFriends = this.friends;
+    } else {
+      this.filteredFriends = this.friends.filter((friend) =>
+        friend.username!.toLowerCase().includes(this.searchText.toLowerCase())
+      );
+    }
+
+
+  }
 }

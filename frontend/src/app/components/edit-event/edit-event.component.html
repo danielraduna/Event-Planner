@@ -24,6 +24,24 @@
     </form>
   </div>
 
+  <div *ngIf="activeIndex === 1">
+    <h3>Pasul 2</h3>
+    <input
+      type="text"
+      pInputText
+      class="search-friend"
+      placeholder="Search a friend"
+      [(ngModel)]="searchText"
+      (ngModelChange)="filterFriends()"
+    />
+    <div class="friend">
+      <div *ngFor="let friend of filteredFriends" class="field-checkbox">
+        <label>{{ friend.username }}</label>
+        <p-checkbox name="group" [value]="friend" [(ngModel)]="selectedFriends"></p-checkbox>
+      </div>
+    </div>
+  </div>
+
   <div *ngIf="activeIndex === 2">
     <div class="flex flex-column gap-3">
       <div class="flex align-items-center">
