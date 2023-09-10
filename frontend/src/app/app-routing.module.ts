@@ -17,6 +17,7 @@ import {TopicDetailedComponent} from "./components/topic-detailed/topic-detailed
 import {EventMediaComponent} from "./components/event-media/event-media.component";
 import {EditEventComponent} from "./components/edit-event/edit-event.component";
 import {FriendsComponent} from "./components/friends/friends.component";
+import {PublicEventsComponent} from "./components/public-events/public-events.component";
 
 const routes: Routes = [
   {
@@ -89,7 +90,11 @@ const routes: Routes = [
   {
     path: 'friends/:userId',
     component: FriendsComponent
-  }
+  },
+  {
+    path: 'public-events',
+    component: PublicEventsComponent
+  },
 
 ]
 @NgModule({

@@ -50,6 +50,7 @@ import { EventMediaComponent } from './components/event-media/event-media.compon
 import { EditEventComponent } from './components/edit-event/edit-event.component';
 import { GalleriaModule } from 'primeng/galleria';
 import { FriendsComponent } from './components/friends/friends.component';
+import { PublicEventsComponent } from './components/public-events/public-events.component';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,8 @@ import { FriendsComponent } from './components/friends/friends.component';
     TopicDetailedComponent,
     EventMediaComponent,
     EditEventComponent,
-    FriendsComponent
+    FriendsComponent,
+    PublicEventsComponent
   ],
   imports: [
     HttpClientModule,
