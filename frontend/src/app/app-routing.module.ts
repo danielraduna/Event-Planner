@@ -16,6 +16,7 @@ import {ArgumentComponent} from "./components/argument/argument.component";
 import {TopicDetailedComponent} from "./components/topic-detailed/topic-detailed.component";
 import {EventMediaComponent} from "./components/event-media/event-media.component";
 import {EditEventComponent} from "./components/edit-event/edit-event.component";
+import {FriendsComponent} from "./components/friends/friends.component";
 
 const routes: Routes = [
   {
@@ -84,6 +85,10 @@ const routes: Routes = [
   {
     path: 'event/:eventId/edit',
     component: EditEventComponent
+  },
+  {
+    path: 'friends/:userId',
+    component: FriendsComponent
   }
 
 ]

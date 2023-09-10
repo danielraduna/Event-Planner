@@ -1,0 +1,53 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 100vh;
+}
+
+.friends {
+  flex-grow: 1;
+  max-width: 70%;
+  margin-top: 20px;
+  text-align: center;
+  background: white;
+  padding: 20px;
+  border-radius: 20px;
+}
+
+h1 {
+  text-align: center;
+  color: #1ab188;
+  font-family: 'Alkatra', cursive;
+}
+
+.search-friend {
+  margin: 15px 0;
+}
+
+.friend {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  background: rgba(19, 35, 47, 1);
+  color: #1ab188;
+  padding: 15px;
+
+}
+
+.edit-button {
+  color: white;
+  background-color: #1ab188;
+  padding: 10px 20px;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #12856d;
+  }
+}

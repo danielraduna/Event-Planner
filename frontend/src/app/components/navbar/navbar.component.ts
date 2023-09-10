@@ -31,8 +31,9 @@ export class NavbarComponent implements OnInit{
         routerLink: '/my-events'
       },
       {
-        label: 'Grupurile mele',
-        icon: 'pi pi-users'
+        label: 'Prietenii mei',
+        icon: 'pi pi-users',
+        routerLink: `/friends/${this.user?.id}`
       },
       {
         label: 'Deconecteaza-ma',

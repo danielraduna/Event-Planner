@@ -1,0 +1,41 @@
+<div  class="friends">
+  <div class="event-header">
+    <h1 class="event-title">Your Friends</h1>
+  </div>
+  <div class="friends-content">
+
+    <input
+      type="text"
+      pInputText
+      class="search-friend"
+      placeholder="Search a friend"
+      [(ngModel)]="searchText"
+      (ngModelChange)="filterFriends()"
+    />
+    <div class="friend" *ngFor="let friend of filteredFriends">
+      <p-avatar
+        *ngIf="friend?.profilePicture?.imageData; else defaultAvatar"
+        [image]="friend?.profilePicture?.imageData!"
+        [routerLink]="['/user-profile', friend.id]"
+        size="xlarge"
+        shape="circle"
+        [style]="{ 'width': '100px', 'height': '100px', 'border-radius': '50%;' }"
+      ></p-avatar>
+
+      <ng-template #defaultAvatar>
+        <p-avatar
+          label="{{ friend?.username?.charAt(0)?.toUpperCase() }}"
+          [routerLink]="['/user-profile', friend.id]"
+          size="xlarge"
+          shape="circle"
+          [style]="{ 'background-color': '#1ab188', color: '#ffffff', 'width': '100px', 'height': '100px' }"
+        ></p-avatar>
+      </ng-template>
+
+      <h1>{{friend.username}}</h1>
+      <p-button *ngIf="friends!.includes(friend)" label="Unfriend" (click)="unfriend(friend.id!)" styleClass="p-button-danger"  icon="pi pi-times"></p-button>
+      <button  *ngIf="!friends!.includes(friend)" class="edit-button" (click)="sendFriendRequest(friend.id!)">Add Friend</button>
+
+    </div>
+  </div>
+</div>
