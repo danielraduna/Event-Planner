@@ -35,6 +35,14 @@ export class UserProfileComponent implements OnInit{
           if(this.currentUser.id === this.user!.id)  {
             this.addFriendButton = false;
           }
+
+            this.friendRequestService.checkFriendRequestExists(this.currentUser.id!, this.user!.id!).subscribe(resp => {
+              this.isRequestSent = resp;
+              if(this.isRequestSent) {
+                this.addFriendButton = false;
+              }
+            });
+
           this.userService.getUserFriends(this.currentUser.id!).subscribe(data => {
             let i;
             for(i = 0; i <= data.body!.length; i++) {
@@ -46,11 +54,7 @@ export class UserProfileComponent implements OnInit{
             if(this.currentUser.id === this.user!.id || this.isAlreadyFriend)  {
               this.addFriendButton = false;
             }
-            if(this.addFriendButton) {
-              this.friendRequestService.checkFriendRequestExists(this.currentUser.id!, this.user!.id!).subscribe(resp => {
-                this.isRequestSent = resp;
-              });
-            }
+
           })
 
 

@@ -40,7 +40,7 @@
   <div class="rating-section">
     <button  *ngIf="addFriendButton" class="edit-button" (click)="sendFriendRequest()">Add Friend</button>
     <p-button *ngIf="isAlreadyFriend" label="Unfriend" (click)="unfriend()" styleClass="p-button-danger"  icon="pi pi-times"></p-button>
-    <button *ngIf="isRequestSent" class="edit-button" disabled>Request already sent!</button>
+    <button *ngIf="isRequestSent" class="edit-button" [disabled]=true>Request already sent!</button>
   </div>
 
 
