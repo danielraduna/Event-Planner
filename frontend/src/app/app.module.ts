@@ -49,6 +49,7 @@ import { TopicDetailedComponent } from './components/topic-detailed/topic-detail
 import { EventMediaComponent } from './components/event-media/event-media.component';
 import { EditEventComponent } from './components/edit-event/edit-event.component';
 import { GalleriaModule } from 'primeng/galleria';
+
 @NgModule({
   declarations: [
     AppComponent,

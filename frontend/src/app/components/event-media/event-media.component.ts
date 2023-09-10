@@ -15,7 +15,8 @@ export class EventMediaComponent  implements OnInit{
   event!: Event;
   images: ImageEvent[] = [];
   responsiveOptions!: any[];
-
+  activeIndex: number = 0;
+  displayCustom: boolean = false;
   constructor(private route: ActivatedRoute,
               private eventService: EventService,
               private imageEventService: ImageEventService
@@ -48,23 +49,30 @@ export class EventMediaComponent  implements OnInit{
   }
 
   onFileSelected(event: any) {
-    const file = (event as HTMLInputElement).files![0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e: ProgressEvent<FileReader>) => {
-        const imageData = e.target!.result as string;
-        const image: ImageEvent = {
-          imageData: imageData,
-          event: this.event
-        }
-        this.images.push(image);
-        this.imageEventService.createEventImage(image).subscribe(data => {
-          this.imageEventService.assignImageToEvent(data.id!, this.event.id!).subscribe();
-        })
-      };
-      reader.readAsDataURL(file);
+    const files: FileList = event.files;
+    if (files && files.length > 0) {
+      for (let i = 0; i < files.length; i++) {
+        const file: File = files[i];
+        const reader = new FileReader();
+        reader.onload = (e: ProgressEvent<FileReader>) => {
+          const imageData = e.target!.result as string;
+          const image: ImageEvent = {
+            imageData: imageData,
+            event: this.event
+          };
+          this.images.push(image);
+          this.imageEventService.createEventImage(image).subscribe(data => {
+            this.imageEventService.assignImageToEvent(data.id!, this.event.id!).subscribe();
+          });
+        };
+        reader.readAsDataURL(file);
+      }
     }
   }
 
 
+  imageClick(index: number) {
+    this.activeIndex = index;
+    this.displayCustom = true;
+  }
 }

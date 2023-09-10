@@ -5,15 +5,28 @@
 
 
   <p-fileUpload mode="basic" chooseLabel="Choose" [multiple]="true" accept="image/*" (onSelect)="onFileSelected($event)"></p-fileUpload>
-  <p-galleria  [responsiveOptions]="responsiveOptions" [containerStyle]="{ 'max-width': '640px' }" [numVisible]="5" [value]="images">
-    <ng-template pTemplate="item" let-item>
-      <img [src]="item.imageData" style="width: 100%;" />
-    </ng-template>
-    <ng-template pTemplate="item" let-item>
-      <div class="grid grid-nogutter justify-content-center">
-        <img [src]="item.imageData" />
+  <div class="card md:flex md:justify-content-center">
+    <div *ngIf="images" class="grid">
+      <div *ngFor="let image of images; let index = index" class="col-3" key="index">
+        <img [src]="image.imageData"  style="cursor: pointer; width: 450px; height: 450px;" (click)="imageClick(index)" />
       </div>
-    </ng-template>
-  </p-galleria>
+    </div>
+    <p-galleria
+      [value]="images"
+      [(visible)]="displayCustom"
+      [(activeIndex)]="activeIndex"
+      [responsiveOptions]="responsiveOptions"
+      [containerStyle]="{ 'max-width': '850px' }"
+      [numVisible]="7"
+      [circular]="true"
+      [fullScreen]="true"
+      [showItemNavigators]="true"
+      [showThumbnails]="false"
+    >
+      <ng-template pTemplate="item" let-item>
+        <img [src]="item.imageData" style="width: 800px; height: 800px; display: block;" />
+      </ng-template>
+    </p-galleria>
+  </div>
 </div>
 

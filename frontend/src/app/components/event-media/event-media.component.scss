@@ -7,7 +7,7 @@
 
 .event-details-container {
   flex-grow: 1;
-  max-width: 70%;
+  max-width: 90%;
   margin-top: 20px;
   text-align: center;
   background: white;
@@ -19,4 +19,18 @@ h1 {
   text-align: center;
   color: #1ab188;
   font-family: 'Alkatra', cursive;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.col-3 {
+  margin-right: 10px; /* Spatiere intre obiecte */
+  margin-bottom: 10px; /* Spatiere intre randuri */
+  padding: 10px;
+  box-sizing: border-box;
+  flex-basis: calc(33.33% - 10px); /* Calculeaza dimensiunea initiala a obiectelor */
 }
