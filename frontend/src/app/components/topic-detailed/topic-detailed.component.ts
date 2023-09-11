@@ -49,8 +49,10 @@ export class TopicDetailedComponent implements OnInit{
 
     this.argumentService.createArgument(newArgument).subscribe(data => {
       this.argumentService.assignArgumentToTopic(data.id!, this.topic.id!).subscribe(() => {
-        this.topic.arguments.push(newArgument);
         this.newArgumentContent = ''; // Reset the textarea
+        this.topicService.getTopicById(this.topic.id!).subscribe(response => {
+          this.topic = response;
+        });
       });
     });
 
