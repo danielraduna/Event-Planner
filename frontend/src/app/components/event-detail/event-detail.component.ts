@@ -20,7 +20,10 @@ export class EventDetailComponent implements OnInit{
               ) { }
   ngOnInit(): void {
     this.eventId = +this.route.snapshot.paramMap.get('id')!;
-    this.eventService.getEventById(this.eventId).subscribe(data => this.event = data.body!);
+    this.eventService.getEventById(this.eventId).subscribe(data =>  {
+      this.event = data.body!;
+      console.log(this.event)
+    });
   }
 
   addExtraDetails() {

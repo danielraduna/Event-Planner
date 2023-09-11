@@ -21,4 +21,6 @@ public interface EventService {
     void updateEvent(Event event);
 
     void deleteEvent(Long idEvent);
+
+    public List<Event> getPublicEvents();
 }

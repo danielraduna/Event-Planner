@@ -14,6 +14,10 @@ import java.util.List;
 @Getter
 @Setter
 public class Event {
+    public enum EventType {
+        PRIVATE,
+        PUBLIC
+    }
 
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -35,6 +39,9 @@ public class Event {
     private String startTime;
 
     private String endTime;
+
+    @Enumerated(EnumType.STRING)
+    private EventType type;
 
     @ElementCollection
     private List<String> extraDetails;

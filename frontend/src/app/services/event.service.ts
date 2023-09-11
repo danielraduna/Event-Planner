@@ -32,6 +32,10 @@ export class EventService {
       .pipe(map((res: HttpResponse<Event[]>) => res));
   }
 
+  getPublicEvents(): Observable<Event[]> {
+    return this.http.get<Event[]>(`${this.eventsUrl}public-events`);
+  }
+
   public getEventById(id: number): Observable<HttpResponse<Event>> {
     const user = JSON.parse(localStorage.getItem('user')!);
     const username = user.username;

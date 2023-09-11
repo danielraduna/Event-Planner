@@ -95,19 +95,19 @@
     </ng-template>
 
       <div class="info-value action-buttons">
-        <div class="action-button-wrapper">
+        <div *ngIf="event.type === 'PRIVATE' || event.type === null" class="action-button-wrapper">
           <button class="action-button" [routerLink]="['/event', eventId, 'polls']">Polls</button>
         </div>
-        <div class="action-button-wrapper">
+        <div *ngIf="event.type === 'PRIVATE' || event.type === null" class="action-button-wrapper">
           <button class="action-button" [routerLink]="['/event', eventId, 'topics']">Topics</button>
         </div>
         <div class="action-button-wrapper">
           <button class="action-button" [routerLink]="['/event', eventId, 'media']">Media</button>
         </div>
-        <div class="action-button-wrapper">
+        <div *ngIf="event.type === 'PRIVATE' || event.type === null" class="action-button-wrapper">
           <button pButton class="action-button" [disabled]="buttonDisabled" (click)="showExtraDetailsInputFunction()">Details</button>
         </div>
-        <div class="action-button-wrapper">
+        <div *ngIf="event.type === 'PRIVATE' || event.type === null" class="action-button-wrapper">
           <button pButton class="action-button" [routerLink]="['/event', eventId, 'edit']">Edit</button>
         </div>
       </div>

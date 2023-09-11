@@ -2,6 +2,20 @@
   <div class="wizard">
     <p-steps [model]="items" [readonly]="false" [activeIndex]="activeIndex" (activeIndexChange)="onActiveIndexChange($event)"></p-steps>
     <div *ngIf="activeIndex === 0" class="step-content">
+
+      <div class="flex align-items-center public">
+        <p-radioButton name="eventType" value="PRIVATE" [(ngModel)]="eventDetails.public"></p-radioButton>
+        <label class="ml-2">PRIVATE</label>
+      </div>
+
+      <div class="flex flex-column gap-3 public">
+        <div class="flex align-items-center">
+          <p-radioButton name="eventType" value="PUBLIC" [(ngModel)]="eventDetails.public"></p-radioButton>
+          <label class="ml-2">PUBLIC</label>
+        </div>
+
+      </div>
+
       <form #eventForm="ngForm">
         <div class="form-group">
           <label for="eventName">Nume Eveniment</label>

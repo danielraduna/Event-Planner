@@ -30,6 +30,13 @@ public class EventController {
         return eventService.getAllEvents();
     }
 
+    @GetMapping("/public-events")
+    public List<Event> getAllPublicEvents() {
+        return eventService.getPublicEvents();
+    }
+
+
+
     @GetMapping("/byId/{id}")
     public ResponseEntity<Event> getEventById(@PathVariable Long id) {
         return ResponseEntity.ok().

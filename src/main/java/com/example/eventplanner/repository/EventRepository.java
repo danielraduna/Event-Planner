@@ -13,4 +13,8 @@ import java.util.List;
 public interface EventRepository extends JpaRepository<Event, Long> {
     List<Event> findAllByNameEqualsIgnoreCase(String name);
 
-    List<Event> findByUsersId(@Param("userId") Long userId);}
+    List<Event> findByUsersId(@Param("userId") Long userId);
+
+    List<Event> findByType(Event.EventType type);
+
+}

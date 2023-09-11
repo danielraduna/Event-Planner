@@ -78,4 +78,8 @@ public class EventServiceImpl implements EventService {
             throw new EventNotFoundException("Event with this id was not found!");
         }
     }
+
+    public List<Event> getPublicEvents() {
+        return eventRepository.findByType(Event.EventType.PUBLIC);
+    }
 }

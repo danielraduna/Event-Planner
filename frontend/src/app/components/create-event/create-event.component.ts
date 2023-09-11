@@ -1,12 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {MenuItem} from "primeng/api";
-import {Event} from "../../entities/event";
+import {Event, EventType} from "../../entities/event";
 import {UserService} from "../../services/user.service";
 import {EventService} from "../../services/event.service";
 import {EventRequestService} from "../../services/event-request.service";
 import {User} from "../../entities/user";
 import {Router} from "@angular/router";
-import {forkJoin, switchMap} from "rxjs";
 
 interface EventDetails {
   name?: string;          // Numele evenimentului
@@ -17,6 +16,7 @@ interface EventDetails {
   startTime?: string | null;
   endTime?: string | null;
   dateRange?: [Date, Date] | null;
+  public?: 'PUBLIC' | 'PRIVATE';
 }
 
 @Component({
@@ -62,6 +62,7 @@ export class CreateEventComponent implements OnInit{
         this.filteredFriends = this.friends;
       });
     });
+    this.eventDetails.public = 'PRIVATE';
   }
 
   next() {
@@ -104,6 +105,7 @@ export class CreateEventComponent implements OnInit{
         startTime: this.eventDetails.startTime!,
         endTime: this.eventDetails.endTime!,
         createDate: new Date(),
+        type: (this.eventDetails.public === 'PUBLIC') ? EventType.PUBLIC: EventType.PRIVATE,
         admin: attachedUser,
         users: [attachedUser],
         extraDetails: this.extraDetails
